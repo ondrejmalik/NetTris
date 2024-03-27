@@ -1,0 +1,15 @@
+A:\Projects\Tetris\Tetris\Tetris.Game\bin\Debug\net8.0\Tetris.Game.deps.json
+A:\Projects\Tetris\Tetris\Tetris.Game\bin\Debug\net8.0\Tetris.Game.dll
+A:\Projects\Tetris\Tetris\Tetris.Game\bin\Debug\net8.0\Tetris.Game.pdb
+A:\Projects\Tetris\Tetris\Tetris.Game\bin\Debug\net8.0\Tetris.Resources.dll
+A:\Projects\Tetris\Tetris\Tetris.Game\bin\Debug\net8.0\Tetris.Resources.pdb
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Debug\net8.0\Tetris.Game.csproj.AssemblyReference.cache
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Debug\net8.0\Tetris.Game.GeneratedMSBuildEditorConfig.editorconfig
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Debug\net8.0\Tetris.Game.AssemblyInfoInputs.cache
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Debug\net8.0\Tetris.Game.AssemblyInfo.cs
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Debug\net8.0\Tetris.Game.csproj.CoreCompileInputs.cache
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Debug\net8.0\Tetris.Game.csproj.CopyComplete
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Debug\net8.0\Tetris.Game.dll
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Debug\net8.0\refint\Tetris.Game.dll
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Debug\net8.0\Tetris.Game.pdb
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Debug\net8.0\ref\Tetris.Game.dll

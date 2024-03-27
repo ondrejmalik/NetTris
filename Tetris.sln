@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Desktop", "Tetris\Tetris.Desktop\Tetris.Desktop.csproj", "{56066907-63E1-4B9E-A2F5-343BCEF97236}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Game", "Tetris\Tetris.Game\Tetris.Game.csproj", "{16EFB9A6-F324-4AC1-A5E6-7A7408F8B77D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Game.Tests", "Tetris\Tetris.Game.Tests\Tetris.Game.Tests.csproj", "{D6ACA8E6-68C0-4DF4-984B-749530B48672}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.Resources", "Tetris\Tetris.Resources\Tetris.Resources.csproj", "{5AC22F15-F4D1-44B9-80CE-29549518F6BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56066907-63E1-4B9E-A2F5-343BCEF97236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56066907-63E1-4B9E-A2F5-343BCEF97236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56066907-63E1-4B9E-A2F5-343BCEF97236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56066907-63E1-4B9E-A2F5-343BCEF97236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16EFB9A6-F324-4AC1-A5E6-7A7408F8B77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16EFB9A6-F324-4AC1-A5E6-7A7408F8B77D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16EFB9A6-F324-4AC1-A5E6-7A7408F8B77D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16EFB9A6-F324-4AC1-A5E6-7A7408F8B77D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6ACA8E6-68C0-4DF4-984B-749530B48672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6ACA8E6-68C0-4DF4-984B-749530B48672}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6ACA8E6-68C0-4DF4-984B-749530B48672}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6ACA8E6-68C0-4DF4-984B-749530B48672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AC22F15-F4D1-44B9-80CE-29549518F6BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC22F15-F4D1-44B9-80CE-29549518F6BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC22F15-F4D1-44B9-80CE-29549518F6BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC22F15-F4D1-44B9-80CE-29549518F6BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

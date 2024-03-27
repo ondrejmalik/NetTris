@@ -1,0 +1,12 @@
+A:\Projects\Tetris\Tetris\Tetris.Resources\bin\Debug\net6.0\Tetris.Resources.deps.json
+A:\Projects\Tetris\Tetris\Tetris.Resources\bin\Debug\net6.0\Tetris.Resources.dll
+A:\Projects\Tetris\Tetris\Tetris.Resources\bin\Debug\net6.0\Tetris.Resources.pdb
+A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net6.0\Tetris.Resources.GeneratedMSBuildEditorConfig.editorconfig
+A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net6.0\Tetris.Resources.AssemblyInfoInputs.cache
+A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net6.0\Tetris.Resources.AssemblyInfo.cs
+A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net6.0\Tetris.Resources.csproj.CoreCompileInputs.cache
+A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net6.0\Tetris.Resources.dll
+A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net6.0\refint\Tetris.Resources.dll
+A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net6.0\Tetris.Resources.pdb
+A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net6.0\ref\Tetris.Resources.dll
+A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net6.0\Tetris.Resources.csproj.AssemblyReference.cache

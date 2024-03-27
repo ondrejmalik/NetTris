@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "7MoPSX+wzB/NR+BvAKM6d0V6NdwYwzWHjIZSGZ/CfggyQYFCjUXIqip2uRDDec4dINW3oScg+qI5ALCBc6hFQg==",
+  "success": false,
+  "projectFilePath": "A:\\Projects\\Tetris\\Tetris\\Tetris.iOS\\Tetris.iOS.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1012",
+      "level": "Error",
+      "message": "Platform version is not present for one or more target frameworks, even though they have specified a platform: net6.0-ios"
+    }
+  ]
+}
