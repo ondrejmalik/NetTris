@@ -1,2 +1,8 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3f6659bf_002D3496_002D47d9_002Dac7f_002D8b8e72783149/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestSceneSlideoutButtonList" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::D6ACA8E6-68C0-4DF4-984B-749530B48672::net8.0::Tetris.Game.Tests.Visual.TestSceneSlideoutButtonList&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::D6ACA8E6-68C0-4DF4-984B-749530B48672::net8.0::Tetris.Game.Tests.Unit.TestPacket.TestSerialize&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/Monitoring/IsToolWindowHidden/@EntryValue">True</s:Boolean></wpf:ResourceDictionary>

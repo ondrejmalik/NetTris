@@ -8,7 +8,7 @@ using osuTK;
 
 namespace Tetris.Game;
 
-public partial class GameContainer : CompositeDrawable
+public partial class GameContainer : GameContainerBase
 {
     private Container box;
     public PlayField PlayField { get; }

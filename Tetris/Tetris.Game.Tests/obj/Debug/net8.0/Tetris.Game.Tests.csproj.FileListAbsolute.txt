@@ -221,3 +221,4 @@ A:\Projects\Tetris\Tetris\Tetris.Game.Tests\obj\Debug\net8.0\refint\Tetris.Game.
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\obj\Debug\net8.0\Tetris.Game.Tests.pdb
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\obj\Debug\net8.0\Tetris.Game.Tests.genruntimeconfig.cache
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\obj\Debug\net8.0\ref\Tetris.Game.Tests.dll
+A:\Projects\Tetris\Tetris\Tetris.Game.Tests\obj\Debug\net8.0\Tetris.Game.Tests.sourcelink.json

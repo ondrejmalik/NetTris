@@ -16,6 +16,8 @@ public partial class SettingsMenu : CompositeDrawable
     [BackgroundDependencyLoader]
     private void load()
     {
+        Anchor = Anchor.TopLeft;
+        Origin = Anchor.TopLeft;
         AutoSizeAxes = Axes.Both;
         InternalChild = box = new Container
         {
@@ -28,7 +30,7 @@ public partial class SettingsMenu : CompositeDrawable
                 new GraphicsSettingsSection()
             }
         };
-        Position = new osuTK.Vector2(-1000, 200);
+        Position = new osuTK.Vector2(-1500, 200);
 
     }
 
@@ -38,6 +40,6 @@ public partial class SettingsMenu : CompositeDrawable
     }
     public void Hide()
     {
-        this.MoveTo( new osuTK.Vector2(-1000, 200), 250, Easing.InQuint);
+        this.MoveTo( new osuTK.Vector2(-1500, 200), 250, Easing.InQuint);
     }
 }

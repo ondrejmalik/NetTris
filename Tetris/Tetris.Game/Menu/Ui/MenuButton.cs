@@ -44,8 +44,6 @@ public partial class MenuButton : BasicButton
         Font = new FontUsage(size: 30, weight: "bold");
         BaseSize = new Vector2(250, 75);
         HoveredSize = new Vector2(325, 75);
-        Anchor = Anchor.Centre;
-        Origin = Anchor.Centre;
     }
 
     protected override bool OnHover(HoverEvent e)

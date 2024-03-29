@@ -140,3 +140,4 @@ A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Debug\net8.0\refint\Tetris.dll
 A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Debug\net8.0\Tetris.pdb
 A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Debug\net8.0\Tetris.Desktop.genruntimeconfig.cache
 A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Debug\net8.0\ref\Tetris.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Debug\net8.0\Tetris.Desktop.sourcelink.json

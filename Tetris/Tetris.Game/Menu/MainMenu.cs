@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -38,29 +39,61 @@ public partial class MainMenu : Screen
             {
                 new FillFlowContainer()
                 {
+                    RelativeAnchorPosition = new osuTK.Vector2(0, 0),
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
                     Direction = FillDirection.Vertical,
                     Spacing = new Vector2(0, 50),
-                    AutoSizeAxes = Axes.Both,
+                    AutoSizeAxes = Axes.Y,
                     Children = new Drawable[]
                     {
-                        PlayButton = new MenuButton()
+                        new HorizontalSlideoutButtonList(new List<Button>()
                         {
-                            Text = new LocalisableString("Play"),
-                            BackgroundColour = Colour4.Aqua,
-                            Colour = Colour4.Wheat,
-                            Action = () => this.Push(new GameScreen())
-                        },
-                        MultiplayerButton = new MenuButton()
+                            new MenuButton()
+                            {
+                                Text = "Endless", Action = () => { this.Push(new GameScreen()); },
+                                BaseSize = new Vector2(100, 75), HoveredSize = new Vector2(120, 75)
+                            },
+                        })
                         {
-                            Text = new LocalisableString("Multiplayer"),
-                            BackgroundColour = Colour4.Aqua,
-                            Colour = Colour4.Wheat,
-                            //Action = () => this.Push(new MultiplayerMenu())
+                            Anchor = Anchor.TopCentre,
+                            Origin = Anchor.TopCentre,
+                            MainButton = new MenuButton()
+                                { Text = "Singleplayer", },
+                            Position = new Vector2(0, 0),
                         },
+                        new HorizontalSlideoutButtonList(new List<Button>()
+                        {
+                            new MenuButton()
+                            {
+                                Text = "Local", Action = () => { this.Push(new DoubleGameScreen()); },
+                                BaseSize = new Vector2(100, 75),
+                                HoveredSize = new Vector2(120, 75)
+                            },
+                            new MenuButton()
+                            {
+                                Text = "P2P", Action = () => { }, BaseSize = new Vector2(100, 75),
+                                HoveredSize = new Vector2(120, 75)
+                            },
+                            new MenuButton()
+                            {
+                                Text = "Online", Action = () => { }, BaseSize = new Vector2(100, 75),
+                                HoveredSize = new Vector2(120, 75)
+                            },
+                        })
+                        {
+                            Anchor = Anchor.TopCentre,
+                            Origin = Anchor.TopCentre,
+                            MainButton = new MenuButton()
+                                { Text = "Multiplayer", },
+                            Position = new Vector2(0, 0),
+                        },
+
                         SettingsButton = new MenuButton()
                         {
+                            Anchor = Anchor.TopCentre,
+                            Origin = Anchor.TopCentre,
+                            RelativeAnchorPosition = new osuTK.Vector2(0, 0),
                             Text = new LocalisableString("Settings"),
                             BackgroundColour = Colour4.Aqua,
                             Colour = Colour4.Wheat,
@@ -73,7 +106,7 @@ public partial class MainMenu : Screen
                                 }
                                 else if (SettingsMenu.IsAlive)
                                 {
-                                    if (SettingsMenu.Position.X == -1000)
+                                    if (SettingsMenu.Position.X == -1500)
                                     {
                                         SettingsMenu.Show();
                                     }
@@ -86,13 +119,16 @@ public partial class MainMenu : Screen
                         },
                         LeaderboardsButton = new MenuButton()
                         {
+                            Anchor = Anchor.TopCentre,
+                            Origin = Anchor.TopCentre,
+                            RelativeAnchorPosition = new osuTK.Vector2(0, 0),
                             Text = new LocalisableString("Leaderboards"),
                             BackgroundColour = Colour4.Aqua,
                             Colour = Colour4.Wheat,
                         }
                     }
-                }
-            },
+                },
+            }
         };
     }
 }

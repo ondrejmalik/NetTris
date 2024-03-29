@@ -23,13 +23,10 @@ public partial class RendererSwitcher : CompositeDrawable
     private void load(FrameworkConfigManager configManager, GameHost host)
     {
         AutoSizeAxes = Axes.Both;
-        Anchor = Anchor.TopCentre;
-        Origin = Anchor.TopCentre;
+        Anchor = Anchor.TopLeft;
+        Origin = Anchor.TopLeft;
         InternalChild = box = new Container
         {
-            AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopCentre,
-            Origin = Anchor.TopCentre,
             Children = new Drawable[]
             {
                 new FillFlowContainer()
@@ -50,44 +47,39 @@ public partial class RendererSwitcher : CompositeDrawable
                         buttons[0] = new MenuButton()
                         {
                             Text = "OpenGL",
-                            Font =  new FontUsage(size: 25),
-                            Action = () => SwitchRenderer(RendererType.OpenGL, configManager),
-                            BaseSize = ButtonsBaseSize,
-                            HoveredSize = ButtonsHoveredSize
-                        },
-                        buttons[2] = new MenuButton()
-                        {
-                            Text = "DirectX",
-                            Font =  new FontUsage(size: 25),
-                            Action = () => SwitchRenderer(RendererType.Direct3D11, configManager),
-                            BaseSize = ButtonsBaseSize,
-                            HoveredSize = ButtonsHoveredSize
+                            Origin = Anchor.Centre,
+                            Anchor = Anchor.Centre,
+                            Font = new FontUsage(size: 25),
                         },
                         buttons[1] = new MenuButton()
                         {
+                            Text = "DirectX",
+                            Origin = Anchor.Centre,
+                            Anchor = Anchor.Centre,
+                            Font = new FontUsage(size: 25),
+                        },
+                        buttons[2] = new MenuButton()
+                        {
                             Text = "Vulkan",
-                            Font =  new FontUsage(size: 25),
-                            Action = () => SwitchRenderer(RendererType.Vulkan, configManager),
-                            BaseSize = ButtonsBaseSize,
-                            HoveredSize = ButtonsHoveredSize
+                            Origin = Anchor.Centre,
+                            Anchor = Anchor.Centre,
+                            Font = new FontUsage(size: 25),
                         },
                         buttons[3] = new MenuButton()
                         {
                             Text = "Metal",
-                            Font =  new FontUsage(size: 25),
-                            Action = () => SwitchRenderer(RendererType.Metal, configManager),
-                            BaseSize = ButtonsBaseSize,
-                            HoveredSize = ButtonsHoveredSize
+                            Origin = Anchor.Centre,
+                            Anchor = Anchor.Centre,
+                            Font = new FontUsage(size: 25),
                         },
-                        buttons[3] = new MenuButton()
+                        buttons[4] = new MenuButton()
                         {
                             Text = "Auto",
-                            Font =  new FontUsage(size: 25),
-                            Action = () => SwitchRenderer(RendererType.Automatic, configManager),
-                            BaseSize = ButtonsBaseSize,
-                            HoveredSize = ButtonsHoveredSize
+                            Origin = Anchor.Centre,
+                            Anchor = Anchor.Centre,
+                            Font = new FontUsage(size: 25),
                         },
-                        disclaimerText = new SpriteText()
+                        new SpriteText()
                         {
                             Origin = Anchor.Centre,
                             Anchor = Anchor.Centre,

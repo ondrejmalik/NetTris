@@ -13,3 +13,4 @@ A:\Projects\Tetris\Tetris\Tetris.Game\obj\Release\net8.0\Tetris.Game.dll
 A:\Projects\Tetris\Tetris\Tetris.Game\obj\Release\net8.0\refint\Tetris.Game.dll
 A:\Projects\Tetris\Tetris\Tetris.Game\obj\Release\net8.0\Tetris.Game.pdb
 A:\Projects\Tetris\Tetris\Tetris.Game\obj\Release\net8.0\ref\Tetris.Game.dll
+A:\Projects\Tetris\Tetris\Tetris.Game\obj\Release\net8.0\Tetris.Game.sourcelink.json

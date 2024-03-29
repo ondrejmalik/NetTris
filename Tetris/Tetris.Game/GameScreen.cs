@@ -8,18 +8,11 @@ namespace Tetris.Game
 {
     public partial class GameScreen : Screen
     {
-        PlayField playField;
-        HoldPreview holdPreview;
-        PlayfieldStats playfieldStats;
-        Hold hold;
-        Bag bag = new Bag();
+        private GameContainer gameContainer1;
 
         public GameScreen()
         {
-            Hold hold = new Hold(bag, null);
-            holdPreview = new HoldPreview(hold) { Position = new Vector2(800, 0) };
-            hold.HoldPreview = holdPreview;
-            holdPreview.Hold = hold;
+            gameContainer1 = new GameContainer() { Position = new Vector2(0, 0) };
         }
 
         [BackgroundDependencyLoader]
@@ -27,9 +20,7 @@ namespace Tetris.Game
         {
             InternalChildren = new Drawable[]
             {
-                holdPreview,
-                playField = new PlayField(holdPreview) { Position = new Vector2(250, 0) },
-                playfieldStats = new PlayfieldStats(playField),
+                gameContainer1,
             };
         }
     }
