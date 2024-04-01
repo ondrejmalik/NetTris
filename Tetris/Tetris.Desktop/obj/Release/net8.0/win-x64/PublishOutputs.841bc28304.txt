@@ -1,0 +1,16 @@
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\Tetris.pdb
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\avcodec-58.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\avformat-58.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\avutil-56.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\bass.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\bass_fx.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\bassmix.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\basswasapi.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\swscale-5.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\SDL2.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\libveldrid-spirv.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\stbi.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\stbi.lib
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\Tetris.Game.pdb
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\Tetris.Resources.pdb
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Release\net8.0\win-x64\publish\Tetris.exe

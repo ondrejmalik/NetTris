@@ -10,18 +10,10 @@ using osu.Framework.Logging;
 using osuTK;
 using osuTK.Input;
 using Tetris.Game.Config;
-
 namespace Tetris.Game
 {
     public partial class PlayField : CompositeDrawable
     {
-        public static List<int> x = new List<int>();
-        public static List<int> y = new List<int>();
-        public event EventHandler ClearedLinesChanged;
-        public HoldPreview HoldPreview;
-        public PlayField OpponentPlayField { get; set; }
-        private bool isOpponent;
-
         public int ClearedLines
         {
             get
@@ -35,17 +27,24 @@ namespace Tetris.Game
             }
         }
 
-        public List<OcupiedSet> ocupied = new List<OcupiedSet>();
-
+        public static List<int> x = new List<int>();
+        public static List<int> y = new List<int>();
+        public event EventHandler ClearedLinesChanged;
+        public HoldPreview HoldPreview;
+        public Tetrimino Piece;
+        public PlayField OpponentPlayField { get; set; }
+        private bool isOpponent;
+        public List<OccupiedSet> Occupied = new List<OccupiedSet>();
         private int _clearedLines;
         private Container box;
-        private Tetrimino p;
         private Container grid;
         private Container droppedContainer;
+        private bool isOnline;
 
-        public PlayField(HoldPreview holdPreview, bool isOpponent = false)
+        public PlayField(HoldPreview holdPreview, bool isOpponent = false, bool isOnline = false)
         {
             this.isOpponent = isOpponent;
+            this.isOnline = isOnline;
             HoldPreview = holdPreview;
             for (int i = 0; i < 10; i++)
             {
@@ -56,14 +55,13 @@ namespace Tetris.Game
             {
                 y.Add(50 * i);
             }
-
-            AutoSizeAxes = Axes.Both;
-            Origin = Anchor.TopLeft;
         }
 
         [BackgroundDependencyLoader]
         private void load(TextureStore textures)
         {
+            AutoSizeAxes = Axes.Both;
+            Origin = Anchor.TopLeft;
             InternalChild = box = new Container
             {
                 AutoSizeAxes = Axes.Both,
@@ -118,7 +116,7 @@ namespace Tetris.Game
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    ocupied.Add(new OcupiedSet()
+                    Occupied.Add(new OccupiedSet()
                     {
                         X = j,
                         Y = i,
@@ -127,14 +125,41 @@ namespace Tetris.Game
                 }
             }
 
-            box.Add(p = new Tetrimino(HoldPreview.Hold.Bag.Dequeue(), 3, 2, this, isOpponent));
+
+            box.Add(Piece = new Tetrimino(HoldPreview.Hold.Bag.Dequeue(), 3, 2, this, isOpponent, isOnline));
+        }
+
+        public void ScheduleRedraw()
+        {
+            Scheduler.Add(() => redrawOccupied());
+            Scheduler.Add( () => Piece.SetDrawPos());
+        }
+
+        private void redrawOccupied()
+        {
+            if (isOnline) { }
+
+            droppedContainer.Clear();
+            foreach (var box in Occupied)
+            {
+                if (box)
+                {
+                    droppedContainer.Add(new Box()
+                    {
+                        Size = new Vector2(45, 45),
+                        Position = new Vector2(PlayField.x[box.X] + 5, PlayField.y[box.Y] + 5),
+                        Anchor = Anchor.TopLeft,
+                        Colour = isOnline ? Colour4.Black : box.Colour,
+                    });
+                }
+            }
         }
 
         internal bool BottomCollisionDetection()
         {
-            for (int i = 0; i < p.GridPos.Count; i++)
+            for (int i = 0; i < Piece.GridPos.Count; i++)
             {
-                if (p.GridPos[i].Item2 == 19)
+                if (Piece.GridPos[i].Item2 == 19)
                 {
                     place();
                     return true;
@@ -146,15 +171,15 @@ namespace Tetris.Game
 
         internal bool CollisionDetection(int diff)
         {
-            for (int i = 0; i < p.GridPos.Count; i++)
+            for (int i = 0; i < Piece.GridPos.Count; i++)
             {
-                int index = p.GridPos[i].Item1 + diff + p.GridPos[i].Item2 * 10;
+                int index = Piece.GridPos[i].Item1 + diff + Piece.GridPos[i].Item2 * 10;
                 if (index < 0 || index > 199)
                 {
                     return true;
                 }
 
-                if (ocupied[index])
+                if (Occupied[index])
                 {
                     if (diff == 0) { place(); }
 
@@ -167,9 +192,9 @@ namespace Tetris.Game
 
         private void place()
         {
-            foreach (var pos in p.GridPos)
+            foreach (var pos in Piece.GridPos)
             {
-                Colour4 c = p.PieceColour;
+                Colour4 c = Piece.PieceColour;
                 droppedContainer.Add(new Box()
                 {
                     Size = new Vector2(45, 45),
@@ -178,18 +203,18 @@ namespace Tetris.Game
                     Colour = c,
                 });
 
-                OcupiedSet o = new OcupiedSet();
-                o = ocupied[pos.Item1 + pos.Item2 * 10 - 10];
+                OccupiedSet o = new OccupiedSet();
+                o = Occupied[pos.Item1 + pos.Item2 * 10 - 10];
                 o.Occupied = true;
                 o.Colour = c;
-                ocupied[pos.Item1 + pos.Item2 * 10 - 10] = o;
+                Occupied[pos.Item1 + pos.Item2 * 10 - 10] = o;
             }
 
             expireTetrimino();
             //check if new piece overlaps existing piece
-            foreach (var pos in p.GridPos)
+            foreach (var pos in Piece.GridPos)
             {
-                if (ocupied[pos.Item1 + pos.Item2 * 10] == true)
+                if (Occupied[pos.Item1 + pos.Item2 * 10] == true)
                 {
                     Logger.Log("Game Over");
                 }
@@ -205,27 +230,27 @@ namespace Tetris.Game
             ClearedLines += diff;
             Logger.Log(ClearedLines.ToString());
 
-            box.Add(p);
+            box.Add(Piece);
             HoldPreview.Hold.CanHold = true;
             HoldPreview.UpdatePreviewTetriminos();
         }
 
         private void expireTetrimino()
         {
-            p.Expire();
-            p = new Tetrimino(HoldPreview.Hold.Bag.Dequeue(), 4, 0, this, isOpponent);
+            Piece.Expire();
+            Piece = new Tetrimino(HoldPreview.Hold.Bag.Dequeue(), 4, 0, this, isOpponent, isOnline);
         }
 
         private int clearLine()
         {
             bool clear = false;
             int cleared = 0;
-            for (int i = 0; i < ocupied.Count; i += 10)
+            for (int i = 0; i < Occupied.Count; i += 10)
             {
                 clear = true;
                 for (int j = i; j < i + 10; j++)
                 {
-                    if (!ocupied[j])
+                    if (!Occupied[j])
                     {
                         clear = false;
                         break;
@@ -242,13 +267,13 @@ namespace Tetris.Game
                 }
             }
 
-            redrawOcupied();
+            redrawOccupied();
             return cleared;
         }
 
         private void newstackDown(int j)
         {
-            ocupied[j].Occupied = false;
+            Occupied[j].Occupied = false;
             recurseStackDown(j);
         }
 
@@ -256,8 +281,8 @@ namespace Tetris.Game
         {
             if (j > 10)
             {
-                ocupied[j].Occupied = ocupied[j - 10].Occupied;
-                ocupied[j].Colour = ocupied[j - 10].Colour;
+                Occupied[j].Occupied = Occupied[j - 10].Occupied;
+                Occupied[j].Colour = Occupied[j - 10].Colour;
                 recurseStackDown(j - 10);
             }
         }
@@ -270,10 +295,10 @@ namespace Tetris.Game
             }
 
             bool foundGarbage = false;
-            int lineStart = ocupied.Count - 10;
-            for (int i = ocupied.Count - 1; i >= 0; i = i - 1) // check garbage line
+            int lineStart = Occupied.Count - 10;
+            for (int i = Occupied.Count - 1; i >= 0; i = i - 1) // check garbage line
             {
-                if (ocupied[i].Colour == Colour4.Gray)
+                if (Occupied[i].Colour == Colour4.Gray)
                 {
                     foundGarbage = true;
                     i = lineStart - 10;
@@ -295,16 +320,16 @@ namespace Tetris.Game
             {
                 if (emptyIndex + lineStart == j) // add empty hole
                 {
-                    ocupied[j].Occupied = false;
+                    Occupied[j].Occupied = false;
                     continue;
                 }
 
-                ocupied[j].Occupied = true;
-                ocupied[j].Colour = Colour4.Gray;
+                Occupied[j].Occupied = true;
+                Occupied[j].Colour = Colour4.Gray;
             }
 
 
-            redrawOcupied();
+            redrawOccupied();
         }
 
         private void recurseStackUp(int j)
@@ -313,41 +338,24 @@ namespace Tetris.Game
             {
                 if (j > 10)
                 {
-                    ocupied[j - 10].Occupied = ocupied[j].Occupied;
-                    ocupied[j - 10].Colour = ocupied[j].Colour;
+                    Occupied[j - 10].Occupied = Occupied[j].Occupied;
+                    Occupied[j - 10].Colour = Occupied[j].Colour;
                 }
 
                 recurseStackUp(j + 10);
             }
         }
 
-        private void redrawOcupied()
-        {
-            droppedContainer.Clear();
-            foreach (var box in ocupied)
-            {
-                if (box)
-                {
-                    droppedContainer.Add(new Box()
-                    {
-                        Size = new Vector2(45, 45),
-                        Position = new Vector2(PlayField.x[box.X] + 5, PlayField.y[box.Y] + 5),
-                        Anchor = Anchor.TopLeft,
-                        Colour = box.Colour,
-                    });
-                }
-            }
-        }
 
         protected override bool OnMouseDown(MouseDownEvent e)
         {
             if (e.Button == MouseButton.Left)
             {
-                p.Rotate(false);
+                Piece.Rotate(false);
                 return base.OnMouseDown(e);
             }
 
-            p.Rotate(true);
+            Piece.Rotate(true);
             return base.OnMouseDown(e);
         }
 
@@ -358,9 +366,9 @@ namespace Tetris.Game
                 case var value when value == GameConfigManager.GameControlsConfig[GameSetting.Hold]:
                     if (HoldPreview.Hold.CanHold)
                     {
-                        HoldPreview.Hold.HeldPiece = p.PieceType;
+                        HoldPreview.Hold.HeldPiece = Piece.PieceType;
                         expireTetrimino();
-                        box.Add(p);
+                        box.Add(Piece);
                         HoldPreview.Hold.CanHold = false;
                     }
 

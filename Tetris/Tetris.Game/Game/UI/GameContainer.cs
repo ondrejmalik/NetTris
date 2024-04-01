@@ -17,13 +17,13 @@ public partial class GameContainer : GameContainerBase
     Hold hold;
     Bag bag = new Bag();
 
-    public GameContainer(bool isOpponent = false)
+    public GameContainer(bool isOpponent = false, bool isOnline = false)
     {
         hold = new Hold(bag, null);
         holdPreview = new HoldPreview(hold) { Position = new Vector2(750, 0) };
         hold.HoldPreview = holdPreview;
         holdPreview.Hold = hold;
-        PlayField = new PlayField(holdPreview, isOpponent) { Position = new Vector2(200, 0) };
+        PlayField = new PlayField(holdPreview, isOpponent, isOnline) { Position = new Vector2(200, 0) };
         playfieldStats = new PlayfieldStats(PlayField);
     }
 

@@ -77,7 +77,8 @@ public partial class MainMenu : Screen
                             },
                             new MenuButton()
                             {
-                                Text = "Online", Action = () => { }, BaseSize = new Vector2(100, 75),
+                                Text = "Online", Action = () => { this.Push(new DoubleGameScreen(true)); },
+                                BaseSize = new Vector2(100, 75),
                                 HoveredSize = new Vector2(120, 75)
                             },
                         })

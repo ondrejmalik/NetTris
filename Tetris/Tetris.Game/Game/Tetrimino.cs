@@ -17,7 +17,7 @@ public partial class Tetrimino : CompositeDrawable
 {
     public int PosX { get; }
     public int PosY { get; }
-    public List<(int, int)> GridPos = new List<(int, int)>();
+    public List<(int X, int Y)> GridPos = new List<(int, int)>();
     public Colour4 PieceColour;
     public PieceType PieceType;
 
@@ -31,18 +31,21 @@ public partial class Tetrimino : CompositeDrawable
     private Action<KeyDownEvent> onkeyDown;
     private bool isOpponent;
     private Dictionary<GameSetting, Key> controlsConfig;
+    private bool isDummy;
 
-    public Tetrimino(PieceType type, int x, int y, PlayField playField = null, bool isOpponent = false)
+    public Tetrimino(PieceType type, int x, int y, PlayField playField = null, bool isOpponent = false,
+        bool isDummy = false)
     {
-        controlsConfig = isOpponent ? GameConfigManager.OpponentControlsConfig : GameConfigManager.GameControlsConfig;
-
+        this.isDummy = isDummy;
         this.isOpponent = isOpponent;
         this.playField = playField;
         PosX = x;
         PosY = y;
         setPieceType(type);
-        if (playField != null)
+        if (playField != null && !isDummy)
         {
+            controlsConfig =
+                isOpponent ? GameConfigManager.OpponentControlsConfig : GameConfigManager.GameControlsConfig;
             updateDeltaTime = () =>
             {
                 if (deltaTime > 1000)
@@ -182,7 +185,28 @@ public partial class Tetrimino : CompositeDrawable
             Colour = Colour4.Purple,
             Depth = -20,
         });
-        setDrawPos();
+        SetDrawPos();
+    }
+
+    public void SetDrawPos()
+    {
+        if (isDummy) { }
+
+        try
+        {
+            boxes[0].Position = new Vector2(PlayField.x[GridPos[0].Item1] + 5,
+                PlayField.y[GridPos[0].Item2] + 5);
+            boxes[1].Position = new Vector2(PlayField.x[GridPos[1].Item1] + 5,
+                PlayField.y[GridPos[1].Item2] + 5);
+            boxes[2].Position = new Vector2(PlayField.x[GridPos[2].Item1] + 5,
+                PlayField.y[GridPos[2].Item2] + 5);
+            boxes[3].Position = new Vector2(PlayField.x[GridPos[3].Item1] + 5,
+                PlayField.y[GridPos[3].Item2] + 5);
+        }
+        catch (Exception e)
+        {
+            Logger.Log(e.Message);
+        }
     }
 
     protected override void Update()
@@ -258,7 +282,7 @@ public partial class Tetrimino : CompositeDrawable
             }
         }
 
-        setDrawPos();
+        SetDrawPos();
     }
 
     private void quickDrop()
@@ -288,7 +312,7 @@ public partial class Tetrimino : CompositeDrawable
         playField.BottomCollisionDetection();
         playField.CollisionDetection(0);
         pivot = new Vector2(pivot.X, pivot.Y + 1);
-        setDrawPos();
+        SetDrawPos();
     }
 
     private void moveLeft(bool checkCollision = true)
@@ -312,7 +336,7 @@ public partial class Tetrimino : CompositeDrawable
         }
 
         pivot = new Vector2(pivot.X - 1, pivot.Y);
-        setDrawPos();
+        SetDrawPos();
     }
 
     private void moveRight(bool checkCollision = true)
@@ -336,25 +360,6 @@ public partial class Tetrimino : CompositeDrawable
         }
 
         pivot = new Vector2(pivot.X + 1, pivot.Y);
-        setDrawPos();
-    }
-
-    private void setDrawPos()
-    {
-        try
-        {
-            boxes[0].Position = new Vector2(PlayField.x[GridPos[0].Item1] + 5,
-                PlayField.y[GridPos[0].Item2] + 5);
-            boxes[1].Position = new Vector2(PlayField.x[GridPos[1].Item1] + 5,
-                PlayField.y[GridPos[1].Item2] + 5);
-            boxes[2].Position = new Vector2(PlayField.x[GridPos[2].Item1] + 5,
-                PlayField.y[GridPos[2].Item2] + 5);
-            boxes[3].Position = new Vector2(PlayField.x[GridPos[3].Item1] + 5,
-                PlayField.y[GridPos[3].Item2] + 5);
-        }
-        catch (Exception e)
-        {
-            Logger.Log(e.Message);
-        }
+        SetDrawPos();
     }
 }
