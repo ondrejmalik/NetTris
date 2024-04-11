@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using JetBrains.Annotations;
+using Tetris.Game.Game.Playfield;
+using Tetris.Game.Game.Playfield.Tetrimino;
 
 namespace Tetris.Game.Networking;
 
@@ -14,16 +14,18 @@ public class Packet
         // Empty constructor for serialization
     }
 
-    public Packet(List<OccupiedSet> occupied, List<(int, int)> piecePos, PieceType pieceType)
+    public Packet(List<OccupiedSet> occupied, List<(int, int)> piecePos, PieceType pieceType, PacketCommandSendLines command = null)
     {
         this.Occupied = occupied;
         this.PieceType = pieceType;
+        this.Command = command;
         SerializePiecePos(piecePos);
     }
 
     public List<OccupiedSet> Occupied { get; set; }
     public List<Dictionary<string, int>> PiecePos { get; set; } = new();
     public PieceType PieceType { get; set; }
+    public PacketCommandBase Command { get; set; }
 
     public string Serialize()
     {

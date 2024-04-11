@@ -9,6 +9,8 @@ using osu.Framework.Input.Events;
 using osu.Framework.Localisation;
 using osu.Framework.Screens;
 using osuTK;
+using Tetris.Game.Game.UI.Screens;
+using Tetris.Game.Menu.Ui;
 
 
 namespace Tetris.Game.Menu;
@@ -66,18 +68,15 @@ public partial class MainMenu : Screen
                         {
                             new MenuButton()
                             {
-                                Text = "Local", Action = () => { this.Push(new DoubleGameScreen()); },
+                                Text = "Local",
+                                Action = () => { this.Push(new DoubleGameScreen()); },
                                 BaseSize = new Vector2(100, 75),
                                 HoveredSize = new Vector2(120, 75)
                             },
                             new MenuButton()
                             {
-                                Text = "P2P", Action = () => { }, BaseSize = new Vector2(100, 75),
-                                HoveredSize = new Vector2(120, 75)
-                            },
-                            new MenuButton()
-                            {
-                                Text = "Online", Action = () => { this.Push(new DoubleGameScreen(true)); },
+                                Text = "Online",
+                                Action = () => { this.Push(new DoubleGameScreen(true)); },
                                 BaseSize = new Vector2(100, 75),
                                 HoveredSize = new Vector2(120, 75)
                             },

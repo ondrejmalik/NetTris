@@ -2,8 +2,7 @@
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 
-
-namespace Tetris.Game;
+namespace Tetris.Game.Menu.Ui;
 
 public partial class SettingsMenu : CompositeDrawable
 {

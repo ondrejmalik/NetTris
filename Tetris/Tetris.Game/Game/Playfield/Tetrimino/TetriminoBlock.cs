@@ -2,7 +2,7 @@
 using osu.Framework.Graphics.Shapes;
 using osuTK;
 
-namespace Tetris.Game;
+namespace Tetris.Game.Game.Playfield.Tetrimino;
 
 public partial class TetriminoBlock: Box
 {

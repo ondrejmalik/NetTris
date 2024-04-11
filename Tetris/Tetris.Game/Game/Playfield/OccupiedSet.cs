@@ -1,7 +1,6 @@
-﻿using System;
-using osu.Framework.Graphics;
+﻿using osu.Framework.Graphics;
 
-namespace Tetris.Game;
+namespace Tetris.Game.Game.Playfield;
 
 public class OccupiedSet
 {

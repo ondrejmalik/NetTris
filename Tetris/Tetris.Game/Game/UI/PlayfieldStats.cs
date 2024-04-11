@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Net.Mime;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
 using osuTK;
+using Tetris.Game.Game.Playfield;
 
-
-namespace Tetris.Game;
+namespace Tetris.Game.Game.UI;
 
 public partial class PlayfieldStats(PlayField playField) : CompositeDrawable
 {

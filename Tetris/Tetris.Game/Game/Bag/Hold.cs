@@ -1,4 +1,7 @@
-﻿namespace Tetris.Game;
+﻿using Tetris.Game.Game.Playfield.Tetrimino;
+using Tetris.Game.Game.UI;
+
+namespace Tetris.Game.Game.Bag;
 
 public class Hold
 {

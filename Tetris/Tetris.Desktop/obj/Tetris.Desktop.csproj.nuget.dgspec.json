@@ -5,10 +5,10 @@
   },
   "projects": {
     "A:\\Projects\\Tetris\\Tetris\\Tetris.Desktop\\Tetris.Desktop.csproj": {
-      "version": "0.0.0",
+      "version": "1.0.0",
       "restore": {
         "projectUniqueName": "A:\\Projects\\Tetris\\Tetris\\Tetris.Desktop\\Tetris.Desktop.csproj",
-        "projectName": "Tetris",
+        "projectName": "Tetris.Desktop",
         "projectPath": "A:\\Projects\\Tetris\\Tetris\\Tetris.Desktop\\Tetris.Desktop.csproj",
         "packagesPath": "C:\\Users\\om777\\.nuget\\packages\\",
         "outputPath": "A:\\Projects\\Tetris\\Tetris\\Tetris.Desktop\\obj\\",
@@ -50,6 +50,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.0.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.4.2, )"
+            },
             "ppy.osu.Framework": {
               "target": "Package",
               "version": "[2024.217.0, )"

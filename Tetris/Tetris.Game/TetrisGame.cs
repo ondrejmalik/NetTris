@@ -1,6 +1,8 @@
 ﻿using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Screens;
+using Tetris.Game.Game.UI.Screens;
+using Tetris.Game.Menu;
 
 namespace Tetris.Game
 {
@@ -20,7 +22,7 @@ namespace Tetris.Game
         {
             base.LoadComplete();
 
-            screenStack.Push(new GameScreen());
+            screenStack.Push(new MainMenu());
         }
     }
 }

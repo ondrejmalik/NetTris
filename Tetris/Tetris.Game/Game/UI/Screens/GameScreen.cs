@@ -1,13 +1,9 @@
-using System;
-using System.Diagnostics;
-using System.Threading;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Screens;
 using osuTK;
-using Tetris.Game.Networking;
 
-namespace Tetris.Game
+namespace Tetris.Game.Game.UI.Screens
 {
     public partial class GameScreen : Screen
     {

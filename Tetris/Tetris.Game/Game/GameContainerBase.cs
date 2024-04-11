@@ -1,14 +1,17 @@
 ﻿using osu.Framework.Graphics.Containers;
+using Tetris.Game.Game.Bag;
+using Tetris.Game.Game.Playfield;
+using Tetris.Game.Game.UI;
 
-namespace Tetris.Game;
+namespace Tetris.Game.Game;
 
 public abstract partial class GameContainerBase : CompositeDrawable
 {
-    protected PlayField playField;
+    protected PlayField PlayField;
     protected  HoldPreview holdPreview;
     protected  PlayfieldStats playfieldStats;
     protected  Hold hold;
-    protected  Bag bag = new Bag();
+    protected  Bag.Bag bag = new Bag.Bag();
 
 
 }

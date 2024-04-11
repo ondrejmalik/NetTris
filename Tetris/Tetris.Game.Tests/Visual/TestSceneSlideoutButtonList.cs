@@ -5,6 +5,7 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Localisation;
 using osuTK;
+using Tetris.Game.Menu.Ui;
 
 namespace Tetris.Game.Tests.Visual
 {

@@ -1,5 +1,6 @@
 using osu.Framework.Graphics;
 using NUnit.Framework;
+using Tetris.Game.Menu.Ui;
 
 namespace Tetris.Game.Tests.Visual
 {

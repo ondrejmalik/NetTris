@@ -4,8 +4,10 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
 using osuTK;
+using Tetris.Game.Game.Bag;
+using Tetris.Game.Game.Playfield.Tetrimino;
 
-namespace Tetris.Game;
+namespace Tetris.Game.Game.UI;
 
 public partial class HoldPreview : CompositeDrawable
 {

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tetris.Game")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+426f91140f17b85dfa6d9dddf04fa3784798258d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8b6b167feb5b938a056f444472ff3322cd0bb5d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Tetris.Game")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Tetris.Game")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

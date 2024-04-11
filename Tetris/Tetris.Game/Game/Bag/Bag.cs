@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tetris.Game.Game.Playfield.Tetrimino;
 
-namespace Tetris.Game;
+namespace Tetris.Game.Game.Bag;
 
 public class Bag
 {

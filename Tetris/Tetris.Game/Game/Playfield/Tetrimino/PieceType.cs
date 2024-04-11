@@ -1,4 +1,4 @@
-﻿namespace Tetris.Game;
+﻿namespace Tetris.Game.Game.Playfield.Tetrimino;
 
 public enum PieceType
 {

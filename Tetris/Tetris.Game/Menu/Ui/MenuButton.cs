@@ -5,7 +5,7 @@ using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Input.Events;
 using osuTK;
 
-namespace Tetris.Game;
+namespace Tetris.Game.Menu.Ui;
 
 public partial class MenuButton : BasicButton
 {
