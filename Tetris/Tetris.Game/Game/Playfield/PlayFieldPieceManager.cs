@@ -2,6 +2,7 @@
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Logging;
+using osu.Framework.Screens;
 using osuTK;
 using Tetris.Game.Networking;
 
@@ -81,12 +82,14 @@ public partial class PlayField : BasePlayField
             if (Occupied[pos.Item1 + pos.Item2 * 10] == true)
             {
                 Logger.Log("Game Over");
+                OnGameOverChanged();
+                break;
             }
         }
 
 
         int diff = clearLine();
-        if (!isOnline)
+        if (!isOnline && OpponentPlayField != null)
         {
             for (int i = 0; i < diff; i++)
             {

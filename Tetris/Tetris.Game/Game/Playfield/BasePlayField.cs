@@ -11,6 +11,8 @@ namespace Tetris.Game.Game.Playfield
         public static List<int> x = new List<int>();
         public static List<int> y = new List<int>();
         public event EventHandler<SendLinesEventArgs> ClearedLinesChanged;
+
+        public event EventHandler<EventArgs> GameOverChanged;
         public HoldPreview HoldPreview;
         public Tetrimino.Tetrimino Piece;
         public PlayField OpponentPlayField { get; set; }
@@ -22,9 +24,14 @@ namespace Tetris.Game.Game.Playfield
         protected bool isOpponent;
         protected bool isOnline;
 
-        protected virtual void OnClearedLinesChanged(int lines)
+        protected void OnClearedLinesChanged(int lines)
         {
             ClearedLinesChanged?.Invoke(this, new SendLinesEventArgs(lines));
+        }
+
+        protected void OnGameOverChanged()
+        {
+            GameOverChanged?.Invoke(this, new EventArgs());
         }
     }
 }

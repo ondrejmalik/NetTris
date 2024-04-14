@@ -50,9 +50,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Realm": {
+              "target": "Package",
+              "version": "[11.7.0, )"
+            },
             "ppy.osu.Framework": {
               "target": "Package",
-              "version": "[2024.217.0, )"
+              "version": "[2024.329.0, )"
             }
           },
           "imports": [
@@ -71,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -117,9 +121,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Realm": {
+              "target": "Package",
+              "version": "[11.7.0, )"
+            },
             "ppy.osu.Framework": {
               "target": "Package",
-              "version": "[2024.217.0, )"
+              "version": "[2024.329.0, )"
             }
           },
           "imports": [
@@ -138,7 +146,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

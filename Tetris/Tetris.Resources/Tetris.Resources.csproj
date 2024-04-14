@@ -9,6 +9,7 @@
         <EmbeddedResource Include="Tracks\**\*"/>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="ppy.osu.Framework" Version="2024.217.0" />
+      <PackageReference Include="ppy.osu.Framework" Version="2024.329.0" />
+      <PackageReference Include="Realm" Version="11.7.0" />
     </ItemGroup>
 </Project>

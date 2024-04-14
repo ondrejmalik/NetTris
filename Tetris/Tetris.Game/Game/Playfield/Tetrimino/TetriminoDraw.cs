@@ -12,7 +12,8 @@ namespace Tetris.Game.Game.Playfield.Tetrimino;
 
 public partial class Tetrimino : TetriminoBase
 {
-    public Tetrimino(PieceType type, int x, int y, PlayField playField = null, bool isOpponent = false, bool isDummy = false)
+    public Tetrimino(PieceType type, int x, int y, PlayField playField = null, bool isOpponent = false,
+        bool isDummy = false)
     {
         this.isDummy = isDummy;
         this.isOpponent = isOpponent;
@@ -66,15 +67,12 @@ public partial class Tetrimino : TetriminoBase
             updateDeltaTime = () => { };
             onkeyDown = e => { };
         }
-
-        load();
     }
 
     [BackgroundDependencyLoader]
     private void load()
     {
         AutoSizeAxes = Axes.Both;
-        Logger.Log("New Piece");
         InternalChild = container = new Container
         {
             AutoSizeAxes = Axes.Both,

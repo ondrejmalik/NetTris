@@ -52,13 +52,9 @@ A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\Vortice.Direct3D11.dll
 A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\Vortice.DirectX.dll
 A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\Vortice.DXGI.dll
 A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\Vortice.Mathematics.dll
-A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libavcodec.so
-A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libavformat.so
-A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libavutil.so
 A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libbass.so
 A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libbass_fx.so
 A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libbassmix.so
-A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libswscale.so
 A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x86\native\libbass.so
 A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x86\native\libbass_fx.so
 A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x86\native\libbassmix.so
@@ -222,3 +218,7 @@ A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Debug\net8.0\Tetris.Desktop.dll
 A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Debug\net8.0\refint\Tetris.Desktop.dll
 A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Debug\net8.0\Tetris.Desktop.pdb
 A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Debug\net8.0\ref\Tetris.Desktop.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libavcodec.so.58
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libavformat.so.58
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libavutil.so.56
+A:\Projects\Tetris\Tetris\Tetris.Desktop\bin\Debug\net8.0\runtimes\linux-x64\native\libswscale.so.5

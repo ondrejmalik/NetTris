@@ -24,8 +24,10 @@ public partial class RendererSwitcher : CompositeDrawable
         AutoSizeAxes = Axes.Both;
         Anchor = Anchor.TopLeft;
         Origin = Anchor.TopLeft;
+        AutoSizeAxes = Axes.Both;
         InternalChild = box = new Container
         {
+            AutoSizeAxes = Axes.Both,
             Children = new Drawable[]
             {
                 new FillFlowContainer()
@@ -49,6 +51,20 @@ public partial class RendererSwitcher : CompositeDrawable
                             Origin = Anchor.Centre,
                             Anchor = Anchor.Centre,
                             Font = new FontUsage(size: 25),
+                            BaseSize = ButtonsBaseSize,
+                            HoveredSize = ButtonsHoveredSize,
+                            Action = () => SwitchRenderer(RendererType.OpenGL, configManager)
+                        },
+
+                        buttons[0] = new MenuButton()
+                        {
+                            Text = "OpenGL",
+                            Origin = Anchor.Centre,
+                            Anchor = Anchor.Centre,
+                            Font = new FontUsage(size: 25),
+                            BaseSize = ButtonsBaseSize,
+                            HoveredSize = ButtonsHoveredSize,
+                            Action = () => SwitchRenderer(RendererType.OpenGL, configManager)
                         },
                         buttons[1] = new MenuButton()
                         {
@@ -56,6 +72,9 @@ public partial class RendererSwitcher : CompositeDrawable
                             Origin = Anchor.Centre,
                             Anchor = Anchor.Centre,
                             Font = new FontUsage(size: 25),
+                            BaseSize = ButtonsBaseSize,
+                            HoveredSize = ButtonsHoveredSize,
+                            Action = () => SwitchRenderer(RendererType.Direct3D11, configManager)
                         },
                         buttons[2] = new MenuButton()
                         {
@@ -63,6 +82,9 @@ public partial class RendererSwitcher : CompositeDrawable
                             Origin = Anchor.Centre,
                             Anchor = Anchor.Centre,
                             Font = new FontUsage(size: 25),
+                            BaseSize = ButtonsBaseSize,
+                            HoveredSize = ButtonsHoveredSize,
+                            Action = () => SwitchRenderer(RendererType.Vulkan, configManager)
                         },
                         buttons[3] = new MenuButton()
                         {
@@ -70,6 +92,9 @@ public partial class RendererSwitcher : CompositeDrawable
                             Origin = Anchor.Centre,
                             Anchor = Anchor.Centre,
                             Font = new FontUsage(size: 25),
+                            BaseSize = ButtonsBaseSize,
+                            HoveredSize = ButtonsHoveredSize,
+                            Action = () => SwitchRenderer(RendererType.Metal, configManager)
                         },
                         buttons[4] = new MenuButton()
                         {
@@ -77,8 +102,11 @@ public partial class RendererSwitcher : CompositeDrawable
                             Origin = Anchor.Centre,
                             Anchor = Anchor.Centre,
                             Font = new FontUsage(size: 25),
+                            BaseSize = ButtonsBaseSize,
+                            HoveredSize = ButtonsHoveredSize,
+                            Action = () => SwitchRenderer(RendererType.Automatic, configManager)
                         },
-                        new SpriteText()
+                        disclaimerText = new SpriteText()
                         {
                             Origin = Anchor.Centre,
                             Anchor = Anchor.Centre,

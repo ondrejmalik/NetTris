@@ -8,7 +8,7 @@ using Tetris.Game.Networking;
 
 namespace Tetris.Game.Game.UI.Screens
 {
-    public partial class DoubleGameScreen : Screen
+    public partial class DoubleGameScreen : GameScreenBase
     {
         private GameContainer gameContainer1;
         private GameContainer gameContainer2;

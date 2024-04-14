@@ -138,13 +138,9 @@ A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\zh-Hans\Microsoft.V
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libavcodec.so
-A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libavformat.so
-A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libavutil.so
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libbass.so
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libbass_fx.so
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libbassmix.so
-A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libswscale.so
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x86\native\libbass.so
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x86\native\libbass_fx.so
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x86\native\libbassmix.so
@@ -222,3 +218,7 @@ A:\Projects\Tetris\Tetris\Tetris.Game.Tests\obj\Debug\net8.0\Tetris.Game.Tests.p
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\obj\Debug\net8.0\Tetris.Game.Tests.genruntimeconfig.cache
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\obj\Debug\net8.0\ref\Tetris.Game.Tests.dll
 A:\Projects\Tetris\Tetris\Tetris.Game.Tests\obj\Debug\net8.0\Tetris.Game.Tests.sourcelink.json
+A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libavcodec.so.58
+A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libavformat.so.58
+A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libavutil.so.56
+A:\Projects\Tetris\Tetris\Tetris.Game.Tests\bin\Debug\net8.0\runtimes\linux-x64\native\libswscale.so.5
