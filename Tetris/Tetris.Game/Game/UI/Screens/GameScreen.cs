@@ -1,9 +1,11 @@
 using System;
+using System.Linq;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Screens;
 using osuTK;
 using Tetris.Game.Menu;
+using Tetris.Game.Realm;
 
 namespace Tetris.Game.Game.UI.Screens
 {
@@ -29,6 +31,7 @@ namespace Tetris.Game.Game.UI.Screens
 
         private void handleGameOver(object sender, EventArgs e)
         {
+            RealmManager.AddScore("TestPlayer", gameContainer1.PlayField.ClearedLines);
             this.Push(new MainMenu());
         }
     }

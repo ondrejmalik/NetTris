@@ -8,6 +8,7 @@ using osu.Framework.Screens;
 using osuTK;
 using Tetris.Game.Game.UI.Screens;
 using Tetris.Game.Menu.Ui;
+using Tetris.Game.Menu.Ui.Leaderboard;
 
 
 namespace Tetris.Game.Menu;
@@ -20,6 +21,7 @@ public partial class MainMenu : Screen
     public MenuButton SettingsButton;
     public MenuButton LeaderboardsButton;
     public SettingsMenu SettingsMenu;
+    public Leaderboard Leaderboard;
 
     public MainMenu()
     {
@@ -101,16 +103,9 @@ public partial class MainMenu : Screen
                                     Box.Add(SettingsMenu = new SettingsMenu());
                                     SettingsMenu.Show();
                                 }
-                                else if (SettingsMenu.IsAlive)
+                                else
                                 {
-                                    if (SettingsMenu.Position.X == -1500)
-                                    {
-                                        SettingsMenu.Show();
-                                    }
-                                    else
-                                    {
-                                        SettingsMenu.Hide();
-                                    }
+                                    SettingsMenu.ToggleShow();
                                 }
                             }
                         },
@@ -122,6 +117,27 @@ public partial class MainMenu : Screen
                             Text = new LocalisableString("Leaderboards"),
                             BackgroundColour = Colour4.Aqua,
                             Colour = Colour4.Wheat,
+                            Action = () =>
+                            {
+                                if (Leaderboard == null)
+                                {
+                                    Box.Add(Leaderboard = new Leaderboard());
+                                    Leaderboard.Show();
+                                }
+                                else
+                                {
+                                    Leaderboard.ToggleShow();
+                                }
+                            }
+                        },
+
+                        new MenuButton()
+                        {
+                            Text = "Fps Screen",
+                            Action = () =>
+                            {
+                                this.Push(new FpsCounterScreen());
+                            }
                         }
                     }
                 },

@@ -8,13 +8,10 @@ public partial class SettingsMenu : CompositeDrawable
 {
     Container box;
 
-    public SettingsMenu()
-    {
-    }
-
     [BackgroundDependencyLoader]
     private void load()
     {
+        Padding = new MarginPadding(25);
         Anchor = Anchor.TopLeft;
         Origin = Anchor.TopLeft;
         AutoSizeAxes = Axes.Both;
@@ -29,16 +26,29 @@ public partial class SettingsMenu : CompositeDrawable
                 new GraphicsSettingsSection()
             }
         };
-        Position = new osuTK.Vector2(-1500, 200);
-
+        Position = new osuTK.Vector2(-1500, 0);
     }
 
     public void Show()
     {
-        this.MoveTo( new osuTK.Vector2(0, 200), 250, Easing.OutQuint);
+        base.Show();
+        this.MoveTo(new osuTK.Vector2(0, 200), 250, Easing.OutQuint);
     }
-    public void Hide()
+
+    public override void Hide()
     {
-        this.MoveTo( new osuTK.Vector2(-1500, 200), 250, Easing.InQuint);
+        this.MoveTo(new osuTK.Vector2(-1500, 0), 250, Easing.InQuint).Then().Delay(250).OnComplete(_ => base.Hide());
+    }
+
+    public void ToggleShow()
+    {
+        if (Position.X == -1500)
+        {
+            Show();
+        }
+        else
+        {
+            Hide();
+        }
     }
 }

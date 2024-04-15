@@ -3031,8 +3031,7 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Realm": "11.7.0",
-          "Tetris.Resources": "1.0.0",
-          "ppy.osu.Framework": "2024.329.0"
+          "Tetris.Resources": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Tetris.Game.dll": {}

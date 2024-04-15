@@ -22,40 +22,32 @@ public partial class RendererSwitcher : CompositeDrawable
     private void load(FrameworkConfigManager configManager, GameHost host)
     {
         AutoSizeAxes = Axes.Both;
-        Anchor = Anchor.TopLeft;
-        Origin = Anchor.TopLeft;
+        Anchor = Anchor.TopCentre;
+        Origin = Anchor.TopCentre;
         AutoSizeAxes = Axes.Both;
         InternalChild = box = new Container
         {
             AutoSizeAxes = Axes.Both,
             Children = new Drawable[]
             {
+                new SpriteText()
+                {
+                    Text = "Renderer",
+                    Font = new FontUsage(size: 30),
+                    Origin = Anchor.TopCentre,
+                    Anchor = Anchor.TopCentre,
+                },
                 new FillFlowContainer()
                 {
+                    Position = new Vector2(0, 50),
+                    CornerRadius = 13,
+                    Masking = true,
                     AutoSizeAxes = Axes.Both,
                     Direction = FillDirection.Horizontal,
                     Spacing = new Vector2(0, 50),
+
                     Children = new Drawable[]
                     {
-                        new SpriteText()
-                        {
-                            Text = "Renderer:",
-                            Font = new FontUsage(size: 25),
-                            Origin = Anchor.Centre,
-                            Anchor = Anchor.Centre,
-                            Margin = new MarginPadding(25),
-                        },
-                        buttons[0] = new MenuButton()
-                        {
-                            Text = "OpenGL",
-                            Origin = Anchor.Centre,
-                            Anchor = Anchor.Centre,
-                            Font = new FontUsage(size: 25),
-                            BaseSize = ButtonsBaseSize,
-                            HoveredSize = ButtonsHoveredSize,
-                            Action = () => SwitchRenderer(RendererType.OpenGL, configManager)
-                        },
-
                         buttons[0] = new MenuButton()
                         {
                             Text = "OpenGL",

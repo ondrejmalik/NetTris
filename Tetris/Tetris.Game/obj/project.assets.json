@@ -7741,8 +7741,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Realm >= 11.7.0",
-      "Tetris.Resources >= 1.0.0",
-      "ppy.osu.Framework >= 2024.329.0"
+      "Tetris.Resources >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -7798,10 +7797,6 @@
           "Realm": {
             "target": "Package",
             "version": "[11.7.0, )"
-          },
-          "ppy.osu.Framework": {
-            "target": "Package",
-            "version": "[2024.329.0, )"
           }
         },
         "imports": [

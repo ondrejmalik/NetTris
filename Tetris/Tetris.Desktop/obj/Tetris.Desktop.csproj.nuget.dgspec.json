@@ -136,10 +136,6 @@
             "Realm": {
               "target": "Package",
               "version": "[11.7.0, )"
-            },
-            "ppy.osu.Framework": {
-              "target": "Package",
-              "version": "[2024.329.0, )"
             }
           },
           "imports": [

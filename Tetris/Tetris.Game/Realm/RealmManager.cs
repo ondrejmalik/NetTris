@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Realms;
@@ -11,30 +12,23 @@ public static class RealmManager
     public static RealmConfiguration config = new RealmConfiguration(Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"NetTris\Data\Database.realm"));
 
-
     public static void AddScore(string playerName, int score)
     {
         Realms.Realm Realm = Realms.Realm.GetInstance(config);
-        using (var trans = Realm.BeginWrite())
+        Realm.Write(() =>
         {
-            Realm.Add(
-                new RealmScore()
-                {
-                    PlayerName = playerName,
-                    Score = score,
-                });
-            trans.Commit();
-        }
+            Realm.Add(new RealmScore
+            {
+                PlayerName = playerName,
+                Score = score
+            });
+        });
     }
 
-    public static void ReadScores()
+    public static List<RealmScore> ReadScores()
     {
-         AddScore("Test", 100);
         Realms.Realm Realm = Realms.Realm.GetInstance(config);
-        IOrderedQueryable<RealmScore> credentials = Realm.All<RealmScore>().OrderByDescending(x => x.Score);
-        foreach (var score in credentials)
-        {
-            Console.WriteLine(score.PlayerName + " " + score.Score);
-        }
+        List<RealmScore> list = Realm.All<RealmScore>().OrderByDescending(x => x.Score).ToList();
+        return list.Take(5).ToList();
     }
 }
