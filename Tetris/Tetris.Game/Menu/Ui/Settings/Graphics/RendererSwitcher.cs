@@ -25,6 +25,7 @@ public partial class RendererSwitcher : CompositeDrawable
         Anchor = Anchor.TopCentre;
         Origin = Anchor.TopCentre;
         AutoSizeAxes = Axes.Both;
+        Margin = new MarginPadding(25);
         InternalChild = box = new Container
         {
             AutoSizeAxes = Axes.Both,

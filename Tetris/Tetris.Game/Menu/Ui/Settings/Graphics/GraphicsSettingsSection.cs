@@ -26,16 +26,9 @@ public partial class GraphicsSettingsSection : CompositeDrawable
                 {
                     AutoSizeAxes = Axes.Both,
                     Direction = FillDirection.Vertical,
-                    Spacing = new Vector2(0, 50),
                     Children = new Drawable[]
                     {
-                        SettingsTitleText = new SpriteText()
-                        {
-                            Text = "Graphics Settings",
-                            Font = new FontUsage(size: 50),
-                            Origin = Anchor.TopCentre,
-                            Anchor = Anchor.TopCentre,
-                        },
+                        SettingsTitleText = new HeaderSpriteText() { Text = "Graphics" },
                         new RendererSwitcher()
                     }
                 }

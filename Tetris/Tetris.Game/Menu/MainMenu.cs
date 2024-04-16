@@ -52,6 +52,7 @@ public partial class MainMenu : Screen
                         {
                             new MenuButton()
                             {
+                                // TODO: Add increasing falling speed
                                 Text = "Endless", Action = () => { this.Push(new GameScreen()); },
                                 BaseSize = new Vector2(100, 75), HoveredSize = new Vector2(120, 75)
                             },
@@ -87,7 +88,7 @@ public partial class MainMenu : Screen
                                 { Text = "Multiplayer", },
                             Position = new Vector2(0, 0),
                         },
-
+                        // TODO: fix settings opening animation
                         SettingsButton = new RoundedMenuButton()
                         {
                             Anchor = Anchor.TopCentre,
