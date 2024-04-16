@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Realms;
 
 namespace Tetris.Game.Realm;
@@ -25,7 +26,7 @@ public static class RealmManager
         });
     }
 
-    public static List<RealmScore> ReadScores()
+    public async static Task<List<RealmScore>> ReadScoresAsync()
     {
         Realms.Realm Realm = Realms.Realm.GetInstance(config);
         List<RealmScore> list = Realm.All<RealmScore>().OrderByDescending(x => x.Score).ToList();

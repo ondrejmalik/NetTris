@@ -1,12 +1,14 @@
 ﻿using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using Tetris.Game.Config;
+using Tetris.Game.Menu.Ui.Controls;
 
 namespace Tetris.Game.Menu.Ui;
 
 public partial class SettingsMenu : CompositeDrawable
 {
-    Container box;
+    FillFlowContainer box;
 
     [BackgroundDependencyLoader]
     private void load()
@@ -15,29 +17,30 @@ public partial class SettingsMenu : CompositeDrawable
         Anchor = Anchor.TopLeft;
         Origin = Anchor.TopLeft;
         AutoSizeAxes = Axes.Both;
-        InternalChild = box = new Container
+        InternalChild = box = new FillFlowContainer()
         {
-            Colour = Colour4.Gold,
+            Direction = FillDirection.Vertical,
+            Spacing = new osuTK.Vector2(0, 10),
             AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
             Children = new Drawable[]
             {
-                new GraphicsSettingsSection()
+                new GraphicsSettingsSection(),
+                new ControlsRemapSection(),
             }
         };
         Position = new osuTK.Vector2(-1500, 0);
+        Show();
     }
 
     public void Show()
     {
         base.Show();
-        this.MoveTo(new osuTK.Vector2(0, 200), 250, Easing.OutQuint);
+        this.MoveTo(new osuTK.Vector2(0, 0), 250, Easing.OutQuint);
     }
 
     public override void Hide()
     {
-        this.MoveTo(new osuTK.Vector2(-1500, 0), 250, Easing.InQuint).Then().Delay(250).OnComplete(_ => base.Hide());
+        this.MoveTo(new osuTK.Vector2(-1500, -200), 250, Easing.InQuint).Then().Delay(250).OnComplete(_ => base.Hide());
     }
 
     public void ToggleShow()

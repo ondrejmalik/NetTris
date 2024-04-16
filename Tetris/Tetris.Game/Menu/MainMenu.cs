@@ -59,7 +59,7 @@ public partial class MainMenu : Screen
                         {
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.TopCentre,
-                            MainButton = new MenuButton()
+                            MainButton = new RoundedMenuButton()
                                 { Text = "Singleplayer", },
                             Position = new Vector2(0, 0),
                         },
@@ -83,12 +83,12 @@ public partial class MainMenu : Screen
                         {
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.TopCentre,
-                            MainButton = new MenuButton()
+                            MainButton = new RoundedMenuButton()
                                 { Text = "Multiplayer", },
                             Position = new Vector2(0, 0),
                         },
 
-                        SettingsButton = new MenuButton()
+                        SettingsButton = new RoundedMenuButton()
                         {
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.TopCentre,
@@ -101,7 +101,6 @@ public partial class MainMenu : Screen
                                 if (SettingsMenu == null)
                                 {
                                     Box.Add(SettingsMenu = new SettingsMenu());
-                                    SettingsMenu.Show();
                                 }
                                 else
                                 {
@@ -109,7 +108,7 @@ public partial class MainMenu : Screen
                                 }
                             }
                         },
-                        LeaderboardsButton = new MenuButton()
+                        LeaderboardsButton = new RoundedMenuButton()
                         {
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.TopCentre,
@@ -122,7 +121,6 @@ public partial class MainMenu : Screen
                                 if (Leaderboard == null)
                                 {
                                     Box.Add(Leaderboard = new Leaderboard());
-                                    Leaderboard.Show();
                                 }
                                 else
                                 {
@@ -130,15 +128,6 @@ public partial class MainMenu : Screen
                                 }
                             }
                         },
-
-                        new MenuButton()
-                        {
-                            Text = "Fps Screen",
-                            Action = () =>
-                            {
-                                this.Push(new FpsCounterScreen());
-                            }
-                        }
                     }
                 },
             }

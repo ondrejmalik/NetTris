@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -107,21 +108,11 @@ namespace Tetris.Game.Game.Playfield
             Scheduler.Add(() => Piece.SetDrawPos());
         }
 
-        public void ScheduleAddGarbage(int lines = 1)
+        public void ScheduleAddGarbage(int lines = 1, List<(int, int)> emptyGridPos = null)
         {
-            Scheduler.Add(() => addGarbage(lines));
+            Scheduler.Add(() => addGarbage(lines, emptyGridPos));
         }
 
-        private void addGarbage(int lines)
-        {
-            // TODO: add move up current piece if overlaps with added garbage
-            for (int i = 0; i < lines; i++)
-            {
-                addLine(2);
-            }
-
-            OpponentPlayField.ClearedLines += lines;
-        }
 
         private void redrawOccupied()
         {
@@ -170,7 +161,7 @@ namespace Tetris.Game.Game.Playfield
 
                     break;
                 case Key.T:
-                    addLine(2);
+                    addGarbage(2);
                     break;
             }
 

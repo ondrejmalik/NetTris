@@ -23,10 +23,11 @@ namespace Tetris.Game.Game.Playfield
         protected Container droppedContainer;
         protected bool isOpponent;
         protected bool isOnline;
+        protected List<(int, int)> lastPieceGridPos;
 
-        protected void OnClearedLinesChanged(int lines)
+        protected void OnClearedLinesChanged()
         {
-            ClearedLinesChanged?.Invoke(this, new SendLinesEventArgs(lines));
+            ClearedLinesChanged?.Invoke(this, new SendLinesEventArgs(clearedLines, lastPieceGridPos));
         }
 
         protected void OnGameOverChanged()

@@ -1,10 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Logging;
-using osu.Framework.Screens;
 using osuTK;
-using Tetris.Game.Networking;
 
 namespace Tetris.Game.Game.Playfield;
 
@@ -16,7 +15,7 @@ public partial class PlayField : BasePlayField
         set
         {
             clearedLines = value;
-            OnClearedLinesChanged(value);
+            OnClearedLinesChanged();
         }
     }
 
@@ -75,6 +74,7 @@ public partial class PlayField : BasePlayField
             Occupied[pos.Item1 + pos.Item2 * 10 - 10] = o;
         }
 
+        lastPieceGridPos = Piece.GridPos; // used in sending garbage
         expireTetrimino();
         //check if new piece overlaps existing piece
         foreach (var pos in Piece.GridPos)
@@ -157,7 +157,38 @@ public partial class PlayField : BasePlayField
         }
     }
 
-    private void addLine(int emptyIndex)
+
+    private void addGarbage(int lines, List<(int, int)> emptyGridPos = null)
+    {
+        // TODO: add move up current piece if overlaps with added garbage
+        // TODO: maybe add empty hole in place of last enemy piece instead of line
+        for (int i = 0; i < lines; i++)
+        {
+            int index = 2;
+            if (emptyGridPos != null)
+            {
+                index = emptyGridPos[Random.Shared.Next(3)].Item1;
+            }
+
+            addLine(index); // for now only add empty hole where the last piece was
+        }
+
+        /*
+        if (emptyGridPos != null)
+        {
+            foreach (var cords in emptyGridPos) // add empty hole in place of last enemy piece
+            {
+                if (Occupied[cords.Item1 + cords.Item2 * 10].Occupied)
+                {
+                    Occupied[cords.Item1 + cords.Item2 * 10].Occupied = false;
+                }
+            }
+        }
+        */
+        OpponentPlayField.ClearedLines += lines;
+    }
+
+    private void addLine(int emptyIndex = 2)
     {
         for (int i = 0; i < 10; i++)
         {
@@ -186,6 +217,7 @@ public partial class PlayField : BasePlayField
             }
         }
 
+
         for (int j = lineStart; j < lineStart + 10; j++)
         {
             if (emptyIndex + lineStart == j) // add empty hole
@@ -197,7 +229,6 @@ public partial class PlayField : BasePlayField
             Occupied[j].Occupied = true;
             Occupied[j].Colour = Colour4.Gray;
         }
-
 
         redrawOccupied();
     }

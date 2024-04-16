@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osuTK;
-using Realms;
 using Tetris.Game.Realm;
 
 
@@ -25,6 +21,16 @@ public partial class Leaderboard : CompositeDrawable
     [BackgroundDependencyLoader]
     private void load()
     {
+        var Scores = RealmManager.ReadScoresAsync();
+        // start Reading Scores from Realm asyncronously
+        Scores.ContinueWith((Scores) =>
+        {
+            foreach (var score in Scores.Result)
+            {
+                Scheduler.Add(() => ffContainer.Add(new LeaderboardScore(score)));
+            }
+        });
+
         Padding = new MarginPadding(25);
         Anchor = Anchor.TopRight;
         Origin = Anchor.TopRight;
@@ -63,30 +69,27 @@ public partial class Leaderboard : CompositeDrawable
                 }
             }
         };
-        Scores = RealmManager.ReadScores();
-        foreach (var score in Scores)
-        {
-            ffContainer.Add(new LeaderboardScore(score));
-        }
 
-        Position = new osuTK.Vector2(1500, 0);
+        Show();
+        Position = new Vector2(1500, 0);
     }
 
     public override void Show()
     {
         base.Show();
-        this.MoveTo(new osuTK.Vector2(0, 200), 250, Easing.OutQuint);
+        this.MoveTo(new Vector2(0, 200), 250, Easing.OutQuint);
     }
 
     public override void Hide()
     {
-        this.MoveTo(new osuTK.Vector2(1500, 0), 250, Easing.InQuint).Then().Delay(250).OnComplete(_ => base.Hide());
+        this.MoveTo(new Vector2(1500, 0), 250, Easing.InQuint).Then().Delay(256).OnComplete(_ => base.Hide());
     }
 
     public void ToggleShow()
     {
         if (Position.X == 1500)
         {
+            Show();
             Show();
         }
         else

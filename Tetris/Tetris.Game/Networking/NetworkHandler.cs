@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -10,16 +11,32 @@ using Tetris.Game.Game.Playfield;
 
 namespace Tetris.Game.Networking;
 
-public class NetworkHandler(IPEndPoint serverIp)
+public class NetworkHandler()
 {
     public UdpClient Client = new UdpClient();
-    private IPEndPoint serverIp = serverIp;
+
     public volatile bool Running = true;
     DateTime lastRecieve = DateTime.Now;
     public static object _MultiplayerLock = new object();
+
+    public int TickRate
+    {
+        get => 1 / tickMs * 1000;
+        set => tickMs = (int)((double)1 / value * 1000);
+    }
+
+    private IPEndPoint serverIp;
+    private int tickMs;
     private int newLines;
+    private List<(int, int)> lastPieceGridPos;
     private PlayField playFieldLeft;
     private PlayField playFieldRight;
+
+    public NetworkHandler(IPEndPoint serverIp, int tickRate = 5) : this()
+    {
+        this.serverIp = serverIp;
+        TickRate = tickRate;
+    }
 
     public void Loop(PlayField playFieldLeft, PlayField playFieldRight)
     {
@@ -27,12 +44,11 @@ public class NetworkHandler(IPEndPoint serverIp)
         this.playFieldRight = playFieldRight;
         Stopwatch sw = new();
         string response;
-
+        sw.Start();
         while (Running)
         {
             try
             {
-                sw.Start();
                 Packet packet = new();
                 if (playFieldLeft.Occupied.Count > 0)
                 {
@@ -40,7 +56,7 @@ public class NetworkHandler(IPEndPoint serverIp)
                     {
                         playFieldLeft.ClearedLinesChanged += handleSendLines;
                         packet = new(playFieldLeft.Occupied, playFieldLeft.Piece.GridPos,
-                            playFieldLeft.Piece.PieceType, new PacketCommandSendLines(newLines));
+                            playFieldLeft.Piece.PieceType, new PacketCommandSendLines(newLines, lastPieceGridPos));
                     }
                 }
 
@@ -58,19 +74,21 @@ public class NetworkHandler(IPEndPoint serverIp)
 
                 setNewPlayfieldValues(deserialized);
 
-                sw.Stop();
-                Thread.Sleep(1000);
 
+                Thread.Sleep((int)(tickMs - Math.Min(tickMs, sw.ElapsedMilliseconds)));
+                Logger.Log(sw.ElapsedMilliseconds.ToString() + "ms -----");
                 //Logger.Log(playFieldRight.Occupied.Where(x => x.Occupied).Count().ToString());
                 foreach (var pos in playFieldRight.Piece.GridPos)
                 {
                     Logger.Log(pos.Item1 + " " + pos.Item2);
                 }
 
+                sw.Restart();
                 //Logger.Log(deserialized.Occupied.Where(x => x.Occupied).Count().ToString());
             }
             catch (Exception e)
             {
+                sw.Restart();
                 Console.WriteLine(e);
             }
         }
@@ -102,6 +120,7 @@ public class NetworkHandler(IPEndPoint serverIp)
     private void handleSendLines(object sender, SendLinesEventArgs eventArgs)
     {
         newLines = eventArgs.Lines;
+        lastPieceGridPos = eventArgs.LastPieceGridPos;
     }
 
     private void setNewPlayfieldValues(Packet deserialized)
@@ -114,11 +133,25 @@ public class NetworkHandler(IPEndPoint serverIp)
 
     private void addSentLines(Packet deserialized)
     {
-        int diff = int.Parse(deserialized.Command.CommandData) - playFieldRight.ClearedLines;
+        string[] split = deserialized.Command.CommandData.Split("-");
+        int diff = int.Parse(split[0]) - playFieldRight.ClearedLines;
         Logger.Log($"diff {diff.ToString()}");
         if (diff > 0)
         {
-            playFieldLeft.ScheduleAddGarbage(diff);
+            playFieldLeft.ScheduleAddGarbage(diff, parseStringToCords(split[1]));
         }
+    }
+
+    private List<(int, int)> parseStringToCords(string cords)
+    {
+        List<(int, int)> list = new();
+        string[] split = cords.Split(";");
+        foreach (var cord in split)
+        {
+            string[] split2 = cord.Split(",");
+            list.Add((int.Parse(split2[0]), int.Parse(split2[1])));
+        }
+
+        return list;
     }
 }

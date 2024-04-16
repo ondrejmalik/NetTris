@@ -7,20 +7,35 @@ namespace Tetris.Game.Config;
 
 public static class GameConfigManager
 {
-    private static Dictionary<GameSetting, Key> _config = GameControlsConfigSetDefaults();
-    private static Dictionary<GameSetting, Key> _opponentconfig = OpponentControlsConfigSetDefaults();
+    private static Dictionary<GameSetting, Key> _gameConfig = GameControlsConfigSetDefaults();
+    private static Dictionary<GameSetting, Key> _opponentConfig = OpponentControlsConfigSetDefaults();
+    private static Dictionary<OnlineSetting, string> _onlineConfig = OnlineConfigSetDefaults();
+    private static Dictionary<UserSetting, string> _userConfig = UserConfigSetDefaults();
 
     public static Dictionary<GameSetting, Key> GameControlsConfig
     {
-        get => _config;
-        set => _config = value;
+        get => _gameConfig;
+        set => _gameConfig = value;
     }
 
     public static Dictionary<GameSetting, Key> OpponentControlsConfig
     {
-        get => _opponentconfig;
-        set => _opponentconfig = value;
+        get => _opponentConfig;
+        set => _opponentConfig = value;
     }
+
+    public static Dictionary<OnlineSetting, string> OnlineConfig
+    {
+        get => _onlineConfig;
+        set => _onlineConfig = value;
+    }
+
+    public static Dictionary<UserSetting, string> UserConfig
+    {
+        get => _userConfig;
+        set => _userConfig = value;
+    }
+
 
     public static Dictionary<GameSetting, Key> GameControlsConfigSetDefaults()
     {
@@ -47,6 +62,23 @@ public static class GameConfigManager
             { GameSetting.HardDrop, Key.Down },
             { GameSetting.Hold, Key.Slash },
             { GameSetting.SoftDrop, Key.Up },
+        };
+    }
+
+    public static Dictionary<OnlineSetting, string> OnlineConfigSetDefaults()
+    {
+        return new Dictionary<OnlineSetting, string>
+        {
+            { OnlineSetting.Ip, "127.0.0.1" },
+            { OnlineSetting.Port, "8543" },
+        };
+    }
+
+    public static Dictionary<UserSetting, string> UserConfigSetDefaults()
+    {
+        return new Dictionary<UserSetting, string>
+        {
+            { UserSetting.Username, "Guest Player" },
         };
     }
 }
