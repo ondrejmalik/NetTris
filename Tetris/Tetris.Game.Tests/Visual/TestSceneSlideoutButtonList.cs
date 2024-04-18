@@ -23,7 +23,7 @@ namespace Tetris.Game.Tests.Visual
                 AutoSizeAxes = Axes.Both,
                 Children = new Drawable[]
                 {
-                    new HorizontalSlideoutButtonList(new List<Button>()
+                    new HorizontalSlideoutButtonList(new List<MenuButton>()
                     {
                         new MenuButton()
                             { Text = "Endless", BaseSize = new Vector2(100, 75), HoveredSize = new Vector2(120, 75) },
@@ -34,7 +34,7 @@ namespace Tetris.Game.Tests.Visual
                         MainButton = new MenuButton()
                             { Text = "Singleplayer", },
                     },
-                    new HorizontalSlideoutButtonList(new List<Button>()
+                    new HorizontalSlideoutButtonList(new List<MenuButton>()
                     {
                         new MenuButton()
                             { Text = "Local", BaseSize = new Vector2(100, 75), HoveredSize = new Vector2(120, 75) },

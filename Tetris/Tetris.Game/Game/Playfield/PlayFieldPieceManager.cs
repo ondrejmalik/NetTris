@@ -19,6 +19,8 @@ public partial class PlayField : BasePlayField
         }
     }
 
+    public int Level => (int)Math.Round((decimal)(ClearedLines / 10 + 1));
+
     internal bool BottomCollisionDetection()
     {
         for (int i = 0; i < Piece.GridPos.Count; i++)

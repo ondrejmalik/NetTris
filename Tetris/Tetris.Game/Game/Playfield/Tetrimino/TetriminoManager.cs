@@ -101,6 +101,11 @@ public partial class Tetrimino : TetriminoBase
         }
     }
 
+    private double levelScaling(int level)
+    {
+        return 750 / Math.Log(level + 1, 2);
+    }
+
     private void moveDown()
     {
         for (int i = 0; i < 4; i++)

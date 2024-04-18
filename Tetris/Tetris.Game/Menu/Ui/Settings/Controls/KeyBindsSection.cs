@@ -17,7 +17,11 @@ public partial class KeyBindsSection : CompositeDrawable
     public Dictionary<GameSetting, Key> Config;
 
     private SpriteText title = new()
-        { Font = new("default", 25), Anchor = Anchor.TopCentre, Origin = Anchor.TopCentre };
+    {
+        Font = new( size:30),
+        Anchor = Anchor.TopCentre,
+        Origin = Anchor.TopCentre
+    };
 
     public string TitleText
     {

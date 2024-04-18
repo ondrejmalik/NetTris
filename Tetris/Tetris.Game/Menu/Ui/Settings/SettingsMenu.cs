@@ -1,11 +1,7 @@
 ﻿using osu.Framework.Allocation;
-using osu.Framework.Bindables;
-using osu.Framework.Configuration;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Platform;
-using osuTK;
-using Tetris.Game.Config;
+using osu.Framework.Graphics.Shapes;
 using Tetris.Game.Menu.Ui.Controls;
 using Tetris.Game.Menu.Ui.Online;
 
@@ -13,7 +9,8 @@ namespace Tetris.Game.Menu.Ui;
 
 public partial class SettingsMenu : CompositeDrawable
 {
-    BasicScrollContainer box;
+    private Container box;
+    private BasicScrollContainer scrollContainer;
     private float relativeHeight;
 
     public SettingsMenu()
@@ -28,22 +25,39 @@ public partial class SettingsMenu : CompositeDrawable
         Padding = new MarginPadding(25);
         Anchor = Anchor.TopLeft;
         Origin = Anchor.TopLeft;
-
-        InternalChild = box = new BasicScrollContainer()
+        AutoSizeAxes = Axes.Both;
+        InternalChild = box = new Container()
         {
-            Height = relativeHeight,
-            Width = 520,
-            Child = new FillFlowContainer()
+            CornerRadius = 40,
+            Masking = true,
+            AutoSizeAxes = Axes.Both,
+            Children = new Drawable[]
             {
-                Direction = FillDirection.Vertical,
-                Spacing = new osuTK.Vector2(0, 10),
-                AutoSizeAxes = Axes.Both,
-                Children = new Drawable[]
+                new Box()
                 {
-                    new UserSettingsSection(),
-                    new GraphicsSettingsSection(),
-                    new ControlsSettingsSection(),
-                    new OnlineSettngsSection(),
+                    Colour = new Colour4((byte)16, (byte)16, (byte)21, (byte)255),
+                    RelativeSizeAxes = Axes.Both,
+                },
+                scrollContainer = new BasicScrollContainer()
+                {
+                    Height = relativeHeight,
+                    Width = 430,
+                    Children = new Drawable[]
+                    {
+                        new FillFlowContainer()
+                        {
+                            Direction = FillDirection.Vertical,
+                            Spacing = new osuTK.Vector2(0, 10),
+                            AutoSizeAxes = Axes.Both,
+                            Children = new Drawable[]
+                            {
+                                new UserSettingsSection(),
+                                new GraphicsSettingsSection(),
+                                new ControlsSettingsSection(),
+                                new OnlineSettngsSection(),
+                            }
+                        },
+                    }
                 }
             }
         };
@@ -54,7 +68,7 @@ public partial class SettingsMenu : CompositeDrawable
 
     protected override void Update()
     {
-        if (Parent != null) box.Height = Parent.DrawSize.Y - 50; // resizing to fit the parent height
+        if (Parent != null) scrollContainer.Height = Parent.DrawSize.Y - 50; // resizing to fit the parent height
         base.Update();
     }
 

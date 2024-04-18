@@ -12,12 +12,10 @@ public partial class ControlsSettingsSection : CompositeDrawable
     [BackgroundDependencyLoader]
     private void load()
     {
-        AutoSizeAxes = Axes.Y;
-        RelativeSizeAxes = Axes.X;
+        AutoSizeAxes = Axes.Both;
         InternalChild = new FillFlowContainer()
         {
-            AutoSizeAxes = Axes.Y,
-            RelativeSizeAxes = Axes.X,
+            AutoSizeAxes = Axes.Both,
             Direction = FillDirection.Vertical,
             Spacing = new osuTK.Vector2(0, 10),
             Children = new Drawable[]
@@ -27,7 +25,6 @@ public partial class ControlsSettingsSection : CompositeDrawable
                 {
                     AutoSizeAxes = Axes.Both,
                     Direction = FillDirection.Horizontal,
-                    Spacing = new osuTK.Vector2(10),
                     Anchor = Anchor.TopCentre,
                     Origin = Anchor.TopCentre,
                     Children = new Drawable[]

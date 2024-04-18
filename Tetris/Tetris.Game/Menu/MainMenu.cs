@@ -40,7 +40,6 @@ public partial class MainMenu : Screen
             {
                 new FillFlowContainer()
                 {
-                    RelativeAnchorPosition = new osuTK.Vector2(0, 0),
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
                     Direction = FillDirection.Vertical,
@@ -48,32 +47,28 @@ public partial class MainMenu : Screen
                     AutoSizeAxes = Axes.Y,
                     Children = new Drawable[]
                     {
-                        new HorizontalSlideoutButtonList(new List<Button>()
+                        new HorizontalSlideoutButtonList(new List<MenuButton>()
                         {
-                            new MenuButton()
+                            new RoundedMenuButton()
                             {
-                                // TODO: Add increasing falling speed
                                 Text = "Endless", Action = () => { this.Push(new GameScreen()); },
                                 BaseSize = new Vector2(100, 75), HoveredSize = new Vector2(120, 75)
                             },
                         })
                         {
-                            Anchor = Anchor.TopCentre,
-                            Origin = Anchor.TopCentre,
-                            MainButton = new RoundedMenuButton()
-                                { Text = "Singleplayer", },
+                            MainButton = new RoundedMenuButton() { Text = "Singleplayer", },
                             Position = new Vector2(0, 0),
                         },
-                        new HorizontalSlideoutButtonList(new List<Button>()
+                        new HorizontalSlideoutButtonList(new List<MenuButton>()
                         {
-                            new MenuButton()
+                            new RoundedMenuButton()
                             {
                                 Text = "Local",
                                 Action = () => { this.Push(new DoubleGameScreen()); },
                                 BaseSize = new Vector2(100, 75),
                                 HoveredSize = new Vector2(120, 75)
                             },
-                            new MenuButton()
+                            new RoundedMenuButton()
                             {
                                 Text = "Online",
                                 Action = () => { this.Push(new DoubleGameScreen(true)); },
@@ -82,10 +77,7 @@ public partial class MainMenu : Screen
                             },
                         })
                         {
-                            Anchor = Anchor.TopCentre,
-                            Origin = Anchor.TopCentre,
-                            MainButton = new RoundedMenuButton()
-                                { Text = "Multiplayer", },
+                            MainButton = new RoundedMenuButton() { Text = "Multiplayer", },
                             Position = new Vector2(0, 0),
                         },
                         // TODO: fix settings opening animation

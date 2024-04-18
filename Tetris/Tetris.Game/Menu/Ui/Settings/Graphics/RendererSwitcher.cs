@@ -11,11 +11,11 @@ namespace Tetris.Game.Menu.Ui;
 
 public partial class RendererSwitcher : CompositeDrawable
 {
-    public Vector2 ButtonsBaseSize = new Vector2(90, 50);
-    public Vector2 ButtonsHoveredSize = new Vector2(100, 50);
+    public Vector2 ButtonsBaseSize = new Vector2(85, 50);
+    public Vector2 ButtonsHoveredSize = new Vector2(90, 50);
 
     private Container box;
-    private MenuButton[] buttons = new MenuButton[5];
+    private MenuButton[] buttons = new MenuButton[4];
     private SpriteText disclaimerText;
 
     [BackgroundDependencyLoader]
@@ -40,6 +40,8 @@ public partial class RendererSwitcher : CompositeDrawable
                 },
                 new FillFlowContainer()
                 {
+                    Anchor = Anchor.TopCentre,
+                    Origin = Anchor.TopCentre,
                     Position = new Vector2(0, 50),
                     CornerRadius = 13,
                     Masking = true,
@@ -81,16 +83,6 @@ public partial class RendererSwitcher : CompositeDrawable
                         },
                         buttons[3] = new MenuButton()
                         {
-                            Text = "Metal",
-                            Origin = Anchor.Centre,
-                            Anchor = Anchor.Centre,
-                            Font = new FontUsage(size: 25),
-                            BaseSize = ButtonsBaseSize,
-                            HoveredSize = ButtonsHoveredSize,
-                            Action = () => SwitchRenderer(RendererType.Metal, configManager)
-                        },
-                        buttons[4] = new MenuButton()
-                        {
                             Text = "Auto",
                             Origin = Anchor.Centre,
                             Anchor = Anchor.Centre,
@@ -99,13 +91,14 @@ public partial class RendererSwitcher : CompositeDrawable
                             HoveredSize = ButtonsHoveredSize,
                             Action = () => SwitchRenderer(RendererType.Automatic, configManager)
                         },
-                        disclaimerText = new SpriteText()
-                        {
-                            Origin = Anchor.Centre,
-                            Anchor = Anchor.Centre,
-                            Margin = new MarginPadding(25),
-                        }
                     }
+                },
+                disclaimerText = new SpriteText()
+                {
+                    Origin = Anchor.Centre,
+                    Anchor = Anchor.Centre,
+                    Margin = new MarginPadding(25),
+                    Position =  new Vector2(0, 50),
                 }
             }
         };

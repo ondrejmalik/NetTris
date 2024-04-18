@@ -8,6 +8,7 @@ using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Input.Events;
 using osuTK.Input;
 using Tetris.Game.Config;
+using Tetris.Game.Realm;
 
 
 namespace Tetris.Game.Menu.Ui.Controls;
@@ -68,7 +69,7 @@ public partial class KeyBind : CompositeDrawable
                 SettingNameText = new SpriteText()
                 {
                     Text = Setting.ToString(),
-                    Font = new FontUsage(size: 30),
+                    Font = new FontUsage(size: 25),
                     Origin = Anchor.TopLeft,
                     Anchor = Anchor.TopLeft,
                     Margin = new MarginPadding(10),
@@ -101,6 +102,7 @@ public partial class KeyBind : CompositeDrawable
         if (Clicked)
         {
             Config[Setting] = e.Key;
+            RealmManager.SaveConfig();
             Clicked = false;
             Key = e.Key;
             KeyButton.Text = e.Key.ToString().Substring(0, Math.Min(5, Key.ToString().Length));

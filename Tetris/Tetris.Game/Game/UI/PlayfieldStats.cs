@@ -13,11 +13,12 @@ public partial class PlayfieldStats(PlayField playField) : CompositeDrawable
     Container box;
     PlayField playField = playField;
     private SpriteText linesClearedText;
+    private SpriteText levelText;
 
     [BackgroundDependencyLoader]
     private void load()
     {
-        playField.ClearedLinesChanged += HandleValueChanged;
+        playField.ClearedLinesChanged += handleValueChanged;
         AutoSizeAxes = Axes.Both;
         InternalChild = box = new Container
         {
@@ -47,14 +48,22 @@ public partial class PlayfieldStats(PlayField playField) : CompositeDrawable
                             Origin = Anchor.TopCentre,
                             Anchor = Anchor.TopCentre,
                         },
+                        levelText = new SpriteText()
+                        {
+                            Text = $"Level: {playField.Level}",
+                            Font = new FontUsage(size: 30),
+                            Origin = Anchor.TopCentre,
+                            Anchor = Anchor.TopCentre,
+                        },
                     },
                 }
             },
         };
     }
 
-    private void HandleValueChanged(object sender, EventArgs e)
+    private void handleValueChanged(object sender, EventArgs e)
     {
         linesClearedText.Text = $"Lines Cleared: {playField.ClearedLines}";
+        levelText.Text = $"Level: {playField.Level}";
     }
 }

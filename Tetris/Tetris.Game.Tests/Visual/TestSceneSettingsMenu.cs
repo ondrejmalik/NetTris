@@ -12,6 +12,7 @@ namespace Tetris.Game.Tests.Visual
             Add(new SettingsMenu()
             {
                 Anchor = Anchor.Centre,
+                Scale =  new osuTK.Vector2(1,1),
             });
         }
     }

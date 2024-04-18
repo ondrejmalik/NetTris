@@ -1,41 +1,66 @@
 ﻿using System.Collections.Generic;
-using osu.Framework.Input.Events;
-using osu.Framework.Input.States;
 using osuTK.Input;
+using Tetris.Game.Realm;
 
 namespace Tetris.Game.Config;
 
 public static class GameConfigManager
 {
-    private static Dictionary<GameSetting, Key> _gameConfig = GameControlsConfigSetDefaults();
-    private static Dictionary<GameSetting, Key> _opponentConfig = OpponentControlsConfigSetDefaults();
-    private static Dictionary<OnlineSetting, string> _onlineConfig = OnlineConfigSetDefaults();
-    private static Dictionary<UserSetting, string> _userConfig = UserConfigSetDefaults();
+    private static Dictionary<GameSetting, Key> _gameConfig = new();
+    private static Dictionary<GameSetting, Key> _opponentConfig = new();
+    private static Dictionary<OnlineSetting, string> _onlineConfig = new();
+    private static Dictionary<UserSetting, string> _userConfig = new();
+
+    static GameConfigManager()
+    {
+        // TODO: add other configs to realm db, load them here and set them to defaults if they don't exist
+        RealmManager.LoadConfig();
+    }
 
     public static Dictionary<GameSetting, Key> GameControlsConfig
     {
         get => _gameConfig;
-        set => _gameConfig = value;
+        set
+        {
+            _gameConfig = value;
+        }
     }
+
 
     public static Dictionary<GameSetting, Key> OpponentControlsConfig
     {
         get => _opponentConfig;
-        set => _opponentConfig = value;
+        set
+        {
+            _opponentConfig = value;
+        }
     }
 
     public static Dictionary<OnlineSetting, string> OnlineConfig
     {
         get => _onlineConfig;
-        set => _onlineConfig = value;
+        set
+        {
+            _onlineConfig = value;
+        }
     }
 
     public static Dictionary<UserSetting, string> UserConfig
     {
         get => _userConfig;
-        set => _userConfig = value;
+        set
+        {
+            _userConfig = value;
+        }
     }
 
+    public static void SetDefaults()
+    {
+        GameControlsConfig = GameControlsConfigSetDefaults();
+        OpponentControlsConfig = OpponentControlsConfigSetDefaults();
+        OnlineConfig = OnlineConfigSetDefaults();
+        UserConfig = UserConfigSetDefaults();
+    }
 
     public static Dictionary<GameSetting, Key> GameControlsConfigSetDefaults()
     {

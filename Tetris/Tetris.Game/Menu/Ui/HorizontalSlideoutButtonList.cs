@@ -11,9 +11,9 @@ public partial class HorizontalSlideoutButtonList : CompositeDrawable
     Container box;
     private FillFlowContainer ffContainer;
     public Button MainButton { get; set; }
-    public List<Button> Buttons;
+    public List<MenuButton> Buttons;
 
-    public HorizontalSlideoutButtonList(List<Button> buttons)
+    public HorizontalSlideoutButtonList(List<MenuButton> buttons)
     {
         Buttons = buttons;
     }
@@ -21,17 +21,17 @@ public partial class HorizontalSlideoutButtonList : CompositeDrawable
     [BackgroundDependencyLoader]
     private void load()
     {
+        Anchor = Anchor.TopCentre;
+        Origin = Anchor.TopCentre;
         MainButton.RelativeAnchorPosition = new osuTK.Vector2(0, 0);
-        MainButton.Anchor = Anchor.TopLeft;
-        MainButton.Origin = Anchor.TopLeft;
         MainButton.Action = () =>
         {
             if (ffContainer.Width == 0)
             {
                 float width = 0;
-                foreach (var child in ffContainer.Children)
+                foreach (var button in Buttons)
                 {
-                    width += child.DrawWidth;
+                    width += button.HoveredSize.X;
                 }
 
                 ffContainer.ResizeWidthTo(width, 250, Easing.OutQuint);
@@ -45,8 +45,6 @@ public partial class HorizontalSlideoutButtonList : CompositeDrawable
         InternalChild = box = new Container
         {
             AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
             Children = new Drawable[]
             {
                 new FillFlowContainer()

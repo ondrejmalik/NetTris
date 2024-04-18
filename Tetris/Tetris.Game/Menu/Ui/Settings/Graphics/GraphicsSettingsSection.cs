@@ -14,18 +14,22 @@ public partial class GraphicsSettingsSection : CompositeDrawable
     [BackgroundDependencyLoader]
     private void load()
     {
+        Anchor = Anchor.TopCentre;
+        Origin = Anchor.TopCentre;
         AutoSizeAxes = Axes.Both;
         InternalChild = box = new Container
         {
             AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
+            Anchor = Anchor.TopCentre,
+            Origin = Anchor.TopCentre,
             Children = new Drawable[]
             {
                 new FillFlowContainer()
                 {
                     AutoSizeAxes = Axes.Both,
                     Direction = FillDirection.Vertical,
+                    Anchor = Anchor.TopCentre,
+                    Origin = Anchor.TopCentre,
                     Children = new Drawable[]
                     {
                         SettingsTitleText = new HeaderSpriteText() { Text = "Graphics" },
