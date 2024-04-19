@@ -19,6 +19,16 @@ public partial class PlayField : BasePlayField
         }
     }
 
+    public double Cpm => ClearedLines / (Clock.CurrentTime / 60 / 1000);
+
+    public int TimeInSeconds
+    {
+        get
+        {
+            return (int)(Clock.CurrentTime / 1000);
+        }
+    }
+
     public int Level => (int)Math.Round((decimal)(ClearedLines / 10 + 1));
 
     internal bool BottomCollisionDetection()

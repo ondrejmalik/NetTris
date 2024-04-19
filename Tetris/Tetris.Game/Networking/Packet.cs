@@ -9,12 +9,20 @@ namespace Tetris.Game.Networking;
 [Serializable]
 public class Packet
 {
+    //TODO: Remove Colour to optimize serialization size
+    //TODO: Add a diferential update system to reduce the amount of data sent
     public Packet()
     {
         // Empty constructor for serialization
     }
 
-    public Packet(List<OccupiedSet> occupied, List<(int, int)> piecePos, PieceType pieceType, PacketCommandSendLines command = null)
+    public Packet(PacketCommandBase command = null)
+    {
+        this.Command = command;
+    }
+
+    public Packet(List<OccupiedSet> occupied, List<(int, int)> piecePos, PieceType pieceType,
+        PacketCommandSendLines command = null)
     {
         this.Occupied = occupied;
         this.PieceType = pieceType;

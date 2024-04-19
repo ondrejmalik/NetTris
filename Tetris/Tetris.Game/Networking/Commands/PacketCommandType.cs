@@ -3,6 +3,7 @@
 public enum PacketCommandType
 {
     SendLines,
+    Start,
     GameOver,
     Pause,
     Resume,

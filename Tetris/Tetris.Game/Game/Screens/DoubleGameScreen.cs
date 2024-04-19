@@ -1,20 +1,27 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading;
+using NuGet.Packaging;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.Containers;
 using osu.Framework.Screens;
 using osuTK;
+using Tetris.Game.Config;
 using Tetris.Game.Networking;
 
 namespace Tetris.Game.Game.UI.Screens
 {
     public partial class DoubleGameScreen : GameScreenBase
     {
+        private Container box;
         private GameContainer gameContainer1;
         private GameContainer gameContainer2;
         private Thread networkingThread;
 
-        private NetworkHandler networkHandler = new(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8543));
+        private NetworkHandler networkHandler = new(new IPEndPoint(
+            IPAddress.Parse(GameConfigManager.OnlineConfig[OnlineSetting.Ip]),
+            int.Parse(GameConfigManager.OnlineConfig[OnlineSetting.Port])));
 
         public DoubleGameScreen(bool online = false)
         {
@@ -26,9 +33,21 @@ namespace Tetris.Game.Game.UI.Screens
             {
                 networkingThread = new Thread(() =>
                 {
-                    networkHandler.Loop(gameContainer1.PlayField, gameContainer2.PlayField);
+                    networkHandler.Start(gameContainer1.PlayField, gameContainer2.PlayField);
                 });
                 networkingThread.Start();
+                networkHandler.GameIsReady += handleGameIsReady;
+            }
+            else
+            {
+                OnLoadComplete += _ =>
+                {
+                    box.AddRange(new Drawable[]
+                    {
+                        gameContainer1,
+                        gameContainer2
+                    });
+                };
             }
         }
 
@@ -37,10 +56,13 @@ namespace Tetris.Game.Game.UI.Screens
         {
             InternalChildren = new Drawable[]
             {
-                gameContainer1,
-                gameContainer2,
+                box = new Container()
+                {
+                    RelativeSizeAxes = Axes.Both
+                }
             };
         }
+
 
         protected override void Dispose(bool isDisposing)
         {
@@ -52,6 +74,18 @@ namespace Tetris.Game.Game.UI.Screens
             }
 
             base.Dispose(isDisposing);
+        }
+
+        private void handleGameIsReady(object sender, EventArgs eventArgs)
+        {
+            Scheduler.Add(() =>
+            {
+                box.AddRange(new Drawable[]
+                {
+                    gameContainer1,
+                    gameContainer2
+                });
+            });
         }
     }
 }

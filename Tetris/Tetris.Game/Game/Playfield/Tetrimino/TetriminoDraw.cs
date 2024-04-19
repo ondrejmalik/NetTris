@@ -27,7 +27,10 @@ public partial class Tetrimino : TetriminoBase
                 isOpponent ? GameConfigManager.OpponentControlsConfig : GameConfigManager.GameControlsConfig;
             updateDeltaTime = () =>
             {
-                if (deltaTime > levelScaling(playField.Level))
+                if (deltaTime > levelScaling(
+                        Math.Max(
+                            playField.Level,
+                            playField.OpponentPlayField != null ? playField.OpponentPlayField.Level : 0)))
                 {
                     deltaTime = 0;
                     moveDown();

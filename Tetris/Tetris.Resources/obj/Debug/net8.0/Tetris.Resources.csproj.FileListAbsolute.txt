@@ -11,5 +11,3 @@ A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net8.0\refint\Tetris.Resour
 A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net8.0\Tetris.Resources.pdb
 A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net8.0\ref\Tetris.Resources.dll
 A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net8.0\Tetris.Resources.sourcelink.json
-A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net8.0\Tetris.Resources.csproj.Fody.CopyLocal.cache
-A:\Projects\Tetris\Tetris\Tetris.Resources\obj\Debug\net8.0\Tetris.Resources.csproj.Fody.RuntimeCopyLocal.cache

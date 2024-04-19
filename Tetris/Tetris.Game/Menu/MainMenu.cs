@@ -56,7 +56,7 @@ public partial class MainMenu : Screen
                             },
                         })
                         {
-                            MainButton = new RoundedMenuButton() { Text = "Singleplayer", },
+                            MainButton = PlayButton = new RoundedMenuButton() { Text = "Singleplayer", },
                             Position = new Vector2(0, 0),
                         },
                         new HorizontalSlideoutButtonList(new List<MenuButton>()
@@ -77,7 +77,7 @@ public partial class MainMenu : Screen
                             },
                         })
                         {
-                            MainButton = new RoundedMenuButton() { Text = "Multiplayer", },
+                            MainButton = MultiplayerButton = new RoundedMenuButton() { Text = "Multiplayer", },
                             Position = new Vector2(0, 0),
                         },
                         // TODO: fix settings opening animation

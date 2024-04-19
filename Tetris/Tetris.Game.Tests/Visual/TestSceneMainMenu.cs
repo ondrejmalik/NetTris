@@ -8,6 +8,7 @@ namespace Tetris.Game.Tests.Visual
     [TestFixture]
     public partial class TestSceneMainMenu : TetrisTestScene
     {
+        //TODO: Add folders and steps to all tests
         ScreenStack stack;
         MainMenu mainMenu;
 
@@ -15,9 +16,26 @@ namespace Tetris.Game.Tests.Visual
         {
             Add(stack = new ScreenStack(mainMenu = new MainMenu()) { RelativeSizeAxes = Axes.Both });
             AddStep("Show", () => stack.Push(mainMenu = new MainMenu() { RelativeSizeAxes = Axes.Both }));
+
+            AddStep("Show Play", () =>
+                {
+                    mainMenu.PlayButton.TriggerClick();
+                }
+            );
+            AddStep("Show Multiplayer", () =>
+                {
+                    mainMenu.MultiplayerButton.TriggerClick();
+                }
+            );
+
             AddStep("Show Settings", () =>
                 {
                     mainMenu.SettingsButton.TriggerClick();
+                }
+            );
+            AddStep("Show Settings", () =>
+                {
+                    mainMenu.LeaderboardsButton.TriggerClick();
                 }
             );
         }

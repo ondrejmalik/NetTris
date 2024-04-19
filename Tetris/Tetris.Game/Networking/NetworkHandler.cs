@@ -14,7 +14,7 @@ namespace Tetris.Game.Networking;
 public class NetworkHandler()
 {
     public UdpClient Client = new UdpClient();
-
+    public event EventHandler<EventArgs> GameIsReady;
     public volatile bool Running = true;
     DateTime lastRecieve = DateTime.Now;
     public static object _MultiplayerLock = new object();
@@ -38,12 +38,43 @@ public class NetworkHandler()
         TickRate = tickRate;
     }
 
-    public void Loop(PlayField playFieldLeft, PlayField playFieldRight)
+    public void Start(PlayField playFieldLeft, PlayField playFieldRight)
     {
         this.playFieldLeft = playFieldLeft;
         this.playFieldRight = playFieldRight;
+        Handshake();
+        Loop();
+    }
+
+    public void Handshake()
+    {
+        while (true) // confirm connection to server
+        {
+            Packet packet = new(new PacketCommandStart());
+            Send(packet);
+            string recieved = Recieve();
+            if (recieved == "OK") break;
+            Thread.Sleep(64);
+        }
+
+        Logger.Log("Connected to server");
+        while (true) // wait for second player to connect
+        {
+            string recieved = Recieve();
+            if (recieved == "GameReady")
+            {
+                Logger.Log("Game Ready");
+                OnGameIsReady();
+                break;
+            }
+        }
+    }
+
+    public void Loop()
+    {
         Stopwatch sw = new();
         string response;
+        playFieldLeft.ClearedLinesChanged += handleSendLines;
         sw.Start();
         while (Running)
         {
@@ -52,9 +83,8 @@ public class NetworkHandler()
                 Packet packet = new();
                 if (playFieldLeft.Occupied.Count > 0)
                 {
-                    lock (_MultiplayerLock)
+                    lock (_MultiplayerLock) // maybe remove lock
                     {
-                        playFieldLeft.ClearedLinesChanged += handleSendLines;
                         packet = new(playFieldLeft.Occupied, playFieldLeft.Piece.GridPos,
                             playFieldLeft.Piece.PieceType, new PacketCommandSendLines(newLines, lastPieceGridPos));
                     }
@@ -77,13 +107,12 @@ public class NetworkHandler()
 
                 Thread.Sleep((int)(tickMs - Math.Min(tickMs, sw.ElapsedMilliseconds)));
                 Logger.Log(sw.ElapsedMilliseconds.ToString() + "ms -----");
+                sw.Restart();
                 //Logger.Log(playFieldRight.Occupied.Where(x => x.Occupied).Count().ToString());
                 foreach (var pos in playFieldRight.Piece.GridPos)
                 {
                     Logger.Log(pos.Item1 + " " + pos.Item2);
                 }
-
-                sw.Restart();
                 //Logger.Log(deserialized.Occupied.Where(x => x.Occupied).Count().ToString());
             }
             catch (Exception e)
@@ -115,6 +144,11 @@ public class NetworkHandler()
         }
 
         return null;
+    }
+
+    private void OnGameIsReady()
+    {
+        GameIsReady?.Invoke(this, new EventArgs());
     }
 
     private void handleSendLines(object sender, SendLinesEventArgs eventArgs)

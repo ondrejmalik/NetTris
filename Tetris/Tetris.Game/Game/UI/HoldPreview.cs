@@ -2,8 +2,10 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osuTK;
+using osuTK.Graphics;
 using Tetris.Game.Game.Bag;
 using Tetris.Game.Game.Playfield.Tetrimino;
 
@@ -28,13 +30,19 @@ public partial class HoldPreview : CompositeDrawable
         AutoSizeAxes = Axes.Both;
         InternalChild = new Container
         {
+            CornerRadius = 40,
+            Masking = true,
             AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
             Children = new Drawable[]
             {
+                new Box()
+                {
+                    RelativeSizeAxes = Axes.Both,
+                    Colour = new Color4(16, 16, 21, 255),
+                },
                 ffBox = new FillFlowContainer()
                 {
+                    Margin = new MarginPadding(20),
                     Direction = FillDirection.Vertical,
                     Spacing = new Vector2(0, 20),
                     AutoSizeAxes = Axes.Both,

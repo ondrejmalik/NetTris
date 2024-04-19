@@ -20,10 +20,10 @@ public partial class GameContainer : GameContainerBase
     public GameContainer(bool isOnline = false, bool isOpponent = false)
     {
         hold = new Hold(bag, null);
-        holdPreview = new HoldPreview(hold) { Position = new Vector2(750, 0) };
+        holdPreview = new HoldPreview(hold) { Position = new Vector2(800, 0) };
         hold.HoldPreview = holdPreview;
         holdPreview.Hold = hold;
-        PlayField = new PlayField(holdPreview, isOpponent, isOnline) { Position = new Vector2(200, 0) };
+        PlayField = new PlayField(holdPreview, isOpponent, isOnline) { Position = new Vector2(250, 0) };
         playfieldStats = new PlayfieldStats(PlayField);
     }
 
@@ -31,7 +31,7 @@ public partial class GameContainer : GameContainerBase
     private void load()
     {
         AutoSizeAxes = Axes.Both;
-        InternalChild = box = new Container
+        InternalChild = box = new Container // TODO: Make this and double game Container FillFlowContainer to remove hard coded positions
         {
             AutoSizeAxes = Axes.Both,
             Anchor = Anchor.TopLeft,
