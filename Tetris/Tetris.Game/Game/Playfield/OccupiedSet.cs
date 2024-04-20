@@ -1,16 +1,15 @@
-﻿using osu.Framework.Graphics;
+﻿using Tetris.Game.Game.Playfield.Tetrimino;
 
 namespace Tetris.Game.Game.Playfield;
 
 public class OccupiedSet
 {
-    public int X { get; set; }
-    public int Y { get; set; }
-    public bool Occupied { get; set; }
-    public Colour4 Colour { get; set; }
+    public int I { get; set; }
+    public bool O { get; set; }
+    public PieceType P { get; set; }
 
     public static implicit operator bool(OccupiedSet obj)
     {
-        return obj != null && obj.Occupied;
+        return obj != null && obj.O;
     }
 }

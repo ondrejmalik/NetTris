@@ -21,7 +21,7 @@ namespace Tetris.Game
             base.Content.Add(Content = new DrawSizePreservingFillContainer
             {
                 // You may want to change TargetDrawSize to your "default" resolution, which will decide how things scale and position when using absolute coordinates.
-                TargetDrawSize = new Vector2(1920, 1080)
+                TargetDrawSize = new Vector2( 1920, 1080)
             });
         }
 

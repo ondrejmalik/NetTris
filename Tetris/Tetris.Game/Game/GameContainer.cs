@@ -31,11 +31,10 @@ public partial class GameContainer : GameContainerBase
     private void load()
     {
         AutoSizeAxes = Axes.Both;
-        InternalChild = box = new Container // TODO: Make this and double game Container FillFlowContainer to remove hard coded positions
+        // TODO: Make this and double game Container FillFlowContainer to remove hard coded positions
+        InternalChild = box = new Container
         {
             AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
             Children = new Drawable[]
             {
                 holdPreview,

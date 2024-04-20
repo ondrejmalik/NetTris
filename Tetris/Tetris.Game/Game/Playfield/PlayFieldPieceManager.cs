@@ -4,6 +4,7 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Logging;
 using osuTK;
+using Tetris.Game.Game.Playfield.Tetrimino;
 
 namespace Tetris.Game.Game.Playfield;
 
@@ -81,8 +82,8 @@ public partial class PlayField : BasePlayField
 
             OccupiedSet o;
             o = Occupied[pos.Item1 + pos.Item2 * 10 - 10];
-            o.Occupied = true;
-            o.Colour = c;
+            o.O = true;
+            o.P = Piece.PieceType;
             Occupied[pos.Item1 + pos.Item2 * 10 - 10] = o;
         }
 
@@ -155,7 +156,7 @@ public partial class PlayField : BasePlayField
 
     private void newstackDown(int j)
     {
-        Occupied[j].Occupied = false;
+        Occupied[j].O = false;
         recurseStackDown(j);
     }
 
@@ -163,8 +164,8 @@ public partial class PlayField : BasePlayField
     {
         if (j > 10)
         {
-            Occupied[j].Occupied = Occupied[j - 10].Occupied;
-            Occupied[j].Colour = Occupied[j - 10].Colour;
+            Occupied[j].O = Occupied[j - 10].O;
+            Occupied[j].P = Occupied[j - 10].P;
             recurseStackDown(j - 10);
         }
     }
@@ -211,7 +212,7 @@ public partial class PlayField : BasePlayField
         int lineStart = Occupied.Count - 10;
         for (int i = Occupied.Count - 1; i >= 0; i = i - 1) // check garbage line
         {
-            if (Occupied[i].Colour == Colour4.Gray)
+            if (PieceTypeToColour(Occupied[i].P) == Colour4.Gray)
             {
                 foundGarbage = true;
                 i = lineStart - 10;
@@ -234,12 +235,12 @@ public partial class PlayField : BasePlayField
         {
             if (emptyIndex + lineStart == j) // add empty hole
             {
-                Occupied[j].Occupied = false;
+                Occupied[j].O = false;
                 continue;
             }
 
-            Occupied[j].Occupied = true;
-            Occupied[j].Colour = Colour4.Gray;
+            Occupied[j].O = true;
+            Occupied[j].P = PieceType.Garbage;
         }
 
         redrawOccupied();
@@ -251,8 +252,8 @@ public partial class PlayField : BasePlayField
         {
             if (j > 10)
             {
-                Occupied[j - 10].Occupied = Occupied[j].Occupied;
-                Occupied[j - 10].Colour = Occupied[j].Colour;
+                Occupied[j - 10].O = Occupied[j].O;
+                Occupied[j - 10].P = Occupied[j].P;
             }
 
             recurseStackUp(j + 10);

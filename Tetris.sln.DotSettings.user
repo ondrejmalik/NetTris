@@ -6,6 +6,10 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::D6ACA8E6-68C0-4DF4-984B-749530B48672::net8.0::Tetris.Game.Tests.Visual.TestSceneSlideoutButtonList&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::D6ACA8E6-68C0-4DF4-984B-749530B48672::net8.0::Tetris.Game.Tests.Unit.TestPacket.TestSerialize&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::D6ACA8E6-68C0-4DF4-984B-749530B48672::net8.0::Tetris.Game.Tests.Unit.TestRealmManager&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::D6ACA8E6-68C0-4DF4-984B-749530B48672::net8.0::Tetris.Game.Tests.Unit.TestPacket.TestDeserialize&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::D6ACA8E6-68C0-4DF4-984B-749530B48672::net8.0::Tetris.Game.Tests.Unit.TestPacket.TestSerializePiecePos&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::D6ACA8E6-68C0-4DF4-984B-749530B48672::net8.0::Tetris.Game.Tests.Unit.TestPacket&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/Monitoring/IsToolWindowHidden/@EntryValue">True</s:Boolean></wpf:ResourceDictionary>

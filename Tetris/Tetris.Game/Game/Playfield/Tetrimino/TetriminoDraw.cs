@@ -12,8 +12,7 @@ namespace Tetris.Game.Game.Playfield.Tetrimino;
 
 public partial class Tetrimino : TetriminoBase
 {
-    public Tetrimino(PieceType type, int x, int y, PlayField playField = null, bool isOpponent = false,
-        bool isDummy = false)
+    public Tetrimino(PieceType type, int x, int y, PlayField playField = null, bool isOpponent = false, bool isDummy = false)
     {
         this.isDummy = isDummy;
         this.isOpponent = isOpponent;

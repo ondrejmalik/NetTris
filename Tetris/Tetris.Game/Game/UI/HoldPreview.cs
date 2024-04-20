@@ -45,7 +45,8 @@ public partial class HoldPreview : CompositeDrawable
                     Margin = new MarginPadding(20),
                     Direction = FillDirection.Vertical,
                     Spacing = new Vector2(0, 20),
-                    AutoSizeAxes = Axes.Both,
+                    AutoSizeAxes = Axes.Y,
+                    Width = 260, // this is static so it doesn't change size when hold tetrimino is changed
                     Children = new Drawable[]
                     {
                         holdTetrimino = new(PieceType.I, 0, 0)

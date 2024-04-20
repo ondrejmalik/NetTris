@@ -17,6 +17,14 @@ public static class GameConfigManager
         RealmManager.LoadConfig();
     }
 
+    public static void Clear()
+    {
+        GameControlsConfig.Clear();
+        OpponentControlsConfig.Clear();
+        OnlineConfig.Clear();
+        UserConfig.Clear();
+    }
+
     public static Dictionary<GameSetting, Key> GameControlsConfig
     {
         get => _gameConfig;

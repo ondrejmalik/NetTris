@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using osuTK.Input;
 using Realms;
 using Tetris.Game.Config;
@@ -13,7 +11,17 @@ public static class RealmManager
 {
     // TODO move this path to config file
     public static RealmConfiguration Config = new RealmConfiguration(Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"NetTris\Data\Database.realm"));
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Tetris\Data\Database.realm"));
+
+    static RealmManager()
+    {
+        if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                @"Tetris\Data")))
+        {
+            Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                @"Tetris\Data"));
+        }
+    }
 
     public static Realms.Realm GetRealmInstance()
     {
@@ -75,7 +83,7 @@ public static class RealmManager
         });
     }
 
-    public static void LoadConfig()
+    public static void LoadConfig(int attempt = 0)
     {
         Realms.Realm Realm = Realms.Realm.GetInstance(Config);
         RealmGameConfig config = Realm.All<RealmGameConfig>().FirstOrDefault();
@@ -85,26 +93,42 @@ public static class RealmManager
             return;
         }
 
-        foreach (var kvp in config.GameConfig)
+        try
         {
-            GameConfigManager.GameControlsConfig.Add(
-                (GameSetting)Enum.Parse(typeof(GameSetting), kvp.Key), (Key)Enum.Parse(typeof(Key), kvp.Value));
-        }
+            foreach (var kvp in config.GameConfig)
+            {
+                GameConfigManager.GameControlsConfig.Add(
+                    (GameSetting)Enum.Parse(typeof(GameSetting), kvp.Key), (Key)Enum.Parse(typeof(Key), kvp.Value));
+            }
 
-        foreach (var kvp in config.OpponentConfig)
-        {
-            GameConfigManager.OpponentControlsConfig.Add(
-                (GameSetting)Enum.Parse(typeof(GameSetting), kvp.Key), (Key)Enum.Parse(typeof(Key), kvp.Value));
-        }
+            foreach (var kvp in config.OpponentConfig)
+            {
+                GameConfigManager.OpponentControlsConfig.Add(
+                    (GameSetting)Enum.Parse(typeof(GameSetting), kvp.Key), (Key)Enum.Parse(typeof(Key), kvp.Value));
+            }
 
-        foreach (var kvp in config.UserConfig)
-        {
-            GameConfigManager.UserConfig.Add((UserSetting)Enum.Parse(typeof(UserSetting), kvp.Key), kvp.Value);
-        }
+            foreach (var kvp in config.UserConfig)
+            {
+                GameConfigManager.UserConfig.Add((UserSetting)Enum.Parse(typeof(UserSetting), kvp.Key), kvp.Value);
+            }
 
-        foreach (var kvp in config.OnlineConfig)
+            foreach (var kvp in config.OnlineConfig)
+            {
+                GameConfigManager.OnlineConfig.Add((OnlineSetting)Enum.Parse(typeof(OnlineSetting), kvp.Key),
+                    kvp.Value);
+            }
+        }
+        catch (Exception e)
         {
-            GameConfigManager.OnlineConfig.Add((OnlineSetting)Enum.Parse(typeof(OnlineSetting), kvp.Key), kvp.Value);
+            if (attempt < 3)
+            {
+                GameConfigManager.Clear();
+                LoadConfig(attempt + 1);
+            }
+            else
+            {
+                GameConfigManager.SetDefaults();
+            }
         }
     }
 }

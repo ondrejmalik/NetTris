@@ -7,26 +7,53 @@ using osu.Framework.Input.Events;
 using osuTK;
 using osuTK.Input;
 using Tetris.Game.Config;
+using Tetris.Game.Game.Playfield.Tetrimino;
 using Tetris.Game.Game.UI;
 
 namespace Tetris.Game.Game.Playfield
 {
     public partial class PlayField : BasePlayField
     {
+        public static Colour4 PieceTypeToColour(PieceType type)
+        {
+            Colour4 colour = Colour4.Black;
+            switch (type)
+            {
+                case PieceType.T:
+                    colour = Colour4.Purple;
+                    break;
+                case PieceType.O:
+                    colour = Colour4.Yellow;
+                    break;
+                case PieceType.J:
+                    colour = Colour4.Blue;
+                    break;
+                case PieceType.L:
+                    colour = Colour4.Orange;
+                    break;
+                case PieceType.Z:
+                    colour = Colour4.Red;
+                    break;
+                case PieceType.S:
+                    colour = Colour4.Green;
+                    break;
+                case PieceType.I:
+                    colour = Colour4.SandyBrown;
+                    break;
+                case PieceType.Garbage:
+                    colour = Colour4.Gray;
+                    break;
+            }
+
+            return colour;
+        }
+
         public PlayField(HoldPreview holdPreview, bool isOpponent = false, bool isOnline = false)
         {
             this.isOpponent = isOpponent;
             this.isOnline = isOnline;
             HoldPreview = holdPreview;
-            for (int i = 0; i < 10; i++)
-            {
-                x.Add(50 * i);
-            }
 
-            for (int i = 0; i < 20; i++)
-            {
-                y.Add(50 * i);
-            }
         }
 
         [BackgroundDependencyLoader]
@@ -84,17 +111,13 @@ namespace Tetris.Game.Game.Playfield
                 });
             }
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 200; i++)
             {
-                for (int j = 0; j < 10; j++)
+                Occupied.Add(new OccupiedSet()
                 {
-                    Occupied.Add(new OccupiedSet()
-                    {
-                        X = j,
-                        Y = i,
-                        Occupied = false,
-                    });
-                }
+                    I = i,
+                    O = false,
+                });
             }
 
 
@@ -126,9 +149,9 @@ namespace Tetris.Game.Game.Playfield
                     droppedContainer.Add(new Box()
                     {
                         Size = new Vector2(45, 45),
-                        Position = new Vector2(PlayField.x[set.X] + 5, PlayField.y[set.Y] + 5),
+                        Position = new Vector2(PlayField.x[set.I % 10] + 5, PlayField.y[set.I / 10] + 5),
                         Anchor = Anchor.TopLeft,
-                        Colour = isOnline ? Colour4.Black : set.Colour,
+                        Colour = isOnline ? Colour4.Black : PieceTypeToColour(set.P),
                     });
                 }
             }

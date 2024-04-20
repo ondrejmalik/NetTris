@@ -25,6 +25,28 @@ namespace Tetris.Game.Game.Playfield
         protected bool isOnline;
         protected List<(int, int)> lastPieceGridPos;
 
+        static BasePlayField()
+        {
+            setX();
+            setY();
+        }
+
+        protected static void setX()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                x.Add(50 * i);
+            }
+        }
+
+        protected static void setY()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                y.Add(50 * i);
+            }
+        }
+
         protected void OnClearedLinesChanged()
         {
             ClearedLinesChanged?.Invoke(this, new SendLinesEventArgs(clearedLines, lastPieceGridPos));

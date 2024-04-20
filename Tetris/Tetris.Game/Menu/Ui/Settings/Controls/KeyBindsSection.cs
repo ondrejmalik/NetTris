@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -13,12 +14,12 @@ namespace Tetris.Game.Menu.Ui.Controls;
 
 public partial class KeyBindsSection : CompositeDrawable
 {
-    FillFlowContainer box;
+    public FillFlowContainer Box;
     public Dictionary<GameSetting, Key> Config;
 
     private SpriteText title = new()
     {
-        Font = new( size:30),
+        Font = new(size: 30),
         Anchor = Anchor.TopCentre,
         Origin = Anchor.TopCentre
     };
@@ -51,7 +52,7 @@ public partial class KeyBindsSection : CompositeDrawable
         Anchor = Anchor.TopCentre;
         Origin = Anchor.TopCentre;
         AutoSizeAxes = Axes.Both;
-        InternalChild = box = new FillFlowContainer()
+        InternalChild = Box = new FillFlowContainer()
         {
             Direction = FillDirection.Vertical,
             AutoSizeAxes = Axes.Both,
@@ -62,18 +63,18 @@ public partial class KeyBindsSection : CompositeDrawable
         };
         foreach (var kvp in Config)
         {
-            box.Add(new KeyBind(kvp.Key, Config));
+            Box.Add(new KeyBind(kvp.Key, Config));
         }
     }
 
     protected override bool OnMouseDown(MouseDownEvent e)
     {
-        for (int i = 0; i < box.Children.Count; i++)
+        for (int i = 0; i < Box.Children.Count; i++)
         {
             KeyBind child;
             try
             {
-                child = (KeyBind)box.Children[i];
+                child = (KeyBind)Box.Children[i];
             }
             catch (Exception exception)
             {
@@ -83,11 +84,11 @@ public partial class KeyBindsSection : CompositeDrawable
             if (child.KeyButton.IsHovered)
             {
                 child.Clicked = true;
-                for (int j = i + 1; j < box.Children.Count; j++) // Reset all other keybinds
+                for (int j = i + 1; j < Box.Children.Count; j++) // Reset all other keybinds
                 {
                     try
                     {
-                        child = (KeyBind)box.Children[j];
+                        child = (KeyBind)Box.Children[j];
                     }
                     catch (Exception exception)
                     {

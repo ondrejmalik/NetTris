@@ -10,7 +10,7 @@ public abstract partial class GameContainerBase : CompositeDrawable
     protected PlayField PlayField;
     protected  HoldPreview holdPreview;
     protected  PlayfieldStats playfieldStats;
-    protected  Hold hold;
+    protected  Hold Hold;
     protected  Bag.Bag bag = new Bag.Bag();
 
 

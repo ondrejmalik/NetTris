@@ -14,10 +14,12 @@ namespace Tetris.Game.Networking;
 public class NetworkHandler()
 {
     public UdpClient Client = new UdpClient();
+
     public event EventHandler<EventArgs> GameIsReady;
     public volatile bool Running = true;
     DateTime lastRecieve = DateTime.Now;
     public static object _MultiplayerLock = new object();
+    public Packet LastPacket = new();
 
     public int TickRate
     {
@@ -32,9 +34,14 @@ public class NetworkHandler()
     private PlayField playFieldLeft;
     private PlayField playFieldRight;
 
-    public NetworkHandler(IPEndPoint serverIp, int tickRate = 5) : this()
+    public NetworkHandler(string serverIp, int port, int tickRate = 5) : this()
     {
-        this.serverIp = serverIp;
+        if (!IPAddress.TryParse(serverIp, out IPAddress ipAddress))
+        {
+            ipAddress = Dns.GetHostAddresses(serverIp)[0]; // Resolve domain to IP address
+        }
+
+        this.serverIp = new IPEndPoint(ipAddress, port);
         TickRate = tickRate;
     }
 
@@ -48,17 +55,18 @@ public class NetworkHandler()
 
     public void Handshake()
     {
-        while (true) // confirm connection to server
+        while (Running) // confirm connection to server
         {
             Packet packet = new(new PacketCommandStart());
             Send(packet);
+            Logger.Log("Waiting for server to respond..");
             string recieved = Recieve();
             if (recieved == "OK") break;
             Thread.Sleep(64);
         }
 
         Logger.Log("Connected to server");
-        while (true) // wait for second player to connect
+        while (Running) // wait for second player to connect
         {
             string recieved = Recieve();
             if (recieved == "GameReady")
@@ -91,6 +99,7 @@ public class NetworkHandler()
                 }
 
                 Send(packet);
+
                 string recieved = Recieve();
                 //Console.WriteLine(recieved);
                 if (recieved == null || recieved == "" || recieved == "OK")
@@ -111,7 +120,7 @@ public class NetworkHandler()
                 //Logger.Log(playFieldRight.Occupied.Where(x => x.Occupied).Count().ToString());
                 foreach (var pos in playFieldRight.Piece.GridPos)
                 {
-                    Logger.Log(pos.Item1 + " " + pos.Item2);
+                    //  Logger.Log(pos.Item1 + " " + pos.Item2);
                 }
                 //Logger.Log(deserialized.Occupied.Where(x => x.Occupied).Count().ToString());
             }
@@ -125,8 +134,14 @@ public class NetworkHandler()
 
     public void Send(Packet packet)
     {
-        byte[] data = Encoding.ASCII.GetBytes(packet.Serialize());
-        Client.Send(data, data.Length, serverIp);
+        try
+        {
+            byte[] data = Encoding.ASCII.GetBytes(packet.Serialize());
+            Client.Send(data, data.Length, serverIp);
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     public string Recieve()
@@ -138,12 +153,34 @@ public class NetworkHandler()
             this.serverIp = serverIp;
             return Encoding.ASCII.GetString(data);
         }
+        catch (SocketException e)
+        {
+            Running = false;
+        }
+        catch (ObjectDisposedException e)
+        {
+            Running = false;
+        }
         catch (Exception e)
         {
-            //Console.WriteLine(e);
+            Running = false;
+            Console.WriteLine(e);
         }
 
         return null;
+    }
+
+    private List<OccupiedSet> getOccupiedDela(Packet packet)
+    {
+        if (LastPacket.Occupied != null)
+        {
+            List<OccupiedSet> delta = LastPacket.Occupied.Except(packet.Occupied)
+                .Union(packet.Occupied.Except(LastPacket.Occupied)).ToList();
+            return delta;
+        }
+
+        LastPacket = new Packet();
+        return LastPacket.Occupied;
     }
 
     private void OnGameIsReady()
@@ -169,7 +206,7 @@ public class NetworkHandler()
     {
         string[] split = deserialized.Command.CommandData.Split("-");
         int diff = int.Parse(split[0]) - playFieldRight.ClearedLines;
-        Logger.Log($"diff {diff.ToString()}");
+        //Logger.Log($"diff {diff.ToString()}");
         if (diff > 0)
         {
             playFieldLeft.ScheduleAddGarbage(diff, parseStringToCords(split[1]));

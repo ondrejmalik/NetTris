@@ -8,5 +8,6 @@ public enum PieceType
     O,
     S,
     T,
-    Z
+    Z,
+    Garbage,
 }
