@@ -14,8 +14,25 @@ namespace Tetris.Game.Networking;
 
 public class NetworkHandler()
 {
-    public UdpClient Client = new UdpClient();
+    private static NetworkHandler instance = null;
+    public static int LastMs = 0;
 
+    public static NetworkHandler GetInstance(string serverIp, int port, int tickRate = 5)
+    {
+        if (instance == null)
+        {
+            instance = new NetworkHandler(serverIp, port, tickRate);
+        }
+
+        return instance;
+    }
+
+    public static void DisposeInstance()
+    {
+        instance = null;
+    }
+
+    public UdpClient Client = new UdpClient();
     public event EventHandler<EventArgs> GameIsReady;
     public event EventHandler<GameOverEventArgs> GameOver;
     public volatile bool Running = true;
@@ -36,22 +53,7 @@ public class NetworkHandler()
     private PlayField playFieldLeft;
     private PlayField playFieldRight;
     private bool sendGameOver = false;
-    private static NetworkHandler instance = null;
 
-    public static NetworkHandler GetInstance(string serverIp, int port, int tickRate = 5)
-    {
-        if (instance == null)
-        {
-            instance = new NetworkHandler(serverIp, port, tickRate);
-        }
-
-        return instance;
-    }
-
-    public static void DisposeInstance()
-    {
-        instance = null;
-    }
 
     private NetworkHandler(string serverIp, int port, int tickRate = 5) : this()
     {
@@ -151,7 +153,8 @@ public class NetworkHandler()
                 setNewPlayfieldValues(deserialized);
 
                 Thread.Sleep((int)(tickMs - Math.Min(tickMs, sw.ElapsedMilliseconds)));
-                Logger.Log(sw.ElapsedMilliseconds.ToString() + "ms -----");
+                LastMs = (int)sw.ElapsedMilliseconds;
+                Logger.Log(LastMs + "ms -----");
                 sw.Restart();
             }
             catch (Exception e)

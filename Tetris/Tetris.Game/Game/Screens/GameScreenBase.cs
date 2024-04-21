@@ -10,12 +10,18 @@ namespace Tetris.Game.Game.Screens
         {
             if (e.Key == osuTK.Input.Key.Escape)
             {
-                this.Push(new MainMenu());
+                this.Push(new MainMenuScreen());
                 RemoveNetwork();
                 return true;
             }
 
             return base.OnKeyDown(e);
+        }
+
+        protected override void LoadComplete()
+        {
+
+            base.LoadComplete();
         }
 
         protected abstract void RemoveNetwork();

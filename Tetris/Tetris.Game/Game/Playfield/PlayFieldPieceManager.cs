@@ -106,7 +106,7 @@ public partial class PlayField : PlayFieldBase
         {
             for (int i = 0; i < diff; i++)
             {
-                OpponentPlayField.addGarbage(1);
+                OpponentPlayField.ScheduleAddGarbage(1, lastPieceGridPos);
             }
         }
 
@@ -193,7 +193,6 @@ public partial class PlayField : PlayFieldBase
 
     private void addGarbage(int lines, List<(int, int)> emptyGridPos = null)
     {
-        // TODO: add move up current piece if overlaps with added garbage
         // TODO: maybe add empty hole in place of last enemy piece instead of line
         for (int i = 0; i < lines; i++)
         {
@@ -223,55 +222,62 @@ public partial class PlayField : PlayFieldBase
 
     private void addLine(int emptyIndex)
     {
-        for (int i = 0; i < 10; i++) // move up each X Line
+        try
         {
-            recurseStackUp(i);
-        }
-
-        //------------------ this checks for each Y line if there is garbage and if there is it goes to start of line above it
-        bool foundGarbage = false;
-        int lineStart = Occupied.Count - 10;
-        for (int i = Occupied.Count - 1; i >= 0; i = i - 1)
-        {
-            // if colour of occupied[i] is colour of garbage
-            if (PieceTypeToColour(Occupied[i].P) == PieceTypeToColour(PieceType.Garbage))
-
+            for (int i = 0; i < 10; i++) // move up each X Line
             {
-                foundGarbage = true;
-                i = lineStart - 10; // this goes to start of line above
+                recurseStackUp(i);
             }
 
-            // if i is at end of line and not found garbage then break
-            if (i % 10 == 0)
+            //------------------ this checks for each Y line if there is garbage and if there is it goes to start of line above it
+            bool foundGarbage = false;
+            int lineStart = Occupied.Count - 10;
+            for (int i = Occupied.Count - 1; i >= 0; i = i - 1)
             {
-                lineStart = i;
-                break;
-            }
-        }
-        //------------------ this add line of garbage at lineStart line and add empty hole where the enemy piece was (emptyIndex)
+                // if colour of occupied[i] is colour of garbage
+                if (PieceTypeToColour(Occupied[i].P) == PieceTypeToColour(PieceType.Garbage))
 
-        for (int j = lineStart; j < lineStart + 10; j++)
+                {
+                    foundGarbage = true;
+                    i = lineStart - 10; // this goes to start of line above
+                }
+
+                // if i is at end of line and not found garbage then break
+                if (i % 10 == 0)
+                {
+                    lineStart = i;
+                    break;
+                }
+            }
+            //------------------ this add line of garbage at lineStart line and add empty hole where the enemy piece was (emptyIndex)
+
+            for (int j = lineStart; j < lineStart + 10; j++)
+            {
+                if (emptyIndex + lineStart == j) // add empty hole
+                {
+                    Occupied[j].O = false;
+                    continue;
+                }
+
+                Occupied[j].O = true;
+                Occupied[j].P = PieceType.Garbage;
+            }
+
+            foreach (var pos in Piece.GridPos)
+            {
+                if (Occupied[pos.Item1 + pos.Item2 * 10].O)
+                {
+                    Piece.MoveUp();
+                    Piece.SetDrawPos();
+                }
+            }
+
+            redrawOccupied();
+        }
+        catch (Exception e)
         {
-            if (emptyIndex + lineStart == j) // add empty hole
-            {
-                Occupied[j].O = false;
-                continue;
-            }
-
-            Occupied[j].O = true;
-            Occupied[j].P = PieceType.Garbage;
+            Logger.Log(e.Message);
         }
-
-        foreach (var pos in Piece.GridPos)
-        {
-            if (Occupied[pos.Item1 + pos.Item2 * 10].O)
-            {
-                Piece.MoveUp();
-                Piece.SetDrawPos();
-            }
-        }
-
-        redrawOccupied();
     }
 
     #endregion

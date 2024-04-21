@@ -353,3 +353,5 @@ A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Release\net8.0\win-x64\Tetris.Deskt
 A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Release\net8.0\win-x64\refint\Tetris.Desktop.dll
 A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Release\net8.0\win-x64\Tetris.Desktop.pdb
 A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Release\net8.0\win-x64\ref\Tetris.Desktop.dll
+A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Release\net8.0\win-x64\Tetris.Desktop.csproj.Fody.CopyLocal.cache
+A:\Projects\Tetris\Tetris\Tetris.Desktop\obj\Release\net8.0\win-x64\Tetris.Desktop.csproj.Fody.RuntimeCopyLocal.cache

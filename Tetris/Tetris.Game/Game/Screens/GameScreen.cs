@@ -4,6 +4,7 @@ using osu.Framework.Graphics;
 using osu.Framework.Screens;
 using Tetris.Game.Config;
 using Tetris.Game.Menu;
+using Tetris.Game.Menu.Ui.Settings;
 using Tetris.Game.Realm;
 
 namespace Tetris.Game.Game.Screens
@@ -29,6 +30,7 @@ namespace Tetris.Game.Game.Screens
             InternalChildren = new Drawable[]
             {
                 gameContainer,
+                new FpsCounter()
             };
         }
 
@@ -36,7 +38,7 @@ namespace Tetris.Game.Game.Screens
         {
             RealmManager.AddScore(GameConfigManager.UserConfig[UserSetting.Username],
                 gameContainer.PlayField.ClearedLines);
-            this.Push(new MainMenu());
+            this.Push(new MainMenuScreen());
         }
 
         protected override void RemoveNetwork()

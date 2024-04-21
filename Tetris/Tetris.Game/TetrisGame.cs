@@ -21,7 +21,7 @@ namespace Tetris.Game
         {
             base.LoadComplete();
 
-            screenStack.Push(new MainMenu());
+            screenStack.Push(new MainMenuScreen());
         }
     }
 }

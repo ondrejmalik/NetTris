@@ -10,32 +10,32 @@ namespace Tetris.Game.Tests.Visual.Menu
     {
         //TODO: Add folders and steps to all tests
         ScreenStack stack;
-        MainMenu mainMenu;
+        MainMenuScreen mainMenuScreen;
 
         public TestSceneMainMenu()
         {
-            Add(stack = new ScreenStack(mainMenu = new MainMenu()) { RelativeSizeAxes = Axes.Both });
-            AddStep("Show", () => stack.Push(mainMenu = new MainMenu() { RelativeSizeAxes = Axes.Both }));
+            Add(stack = new ScreenStack(mainMenuScreen = new MainMenuScreen()) { RelativeSizeAxes = Axes.Both });
+            AddStep("Show", () => stack.Push(mainMenuScreen = new MainMenuScreen() { RelativeSizeAxes = Axes.Both }));
 
             AddStep("Show Play", () =>
                 {
-                    mainMenu.PlayButton.TriggerClick();
+                    mainMenuScreen.PlayButton.TriggerClick();
                 }
             );
             AddStep("Show Multiplayer", () =>
                 {
-                    mainMenu.MultiplayerButton.TriggerClick();
+                    mainMenuScreen.MultiplayerButton.TriggerClick();
                 }
             );
 
             AddStep("Show Settings", () =>
                 {
-                    mainMenu.SettingsButton.TriggerClick();
+                    mainMenuScreen.SettingsButton.TriggerClick();
                 }
             );
             AddStep("Show Settings", () =>
                 {
-                    mainMenu.LeaderboardsButton.TriggerClick();
+                    mainMenuScreen.LeaderboardsButton.TriggerClick();
                 }
             );
         }
