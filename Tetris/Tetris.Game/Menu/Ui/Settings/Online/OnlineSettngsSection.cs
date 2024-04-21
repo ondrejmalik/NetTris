@@ -4,8 +4,7 @@ using osu.Framework.Graphics.Containers;
 using Tetris.Game.Config;
 using Tetris.Game.Realm;
 
-
-namespace Tetris.Game.Menu.Ui.Online;
+namespace Tetris.Game.Menu.Ui.Settings.Online;
 
 public partial class OnlineSettngsSection : CompositeDrawable
 {

@@ -1,14 +1,10 @@
-using osu.Framework.Graphics;
 using NUnit.Framework;
 using osu.Framework;
 using osu.Framework.Platform;
-using osu.Framework.Timing;
 using osuTK;
-using Tetris.Game.Menu.Ui;
-using Tetris.Game.Menu.Ui.Leaderboard;
-using Tetris.Game.Realm;
+using Tetris.Game.Menu.Ui.Settings;
 
-namespace Tetris.Game.Tests.Visual
+namespace Tetris.Game.Tests.Visual.Game_Ui
 {
     [TestFixture]
     public partial class TestSceneFpsCounter : TetrisTestScene

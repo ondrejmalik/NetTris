@@ -1,12 +1,12 @@
-using osu.Framework.Graphics;
 using NUnit.Framework;
 using osu.Framework;
+using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Platform;
 using osuTK;
 
-namespace Tetris.Game.Tests.Visual
+namespace Tetris.Game.Tests.Visual.Scaling
 {
     [TestFixture]
     public partial class TestSceneRelativeFit : TetrisTestScene

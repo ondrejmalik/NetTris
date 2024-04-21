@@ -3,18 +3,25 @@ using System.Collections.Generic;
 using osu.Framework.Graphics.Containers;
 using Tetris.Game.Game.UI;
 using Tetris.Game.Networking;
+using Tetris.Game.Networking.Commands;
 
 namespace Tetris.Game.Game.Playfield
 {
-    public abstract partial class BasePlayField : CompositeDrawable
+    public abstract partial class PlayFieldBase : CompositeDrawable
     {
+        #region Public
+
         public static List<int> x = new List<int>();
         public static List<int> y = new List<int>();
         public event EventHandler<SendLinesEventArgs> ClearedLinesChanged;
-
-        public event EventHandler<EventArgs> GameOverChanged;
+        public event EventHandler<GameOverEventArgs> GameOverChanged;
         public HoldPreview HoldPreview;
         public Tetrimino.Tetrimino Piece;
+
+        #endregion
+
+        #region Protected
+
         public PlayField OpponentPlayField { get; set; }
         public List<OccupiedSet> Occupied = new List<OccupiedSet>();
         protected int clearedLines;
@@ -24,12 +31,17 @@ namespace Tetris.Game.Game.Playfield
         protected bool isOpponent;
         protected bool isOnline;
         protected List<(int, int)> lastPieceGridPos;
+        protected double loadTime;
 
-        static BasePlayField()
+        #endregion
+
+        static PlayFieldBase()
         {
             setX();
             setY();
         }
+
+        #region setDefaultXY
 
         protected static void setX()
         {
@@ -47,14 +59,20 @@ namespace Tetris.Game.Game.Playfield
             }
         }
 
+        #endregion
+
+        #region InvokeEvents
+
         protected void OnClearedLinesChanged()
         {
             ClearedLinesChanged?.Invoke(this, new SendLinesEventArgs(clearedLines, lastPieceGridPos));
         }
 
-        protected void OnGameOverChanged()
+        protected void OnGameOverChanged(bool lost)
         {
-            GameOverChanged?.Invoke(this, new EventArgs());
+            GameOverChanged?.Invoke(this, new GameOverEventArgs(lost));
         }
+
+        #endregion
     }
 }

@@ -3,11 +3,15 @@ using System.Threading;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
+using osu.Framework.Screens;
 using osuTK;
 using Tetris.Game.Config;
+using Tetris.Game.Game.UI;
+using Tetris.Game.Menu;
 using Tetris.Game.Networking;
+using Tetris.Game.Networking.Commands;
 
-namespace Tetris.Game.Game.UI.Screens
+namespace Tetris.Game.Game.Screens
 {
     public partial class DoubleGameScreen : GameScreenBase
     {
@@ -36,17 +40,14 @@ namespace Tetris.Game.Game.UI.Screens
                 });
                 networkingThread.Start();
                 networkHandler.GameIsReady += handleGameIsReady;
+                networkHandler.GameOver += handleGameOver;
             }
             else
             {
+                gameContainer1.PlayField.GameOverChanged += handleGameOver;
                 OnLoadComplete += _ =>
                 {
-                    loadingBox.Dispose();
-                    ffContainer.AddRange(new Drawable[]
-                    {
-                        gameContainer1,
-                        gameContainer2
-                    });
+                    handleGameIsReady(null, null);
                 };
             }
         }
@@ -72,22 +73,39 @@ namespace Tetris.Game.Game.UI.Screens
         }
 
 
-        protected override void Dispose(bool isDisposing)
-        {
-            RemoveNetwork();
-            base.Dispose(isDisposing);
-        }
+        #region Event Handlers
 
         private void handleGameIsReady(object sender, EventArgs eventArgs)
         {
             Scheduler.Add(() =>
             {
+                loadingBox.Hide();
+                //loadingBox.Dispose();
                 ffContainer.AddRange(new Drawable[]
                 {
                     gameContainer1,
                     gameContainer2,
                 });
             });
+        }
+
+        private void handleGameOver(object sender, GameOverEventArgs eventArgs)
+        {
+            Scheduler.Add(() =>
+            {
+                RemoveNetwork();
+                this.Push(new MainMenu());
+            });
+        }
+
+        #endregion
+
+        #region Dispose
+
+        protected override void Dispose(bool isDisposing)
+        {
+            RemoveNetwork();
+            base.Dispose(isDisposing);
         }
 
         protected override void RemoveNetwork()
@@ -100,5 +118,7 @@ namespace Tetris.Game.Game.UI.Screens
                 networkingThread.Join();
             }
         }
+
+        #endregion
     }
 }

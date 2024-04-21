@@ -3,12 +3,10 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
-using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Platform;
 using osuTK;
 
-
-namespace Tetris.Game.Menu.Ui;
+namespace Tetris.Game.Menu.Ui.Settings;
 
 public partial class FpsCounter : CompositeDrawable
 {
@@ -16,6 +14,7 @@ public partial class FpsCounter : CompositeDrawable
     Container box;
     private SpriteText DrawFpsText;
     private SpriteText UpdateFpsText;
+    private double deltaTime;
 
     [BackgroundDependencyLoader]
     private void load()
@@ -40,8 +39,7 @@ public partial class FpsCounter : CompositeDrawable
                 new Box
                 {
                     Colour = Colour4.Gray,
-                    Size = new Vector2( 130, 75),
-
+                    Size = new Vector2(130, 75),
                 },
                 DrawFpsText = new SpriteText
                 {
@@ -64,8 +62,13 @@ public partial class FpsCounter : CompositeDrawable
 
     protected override void Update()
     {
-        DrawFpsText.Text = $"FPS: {host.DrawThread.Clock.FramesPerSecond}";
-        UpdateFpsText.Text = $"UPS: {host.UpdateThread.Clock.FramesPerSecond}";
+        deltaTime += host.DrawThread.Clock.ElapsedFrameTime;
+        if (deltaTime < 100) // update counter every 100ms
+        {
+            DrawFpsText.Text = $"FPS: {host.DrawThread.Clock.FramesPerSecond}";
+            UpdateFpsText.Text = $"UPS: {host.UpdateThread.Clock.FramesPerSecond}";
+        }
+
         base.Update();
     }
 }

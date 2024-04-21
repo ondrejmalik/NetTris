@@ -4,7 +4,7 @@ using osu.Framework.Platform;
 using Tetris.Game.Game.Playfield.Tetrimino;
 using Tetris.Game.Game.UI;
 
-namespace Tetris.Game.Tests.Visual
+namespace Tetris.Game.Tests.Visual.Game
 {
     [TestFixture]
     public partial class TestSceneTetrimino : TetrisTestScene

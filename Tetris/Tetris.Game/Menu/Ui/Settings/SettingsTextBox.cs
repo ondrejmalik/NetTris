@@ -1,7 +1,7 @@
 ﻿using osu.Framework.Graphics;
 using osu.Framework.Graphics.UserInterface;
 
-namespace Tetris.Game.Menu.Ui;
+namespace Tetris.Game.Menu.Ui.Settings;
 
 public partial class SettingsTextBox : BasicTextBox
 {

@@ -1,7 +1,7 @@
 ﻿using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
 
-namespace Tetris.Game.Menu.Ui;
+namespace Tetris.Game.Menu.Ui.Settings;
 
 public partial class HeaderSpriteText : SpriteText
 {

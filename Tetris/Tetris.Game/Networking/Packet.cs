@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Tetris.Game.Game.Playfield;
 using Tetris.Game.Game.Playfield.Tetrimino;
+using Tetris.Game.Networking.Commands;
 
 namespace Tetris.Game.Networking;
 

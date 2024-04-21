@@ -1,11 +1,9 @@
 ﻿using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Shapes;
 using Tetris.Game.Config;
 
-
-namespace Tetris.Game.Menu.Ui.Controls;
+namespace Tetris.Game.Menu.Ui.Settings.Controls;
 
 public partial class ControlsSettingsSection : CompositeDrawable
 {

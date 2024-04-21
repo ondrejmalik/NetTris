@@ -2,7 +2,7 @@ using osu.Framework.Input.Events;
 using osu.Framework.Screens;
 using Tetris.Game.Menu;
 
-namespace Tetris.Game.Game.UI.Screens
+namespace Tetris.Game.Game.Screens
 {
     public abstract partial class GameScreenBase : Screen
     {
@@ -12,7 +12,6 @@ namespace Tetris.Game.Game.UI.Screens
             {
                 this.Push(new MainMenu());
                 RemoveNetwork();
-                //Dispose();
                 return true;
             }
 

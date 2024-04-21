@@ -2,10 +2,13 @@
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
-using Tetris.Game.Menu.Ui.Controls;
-using Tetris.Game.Menu.Ui.Online;
+using osu.Framework.Platform;
+using Tetris.Game.Menu.Ui.Settings.Controls;
+using Tetris.Game.Menu.Ui.Settings.Graphics;
+using Tetris.Game.Menu.Ui.Settings.Online;
+using Tetris.Game.Menu.Ui.Settings.User;
 
-namespace Tetris.Game.Menu.Ui;
+namespace Tetris.Game.Menu.Ui.Settings;
 
 public partial class SettingsMenu : CompositeDrawable
 {
@@ -72,6 +75,8 @@ public partial class SettingsMenu : CompositeDrawable
         base.Update();
     }
 
+    #region Show/Hide
+
     public void Show()
     {
         base.Show();
@@ -83,15 +88,19 @@ public partial class SettingsMenu : CompositeDrawable
         this.MoveTo(new osuTK.Vector2(-1500, -200), 250, Easing.InQuint).Then().Delay(250).OnComplete(_ => base.Hide());
     }
 
-    public void ToggleShow()
+    public void ToggleShow(string baseTitle, GameHost host = null)
     {
         if (Position.X == -1500)
         {
+            if (host != null) host.Window.Title = "Settings";
             Show();
         }
         else
         {
+            if (host != null) host.Window.Title = baseTitle;
             Hide();
         }
     }
+
+    #endregion
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Tetris.Game.Networking;
+namespace Tetris.Game.Networking.Commands;
 
 [Serializable]
 public class PacketCommandBase

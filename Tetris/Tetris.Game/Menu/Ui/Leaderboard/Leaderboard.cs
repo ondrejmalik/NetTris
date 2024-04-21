@@ -9,6 +9,7 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Logging;
+using osu.Framework.Platform;
 using osuTK;
 using Realms;
 using Tetris.Game.Realm;
@@ -102,15 +103,16 @@ public partial class Leaderboard : CompositeDrawable
         this.MoveTo(new Vector2(1500, -200), 250, Easing.InQuint).Then().Delay(256).OnComplete(_ => base.Hide());
     }
 
-    public void ToggleShow()
+    public void ToggleShow(string baseTitle, GameHost host = null)
     {
         if (Position.X == 1500)
         {
-            Show();
+            if (host != null) host.Window.Title = "Leaderboard";
             Show();
         }
         else
         {
+            if (host != null) host.Window.Title = baseTitle;
             Hide();
         }
     }

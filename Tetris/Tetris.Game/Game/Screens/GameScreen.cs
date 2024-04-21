@@ -6,20 +6,20 @@ using Tetris.Game.Config;
 using Tetris.Game.Menu;
 using Tetris.Game.Realm;
 
-namespace Tetris.Game.Game.UI.Screens
+namespace Tetris.Game.Game.Screens
 {
     public partial class GameScreen : GameScreenBase
     {
-        private GameContainer gameContainer1;
+        private GameContainer gameContainer;
 
         public GameScreen()
         {
-            gameContainer1 = new GameContainer()
+            gameContainer = new GameContainer()
             {
                 Anchor = Anchor.TopCentre,
                 Origin = Anchor.TopCentre,
             };
-            gameContainer1.PlayField.GameOverChanged += handleGameOver;
+            gameContainer.PlayField.GameOverChanged += handleGameOver;
         }
 
 
@@ -28,14 +28,14 @@ namespace Tetris.Game.Game.UI.Screens
         {
             InternalChildren = new Drawable[]
             {
-                gameContainer1,
+                gameContainer,
             };
         }
 
         private void handleGameOver(object sender, EventArgs e)
         {
             RealmManager.AddScore(GameConfigManager.UserConfig[UserSetting.Username],
-                gameContainer1.PlayField.ClearedLines);
+                gameContainer.PlayField.ClearedLines);
             this.Push(new MainMenu());
         }
 

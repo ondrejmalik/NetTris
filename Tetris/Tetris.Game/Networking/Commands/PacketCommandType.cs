@@ -1,10 +1,8 @@
-﻿namespace Tetris.Game.Networking;
+﻿namespace Tetris.Game.Networking.Commands;
 
 public enum PacketCommandType
 {
     SendLines,
     Start,
     GameOver,
-    Pause,
-    Resume,
 }

@@ -7,7 +7,7 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Platform;
 using osuTK;
 
-namespace Tetris.Game.Menu.Ui;
+namespace Tetris.Game.Menu.Ui.Settings.Graphics;
 
 public partial class RendererSwitcher : CompositeDrawable
 {

@@ -1,9 +1,9 @@
-using osu.Framework.Graphics;
 using NUnit.Framework;
+using osu.Framework.Graphics;
 using osu.Framework.Screens;
 using Tetris.Game.Menu;
 
-namespace Tetris.Game.Tests.Visual
+namespace Tetris.Game.Tests.Visual.Menu
 {
     [TestFixture]
     public partial class TestSceneMainMenu : TetrisTestScene

@@ -1,15 +1,13 @@
-using osu.Framework.Graphics;
 using NUnit.Framework;
+using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using Tetris.Game.Game.Playfield.Tetrimino;
 
-namespace Tetris.Game.Tests.Visual
+namespace Tetris.Game.Tests.Visual.Game_Ui
 {
     [TestFixture]
     public partial class TestSceneFillFlowTetrimino : TetrisTestScene
     {
-        // Add visual tests to ensure correct behaviour of your game: https://github.com/ppy/osu-framework/wiki/Development-and-Testing
-        // You can make changes to classes associated with the tests and they will recompile and update immediately.
         private FillFlowContainer FF;
 
         public TestSceneFillFlowTetrimino()

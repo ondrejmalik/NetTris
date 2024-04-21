@@ -1,12 +1,7 @@
-using osu.Framework.Graphics;
 using NUnit.Framework;
-using osu.Framework.Configuration;
-using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Sprites;
-using osuTK;
 using Tetris.Game.Menu.Ui;
 
-namespace Tetris.Game.Tests.Visual
+namespace Tetris.Game.Tests.Visual.Settings
 {
     [TestFixture]
     public partial class TestSceneRenderSwitcher : TetrisTestScene

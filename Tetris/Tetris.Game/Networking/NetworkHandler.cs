@@ -7,7 +7,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using osu.Framework.Logging;
+using osu.Framework.Threading;
 using Tetris.Game.Game.Playfield;
+using Tetris.Game.Networking.Commands;
 
 namespace Tetris.Game.Networking;
 
@@ -16,6 +18,7 @@ public class NetworkHandler()
     public UdpClient Client = new UdpClient();
 
     public event EventHandler<EventArgs> GameIsReady;
+    public event EventHandler<GameOverEventArgs> GameOver;
     public volatile bool Running = true;
     DateTime lastRecieve = DateTime.Now;
     public static object _MultiplayerLock = new object();
@@ -33,6 +36,7 @@ public class NetworkHandler()
     private List<(int, int)> lastPieceGridPos;
     private PlayField playFieldLeft;
     private PlayField playFieldRight;
+    private bool sendGameOver = false;
 
     public NetworkHandler(string serverIp, int port, int tickRate = 5) : this()
     {
@@ -45,8 +49,11 @@ public class NetworkHandler()
         TickRate = tickRate;
     }
 
+    #region Run
+
     public void Start(PlayField playFieldLeft, PlayField playFieldRight)
     {
+        playFieldLeft.GameOverChanged += (sender, args) => sendGameOver = true;
         this.playFieldLeft = playFieldLeft;
         this.playFieldRight = playFieldRight;
         Handshake();
@@ -60,7 +67,7 @@ public class NetworkHandler()
             Packet packet = new(new PacketCommandStart());
             Send(packet);
             Logger.Log("Waiting for server to respond..");
-            string recieved = Recieve();
+            string recieved = Receive();
             if (recieved == "OK") break;
             Thread.Sleep(64);
         }
@@ -68,7 +75,7 @@ public class NetworkHandler()
         Logger.Log("Connected to server");
         while (Running) // wait for second player to connect
         {
-            string recieved = Recieve();
+            string recieved = Receive();
             if (recieved == "GameReady")
             {
                 Logger.Log("Game Ready");
@@ -80,6 +87,7 @@ public class NetworkHandler()
 
     public void Loop()
     {
+        //------------------------Send Part-----------------------------------
         Stopwatch sw = new();
         string response;
         playFieldLeft.ClearedLinesChanged += handleSendLines;
@@ -93,36 +101,43 @@ public class NetworkHandler()
                 {
                     lock (_MultiplayerLock) // maybe remove lock
                     {
-                        packet = new(playFieldLeft.Occupied, playFieldLeft.Piece.GridPos,
-                            playFieldLeft.Piece.PieceType, new PacketCommandSendLines(newLines, lastPieceGridPos));
+                        if (sendGameOver)
+                        {
+                            packet = new(new PacketCommandGameOver());
+                            OnGameOver(true);
+                        }
+                        else
+                        {
+                            packet = new(playFieldLeft.Occupied, playFieldLeft.Piece.GridPos,
+                                playFieldLeft.Piece.PieceType, new PacketCommandSendLines(newLines, lastPieceGridPos));
+                        }
                     }
                 }
 
                 Send(packet);
-
-                string recieved = Recieve();
+                //------------------------Recieve part-----------------------------------
+                string received = Receive();
                 //Console.WriteLine(recieved);
-                if (recieved == null || recieved == "" || recieved == "OK")
+                if (received == null || received == "" || received == "OK")
                 {
                     continue;
                 }
 
-                Packet deserialized = Packet.Deserialize(recieved);
+                Packet deserialized = Packet.Deserialize(received);
+                if (deserialized.Command.PacketCommandType == PacketCommandType.GameOver)
+                {
+                    OnGameOver(false);
+                    Running = false;
+                    break;
+                }
 
                 addSentLines(deserialized);
 
                 setNewPlayfieldValues(deserialized);
 
-
                 Thread.Sleep((int)(tickMs - Math.Min(tickMs, sw.ElapsedMilliseconds)));
                 Logger.Log(sw.ElapsedMilliseconds.ToString() + "ms -----");
                 sw.Restart();
-                //Logger.Log(playFieldRight.Occupied.Where(x => x.Occupied).Count().ToString());
-                foreach (var pos in playFieldRight.Piece.GridPos)
-                {
-                    //  Logger.Log(pos.Item1 + " " + pos.Item2);
-                }
-                //Logger.Log(deserialized.Occupied.Where(x => x.Occupied).Count().ToString());
             }
             catch (Exception e)
             {
@@ -131,6 +146,10 @@ public class NetworkHandler()
             }
         }
     }
+
+    #endregion
+
+    #region Send Receive
 
     public void Send(Packet packet)
     {
@@ -144,7 +163,7 @@ public class NetworkHandler()
         }
     }
 
-    public string Recieve()
+    public string Receive()
     {
         try
         {
@@ -170,6 +189,9 @@ public class NetworkHandler()
         return null;
     }
 
+    #endregion
+
+
     private List<OccupiedSet> getOccupiedDela(Packet packet)
     {
         if (LastPacket.Occupied != null)
@@ -183,10 +205,22 @@ public class NetworkHandler()
         return LastPacket.Occupied;
     }
 
+    #region Event Invokes
+
     private void OnGameIsReady()
     {
         GameIsReady?.Invoke(this, new EventArgs());
     }
+
+    private void OnGameOver(bool lost)
+    {
+        Logger.Log("Game Over " + (lost ? "You Lost" : "You Won"));
+        GameOver?.Invoke(this, new GameOverEventArgs(lost));
+    }
+
+    #endregion
+
+    #region Event Handlers
 
     private void handleSendLines(object sender, SendLinesEventArgs eventArgs)
     {
@@ -201,6 +235,10 @@ public class NetworkHandler()
         playFieldRight.Piece.GridPos = deserialized.DeserializePiecePos();
         playFieldRight.ScheduleRedraw();
     }
+
+    #endregion
+
+    #region Parsing
 
     private void addSentLines(Packet deserialized)
     {
@@ -225,4 +263,6 @@ public class NetworkHandler()
 
         return list;
     }
+
+    #endregion
 }

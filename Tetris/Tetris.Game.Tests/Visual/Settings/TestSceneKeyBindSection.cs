@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using osu.Framework.Testing;
 using Tetris.Game.Config;
-using Tetris.Game.Menu.Ui.Controls;
+using Tetris.Game.Menu.Ui.Settings.Controls;
 
-namespace Tetris.Game.Tests.Visual
+namespace Tetris.Game.Tests.Visual.Settings
 {
     [TestFixture]
     public partial class TestSceneKeyBindSection : TetrisTestScene

@@ -2,7 +2,7 @@ using osu.Framework.Allocation;
 using osu.Framework.Platform;
 using NUnit.Framework;
 
-namespace Tetris.Game.Tests.Visual
+namespace Tetris.Game.Tests.Visual.Game
 {
     [TestFixture]
     public partial class TestSceneTetrisGame : TetrisTestScene

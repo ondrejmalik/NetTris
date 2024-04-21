@@ -86,6 +86,7 @@ public partial class HoldPreview : CompositeDrawable
         holdTetrimino.Hide();
     }
 
+    #region Update Content
 
     public void SetHoldTetrimino()
     {
@@ -112,4 +113,6 @@ public partial class HoldPreview : CompositeDrawable
             bagQueueContainer.Add(tetrimino);
         }
     }
+
+    #endregion
 }

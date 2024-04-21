@@ -10,8 +10,7 @@ using osuTK.Input;
 using Tetris.Game.Config;
 using Tetris.Game.Realm;
 
-
-namespace Tetris.Game.Menu.Ui.Controls;
+namespace Tetris.Game.Menu.Ui.Settings.Controls;
 
 public partial class KeyBind : CompositeDrawable
 {

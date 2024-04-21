@@ -1,13 +1,11 @@
 using System.Collections.Generic;
-using osu.Framework.Graphics;
 using NUnit.Framework;
+using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.UserInterface;
-using osu.Framework.Localisation;
 using osuTK;
 using Tetris.Game.Menu.Ui;
 
-namespace Tetris.Game.Tests.Visual
+namespace Tetris.Game.Tests.Visual.Menu
 {
     [TestFixture]
     public partial class TestSceneSlideoutButtonList : TetrisTestScene

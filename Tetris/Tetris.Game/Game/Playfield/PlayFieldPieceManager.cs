@@ -8,7 +8,7 @@ using Tetris.Game.Game.Playfield.Tetrimino;
 
 namespace Tetris.Game.Game.Playfield;
 
-public partial class PlayField : BasePlayField
+public partial class PlayField : PlayFieldBase
 {
     public int ClearedLines
     {
@@ -26,7 +26,7 @@ public partial class PlayField : BasePlayField
     {
         get
         {
-            return (int)(Clock.CurrentTime / 1000);
+            return (int)((Clock.CurrentTime - loadTime) / 1000);
         }
     }
 
@@ -95,7 +95,7 @@ public partial class PlayField : BasePlayField
             if (Occupied[pos.Item1 + pos.Item2 * 10] == true)
             {
                 Logger.Log("Game Over");
-                OnGameOverChanged();
+                OnGameOverChanged(true);
                 break;
             }
         }
@@ -154,6 +154,8 @@ public partial class PlayField : BasePlayField
         return cleared;
     }
 
+    #region Stack Up Down
+
     private void newstackDown(int j)
     {
         Occupied[j].O = false;
@@ -170,6 +172,24 @@ public partial class PlayField : BasePlayField
         }
     }
 
+
+    private void recurseStackUp(int j)
+    {
+        if (j < 190)
+        {
+            if (j > 10)
+            {
+                Occupied[j - 10].O = Occupied[j].O;
+                Occupied[j - 10].P = Occupied[j].P;
+            }
+
+            recurseStackUp(j + 10);
+        }
+    }
+
+    #endregion
+
+    #region Add Garbage Line
 
     private void addGarbage(int lines, List<(int, int)> emptyGridPos = null)
     {
@@ -246,17 +266,5 @@ public partial class PlayField : BasePlayField
         redrawOccupied();
     }
 
-    private void recurseStackUp(int j)
-    {
-        if (j < 190)
-        {
-            if (j > 10)
-            {
-                Occupied[j - 10].O = Occupied[j].O;
-                Occupied[j - 10].P = Occupied[j].P;
-            }
-
-            recurseStackUp(j + 10);
-        }
-    }
+    #endregion
 }

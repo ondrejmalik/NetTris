@@ -60,6 +60,8 @@ public partial class PlayfieldStats(PlayField playField) : CompositeDrawable
         periodicTextUdpate();
     }
 
+    #region UpdateContent
+
     protected override void Update()
     {
         deltaTime += Clock.ElapsedFrameTime;
@@ -77,6 +79,8 @@ public partial class PlayfieldStats(PlayField playField) : CompositeDrawable
         cpmText.Text = $"CPM: {Math.Round(playField.Cpm, 2)}";
         timeText.Text = $"Time: {playField.TimeInSeconds} sec";
     }
+
+    #endregion
 
     private void handleValueChanged(object sender, EventArgs e)
     {

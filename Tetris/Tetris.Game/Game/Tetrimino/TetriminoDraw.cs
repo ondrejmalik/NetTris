@@ -12,7 +12,8 @@ namespace Tetris.Game.Game.Playfield.Tetrimino;
 
 public partial class Tetrimino : TetriminoBase
 {
-    public Tetrimino(PieceType type, int x, int y, PlayField playField = null, bool isOpponent = false, bool isDummy = false)
+    public Tetrimino(PieceType type, int x, int y, PlayField playField = null, bool isOpponent = false,
+        bool isDummy = false)
     {
         this.isDummy = isDummy;
         this.isOpponent = isOpponent;
@@ -109,6 +110,30 @@ public partial class Tetrimino : TetriminoBase
         SetDrawPos();
     }
 
+    #region SetDrawPos SetPieceType
+
+    public void SetDrawPos()
+    {
+        if (isDummy) { }
+
+        try
+        {
+            boxes[0].Position = new Vector2(PlayFieldBase.x[GridPos[0].Item1] + 5,
+                PlayFieldBase.y[GridPos[0].Item2] + 5);
+            boxes[1].Position = new Vector2(PlayFieldBase.x[GridPos[1].Item1] + 5,
+                PlayFieldBase.y[GridPos[1].Item2] + 5);
+            boxes[2].Position = new Vector2(PlayFieldBase.x[GridPos[2].Item1] + 5,
+                PlayFieldBase.y[GridPos[2].Item2] + 5);
+            boxes[3].Position = new Vector2(PlayFieldBase.x[GridPos[3].Item1] + 5,
+                PlayFieldBase.y[GridPos[3].Item2] + 5);
+        }
+        catch (Exception e)
+        {
+            Logger.Log(e.Message);
+        }
+    }
+
+
     private void setPieceType(PieceType type)
     {
         PieceType = type;
@@ -167,24 +192,5 @@ public partial class Tetrimino : TetriminoBase
             pivot = new Vector2(1 + PosX, 1 + PosY);
     }
 
-    public void SetDrawPos()
-    {
-        if (isDummy) { }
-
-        try
-        {
-            boxes[0].Position = new Vector2(BasePlayField.x[GridPos[0].Item1] + 5,
-                BasePlayField.y[GridPos[0].Item2] + 5);
-            boxes[1].Position = new Vector2(BasePlayField.x[GridPos[1].Item1] + 5,
-                BasePlayField.y[GridPos[1].Item2] + 5);
-            boxes[2].Position = new Vector2(BasePlayField.x[GridPos[2].Item1] + 5,
-                BasePlayField.y[GridPos[2].Item2] + 5);
-            boxes[3].Position = new Vector2(BasePlayField.x[GridPos[3].Item1] + 5,
-                BasePlayField.y[GridPos[3].Item2] + 5);
-        }
-        catch (Exception e)
-        {
-            Logger.Log(e.Message);
-        }
-    }
+    #endregion
 }

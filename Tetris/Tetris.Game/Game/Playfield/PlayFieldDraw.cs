@@ -12,11 +12,11 @@ using Tetris.Game.Game.UI;
 
 namespace Tetris.Game.Game.Playfield
 {
-    public partial class PlayField : BasePlayField
+    public partial class PlayField : PlayFieldBase
     {
         public static Colour4 PieceTypeToColour(PieceType type)
         {
-            Colour4 colour = Colour4.Black;
+            Colour4 colour = Colour4.White;
             switch (type)
             {
                 case PieceType.T:
@@ -53,7 +53,6 @@ namespace Tetris.Game.Game.Playfield
             this.isOpponent = isOpponent;
             this.isOnline = isOnline;
             HoldPreview = holdPreview;
-
         }
 
         [BackgroundDependencyLoader]
@@ -123,7 +122,10 @@ namespace Tetris.Game.Game.Playfield
 
             box.Add(Piece = new Tetrimino.Tetrimino(HoldPreview.Hold.Bag.Dequeue(), 3, 2, this, isOpponent,
                 isOnline && isOpponent));
+            loadTime = Clock.CurrentTime;
         }
+
+        #region Scheduling
 
         public void ScheduleRedraw()
         {
@@ -136,6 +138,7 @@ namespace Tetris.Game.Game.Playfield
             Scheduler.Add(() => addGarbage(lines, emptyGridPos));
         }
 
+        #endregion
 
         private void redrawOccupied()
         {
@@ -151,11 +154,13 @@ namespace Tetris.Game.Game.Playfield
                         Size = new Vector2(45, 45),
                         Position = new Vector2(PlayField.x[set.I % 10] + 5, PlayField.y[set.I / 10] + 5),
                         Anchor = Anchor.TopLeft,
-                        Colour = isOnline ? Colour4.Black : PieceTypeToColour(set.P),
+                        Colour = PieceTypeToColour(set.P),
                     });
                 }
             }
         }
+
+        #region Input
 
         protected override bool OnMouseDown(MouseDownEvent e)
         {
@@ -190,5 +195,7 @@ namespace Tetris.Game.Game.Playfield
 
             return base.OnKeyDown(e);
         }
+
+        #endregion
     }
 }

@@ -3,11 +3,13 @@ using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Localisation;
+using osu.Framework.Platform;
 using osu.Framework.Screens;
 using osuTK;
-using Tetris.Game.Game.UI.Screens;
+using Tetris.Game.Game.Screens;
 using Tetris.Game.Menu.Ui;
 using Tetris.Game.Menu.Ui.Leaderboard;
+using Tetris.Game.Menu.Ui.Settings;
 
 
 namespace Tetris.Game.Menu;
@@ -21,6 +23,8 @@ public partial class MainMenu : Screen
     public MenuButton LeaderboardsButton;
     public SettingsMenu SettingsMenu;
     public Leaderboard Leaderboard;
+    [Resolved] private GameHost host { get; set; }
+    private string windowTitle = "Tetris";
 
     public MainMenu()
     {
@@ -30,6 +34,7 @@ public partial class MainMenu : Screen
     [BackgroundDependencyLoader]
     private void load()
     {
+        host.Window.Title = windowTitle;
         InternalChild = Box = new Container
         {
             RelativeSizeAxes = Axes.Both,
@@ -50,7 +55,11 @@ public partial class MainMenu : Screen
                         {
                             new RoundedMenuButton()
                             {
-                                Text = "Endless", Action = () => { this.Push(new GameScreen()); },
+                                Text = "Endless", Action = () =>
+                                {
+                                    host.Window.Title = "Playing Endless";
+                                    this.Push(new GameScreen());
+                                },
                                 BaseSize = new Vector2(100, 75), HoveredSize = new Vector2(120, 75)
                             },
                         })
@@ -63,14 +72,22 @@ public partial class MainMenu : Screen
                             new RoundedMenuButton()
                             {
                                 Text = "Local",
-                                Action = () => { this.Push(new DoubleGameScreen()); },
+                                Action = () =>
+                                {
+                                    host.Window.Title = "Playing Local Multiplayer";
+                                    this.Push(new DoubleGameScreen());
+                                },
                                 BaseSize = new Vector2(100, 75),
                                 HoveredSize = new Vector2(120, 75)
                             },
                             new RoundedMenuButton()
                             {
                                 Text = "Online",
-                                Action = () => { this.Push(new DoubleGameScreen(true)); },
+                                Action = () =>
+                                {
+                                    host.Window.Title = "Playing Online Multiplayer";
+                                    this.Push(new DoubleGameScreen(true));
+                                },
                                 BaseSize = new Vector2(100, 75),
                                 HoveredSize = new Vector2(120, 75)
                             },
@@ -92,11 +109,13 @@ public partial class MainMenu : Screen
                             {
                                 if (SettingsMenu == null)
                                 {
+                                    host.Window.Title = "Settings";
                                     Box.Add(SettingsMenu = new SettingsMenu());
                                 }
                                 else
                                 {
-                                    SettingsMenu.ToggleShow();
+                                    host.Window.Title = windowTitle;
+                                    SettingsMenu.ToggleShow(windowTitle, host);
                                 }
                             }
                         },
@@ -112,11 +131,13 @@ public partial class MainMenu : Screen
                             {
                                 if (Leaderboard == null)
                                 {
+                                    host.Window.Title = "Leaderboards";
                                     Box.Add(Leaderboard = new Leaderboard());
                                 }
                                 else
                                 {
-                                    Leaderboard.ToggleShow();
+                                    host.Window.Title = windowTitle;
+                                    Leaderboard.ToggleShow(windowTitle, host);
                                 }
                             }
                         },

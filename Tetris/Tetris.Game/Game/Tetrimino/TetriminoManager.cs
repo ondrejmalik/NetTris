@@ -20,6 +20,11 @@ public partial class Tetrimino : TetriminoBase
         return base.OnKeyDown(e);
     }
 
+    private double levelScaling(int level)
+    {
+        return 750 / Math.Log(level + 1, 2);
+    }
+
 // TODO Check if occupied in new pos before rotating else don't rotate
     public void Rotate(bool reverse)
     {
@@ -101,10 +106,7 @@ public partial class Tetrimino : TetriminoBase
         }
     }
 
-    private double levelScaling(int level)
-    {
-        return 750 / Math.Log(level + 1, 2);
-    }
+    #region Movement
 
     private void moveDown()
     {
@@ -166,4 +168,6 @@ public partial class Tetrimino : TetriminoBase
         pivot = new Vector2(pivot.X + 1, pivot.Y);
         SetDrawPos();
     }
+
+    #endregion
 }
