@@ -25,6 +25,14 @@ public partial class PlayField : PlayFieldBase
         }
     }
 
+    public string GameStatsToString()
+    {
+        return $"Cleared Lines: {ClearedLines}      " +
+               $"Level: {Level}     " +
+               $"Time: {TimeInSeconds}s      " +
+               $"Clears per minute: {Cpm.ToString().Substring(0, 5)}     ";
+    }
+
     /// <summary>
     /// Clears per minute.
     /// </summary>

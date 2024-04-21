@@ -41,7 +41,7 @@ namespace Tetris.Game.Game.Screens
         {
             RealmManager.AddScore(GameConfigManager.UserConfig[UserSetting.Username],
                 gameContainer.PlayField.ClearedLines);
-            this.Push(new MainMenuScreen());
+            this.Push(new GameOverScreen(gameContainer.PlayField.GameStatsToString()));
         }
 
         protected override void RemoveNetwork()

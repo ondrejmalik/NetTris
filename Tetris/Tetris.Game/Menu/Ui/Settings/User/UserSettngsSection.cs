@@ -66,6 +66,9 @@ public partial class UserSettingsSection : CompositeDrawable
         };
     }
 
+    /// <summary>
+    /// Invokes the ShowFpsChanged event.
+    /// </summary>
     private void OnShowFpsChanged()
     {
         ShowFpsChanged?.Invoke(this, new FpsChangedEventArgs(showFpsCheckbox.ShowFpsCheckbox.Current.Value));

@@ -84,7 +84,7 @@ public partial class FpsCounter : CompositeDrawable
                 }
             }
         };
-        if (!GameConfigManager.UserConfig[UserSetting.ShowFps].Equals("false"))
+        if (GameConfigManager.UserConfig[UserSetting.ShowFps].Equals("False"))
         {
             Hide();
         }

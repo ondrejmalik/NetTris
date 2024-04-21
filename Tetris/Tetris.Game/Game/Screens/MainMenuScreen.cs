@@ -52,6 +52,12 @@ public partial class MainMenuScreen : Screen
                     AutoSizeAxes = Axes.Y,
                     Children = new Drawable[]
                     {
+                        new HeaderSpriteText()
+                        {
+                            Font = new(size: 130),
+                            Text = windowTitle,
+                            Margin = new MarginPadding() { Bottom = 50 }
+                        },
                         new HorizontalSlideoutButtonList(new List<MenuButton>()
                         {
                             new RoundedMenuButton()

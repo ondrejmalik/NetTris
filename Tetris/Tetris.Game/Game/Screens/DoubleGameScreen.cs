@@ -109,7 +109,7 @@ namespace Tetris.Game.Game.Screens
             Scheduler.Add(() =>
             {
                 RemoveNetwork();
-                this.Push(new MainMenuScreen());
+                this.Push(new GameOverScreen(eventArgs.lost));
             });
         }
 
