@@ -9,6 +9,9 @@ using osuTK;
 
 namespace Tetris.Game.Menu.Ui.Settings.Graphics;
 
+/// <summary>
+/// Container for switching between different graphics renderers.
+/// </summary>
 public partial class RendererSwitcher : CompositeDrawable
 {
     public Vector2 ButtonsBaseSize = new Vector2(85, 50);
@@ -98,7 +101,7 @@ public partial class RendererSwitcher : CompositeDrawable
                     Origin = Anchor.Centre,
                     Anchor = Anchor.Centre,
                     Margin = new MarginPadding(25),
-                    Position =  new Vector2(0, 50),
+                    Position = new Vector2(0, 50),
                 }
             }
         };

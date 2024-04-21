@@ -5,6 +5,9 @@ using Tetris.Game.Config;
 
 namespace Tetris.Game.Menu.Ui.Settings.Controls;
 
+/// <summary>
+/// Settings Section for setting controls.
+/// </summary>
 public partial class ControlsSettingsSection : CompositeDrawable
 {
     [BackgroundDependencyLoader]

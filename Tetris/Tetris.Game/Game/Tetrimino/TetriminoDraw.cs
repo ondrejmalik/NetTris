@@ -7,59 +7,62 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Logging;
 using osuTK;
 using Tetris.Game.Config;
+using Tetris.Game.Game.Playfield;
 
-namespace Tetris.Game.Game.Playfield.Tetrimino;
+namespace Tetris.Game.Game.Tetrimino;
 
 public partial class Tetrimino : TetriminoBase
 {
     public Tetrimino(PieceType type, int x, int y, PlayField playField = null, bool isOpponent = false,
         bool isDummy = false)
     {
-        this.isDummy = isDummy;
-        this.isOpponent = isOpponent;
-        this.playField = playField;
+        this.IsDummy = isDummy;
+        this.IsOpponent = isOpponent;
+        this.PlayField = playField;
         PosX = x;
         PosY = y;
         setPieceType(type);
         if (playField != null && !isDummy)
         {
-            controlsConfig =
+            ControlsConfig =
                 isOpponent ? GameConfigManager.OpponentControlsConfig : GameConfigManager.GameControlsConfig;
-            updateDeltaTime = () =>
+            UpdateDeltaTime = () =>
             {
-                if (deltaTime > levelScaling(
+                //takes the Level number that is bigger between the current player and the opponent
+                if (DeltaTime > levelScaling(
                         Math.Max(
                             playField.Level,
                             playField.OpponentPlayField != null ? playField.OpponentPlayField.Level : 0)))
                 {
-                    deltaTime = 0;
+                    DeltaTime = 0;
                     moveDown();
                 }
-
+                /*
                 debugText.Text =
                     $"{GridPos[0].Item1},  {GridPos[0].Item2}, {GridPos[1].Item1},  {GridPos[1].Item2}, {GridPos[2].Item1},  {GridPos[2].Item2}, {GridPos[3].Item1},  {GridPos[3].Item2}";
-                deltaTime += Time.Elapsed;
+                DeltaTime += Time.Elapsed;
+                */
             };
-            onkeyDown = e =>
+            OnkeyDown = e =>
             {
                 switch (e.Key)
                 {
-                    case var value when value == controlsConfig[GameSetting.MoveLeft]:
+                    case var value when value == ControlsConfig[GameSetting.MoveLeft]:
                         moveLeft();
                         break;
-                    case var value when value == controlsConfig[GameSetting.MoveRight]:
+                    case var value when value == ControlsConfig[GameSetting.MoveRight]:
                         moveRight();
                         break;
-                    case var value when value == controlsConfig[GameSetting.HardDrop]:
+                    case var value when value == ControlsConfig[GameSetting.HardDrop]:
                         quickDrop();
                         break;
-                    case var value when value == controlsConfig[GameSetting.SoftDrop]:
+                    case var value when value == ControlsConfig[GameSetting.SoftDrop]:
                         moveDown();
                         break;
-                    case var value when value == controlsConfig[GameSetting.RotateLeft]:
+                    case var value when value == ControlsConfig[GameSetting.RotateLeft]:
                         Rotate(false);
                         break;
-                    case var value when value == controlsConfig[GameSetting.RotateRight]:
+                    case var value when value == ControlsConfig[GameSetting.RotateRight]:
                         Rotate(true);
                         break;
                 }
@@ -67,8 +70,8 @@ public partial class Tetrimino : TetriminoBase
         }
         else
         {
-            updateDeltaTime = () => { };
-            onkeyDown = e => { };
+            UpdateDeltaTime = () => { };
+            OnkeyDown = e => { };
         }
     }
 
@@ -77,13 +80,13 @@ public partial class Tetrimino : TetriminoBase
     private void load()
     {
         AutoSizeAxes = Axes.Both;
-        InternalChild = container = new Container
+        InternalChild = Container = new Container
         {
             AutoSizeAxes = Axes.Both,
 
-
             Children = new Drawable[]
             {
+                /*
                 debugText = new SpriteText()
                 {
                     Anchor = Anchor.Centre,
@@ -93,15 +96,16 @@ public partial class Tetrimino : TetriminoBase
                     Colour = Colour4.Black,
                     Depth = -10,
                 }
+                */
             }
         };
-        container.Add(boxes[0] = new TetriminoBlock(PieceColour));
-        container.Add(boxes[1] = new TetriminoBlock(PieceColour));
-        container.Add(boxes[2] = new TetriminoBlock(PieceColour));
-        container.Add(boxes[3] = new TetriminoBlock(PieceColour));
-        container.Add(new Circle()
+        Container.Add(Boxes[0] = new TetriminoBlock(PieceColour));
+        Container.Add(Boxes[1] = new TetriminoBlock(PieceColour));
+        Container.Add(Boxes[2] = new TetriminoBlock(PieceColour));
+        Container.Add(Boxes[3] = new TetriminoBlock(PieceColour));
+        Container.Add(new Circle()
         {
-            Position = pivot * 50,
+            Position = Pivot * 50,
             Size = new Vector2(5, 5),
 
             Colour = Colour4.Purple,
@@ -112,19 +116,22 @@ public partial class Tetrimino : TetriminoBase
 
     #region SetDrawPos SetPieceType
 
+    /// <summary>
+    /// Sets the absolute draw position of the tetrimino blocks.
+    /// </summary>
     public void SetDrawPos()
     {
-        if (isDummy) { }
+        if (IsDummy) { }
 
         try
         {
-            boxes[0].Position = new Vector2(PlayFieldBase.x[GridPos[0].Item1] + 5,
+            Boxes[0].Position = new Vector2(PlayFieldBase.x[GridPos[0].Item1] + 5,
                 PlayFieldBase.y[GridPos[0].Item2] + 5);
-            boxes[1].Position = new Vector2(PlayFieldBase.x[GridPos[1].Item1] + 5,
+            Boxes[1].Position = new Vector2(PlayFieldBase.x[GridPos[1].Item1] + 5,
                 PlayFieldBase.y[GridPos[1].Item2] + 5);
-            boxes[2].Position = new Vector2(PlayFieldBase.x[GridPos[2].Item1] + 5,
+            Boxes[2].Position = new Vector2(PlayFieldBase.x[GridPos[2].Item1] + 5,
                 PlayFieldBase.y[GridPos[2].Item2] + 5);
-            boxes[3].Position = new Vector2(PlayFieldBase.x[GridPos[3].Item1] + 5,
+            Boxes[3].Position = new Vector2(PlayFieldBase.x[GridPos[3].Item1] + 5,
                 PlayFieldBase.y[GridPos[3].Item2] + 5);
         }
         catch (Exception e)
@@ -133,7 +140,11 @@ public partial class Tetrimino : TetriminoBase
         }
     }
 
-
+    /// <summary>
+    /// Sets the pivot, colour and relative positions of the blocks in the tetrimino.
+    ///
+    /// </summary>
+    /// <param name="type">Type of the piece</param>
     private void setPieceType(PieceType type)
     {
         PieceType = type;
@@ -175,21 +186,21 @@ public partial class Tetrimino : TetriminoBase
         }
 
         if (type == PieceType.I)
-            pivot = new Vector2(1.5f + PosX, 0.5f + PosY);
+            Pivot = new Vector2(1.5f + PosX, 0.5f + PosY);
         else if (type == PieceType.L)
         {
-            pivot = new Vector2(PosX, 1 + PosY);
+            Pivot = new Vector2(PosX, 1 + PosY);
         }
         else if (type == PieceType.Z)
         {
-            pivot = new Vector2(1 + PosX, PosY + 1f);
+            Pivot = new Vector2(1 + PosX, PosY + 1f);
         }
         else if (type == PieceType.O)
         {
-            pivot = new Vector2(0.5f + PosX, 0.5f + PosY);
+            Pivot = new Vector2(0.5f + PosX, 0.5f + PosY);
         }
         else
-            pivot = new Vector2(1 + PosX, 1 + PosY);
+            Pivot = new Vector2(1 + PosX, 1 + PosY);
     }
 
     #endregion

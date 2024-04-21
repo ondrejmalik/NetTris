@@ -3,28 +3,38 @@ using System.Collections.Generic;
 using osu.Framework.Input.Events;
 using osuTK;
 
-namespace Tetris.Game.Game.Playfield.Tetrimino;
+namespace Tetris.Game.Game.Tetrimino;
 
+/// <summary>
+/// Tetrimino class that represents a tetrimino in the game.
+/// </summary>
 public partial class Tetrimino : TetriminoBase
 {
     protected override void Update()
     {
-        updateDeltaTime();
+        DeltaTime += Clock.ElapsedFrameTime;
+        UpdateDeltaTime();
         base.Update();
     }
 
     protected override bool OnKeyDown(KeyDownEvent e)
     {
-        onkeyDown(e);
+        OnkeyDown(e);
 
         return base.OnKeyDown(e);
     }
 
+    /// <param name="level">Current game level</param>
+    /// <returns>time between auto move down</returns>
     private double levelScaling(int level)
     {
         return 750 / Math.Log(level + 1, 2);
     }
 
+    /// <summary>
+    /// Rotates the tetrimino.
+    /// </summary>
+    /// <param name="reverse">If tetrimino should be rotated counterclockwise</param>
 // TODO Check if occupied in new pos before rotating else don't rotate
     public void Rotate(bool reverse)
     {
@@ -65,18 +75,18 @@ public partial class Tetrimino : TetriminoBase
         List<(int, int)> tempGridPos = GridPos;
         for (int i = 0; i < 4; i++)
         {
-            double deltaX = GridPos[i].Item1 - pivot.X;
-            double deltaY = GridPos[i].Item2 - pivot.Y;
+            double deltaX = GridPos[i].Item1 - Pivot.X;
+            double deltaY = GridPos[i].Item2 - Pivot.Y;
 
             double rotatedX = rotationMatrix[0, 0] * deltaX + rotationMatrix[0, 1] * deltaY;
             double rotatedY = rotationMatrix[1, 0] * deltaX + rotationMatrix[1, 1] * deltaY;
-            if (rotatedX + pivot.X < 0 || rotatedX + pivot.X > 9 || rotatedY + pivot.Y > 19 || rotatedY + pivot.Y < 0)
+            if (rotatedX + Pivot.X < 0 || rotatedX + Pivot.X > 9 || rotatedY + Pivot.Y > 19 || rotatedY + Pivot.Y < 0)
             {
                 GridPos = tempGridPos;
                 return;
             }
 
-            GridPos[i] = ((int, int))(rotatedX + pivot.X, rotatedY + pivot.Y);
+            GridPos[i] = ((int, int))(rotatedX + Pivot.X, rotatedY + Pivot.Y);
         }
 
         if (revert)
@@ -103,6 +113,10 @@ public partial class Tetrimino : TetriminoBase
         SetDrawPos();
     }
 
+    /// <summary>
+    /// Also known as Hard drop.
+    /// Drops the tetrimino to the bottom of the playfield or the nearest piece.
+    /// </summary>
     private void quickDrop()
     {
         while (true)
@@ -112,8 +126,8 @@ public partial class Tetrimino : TetriminoBase
                 GridPos[i] = (GridPos[i].Item1, GridPos[i].Item2 + 1);
             }
 
-            pivot = new Vector2(pivot.X, pivot.Y + 1);
-            if (playField.CollisionDetection(0) || playField.BottomCollisionDetection())
+            Pivot = new Vector2(Pivot.X, Pivot.Y + 1);
+            if (PlayField.CollisionDetection(0) || PlayField.BottomCollisionDetection())
             {
                 break;
             }
@@ -122,6 +136,10 @@ public partial class Tetrimino : TetriminoBase
 
     #region Movement
 
+    /// <summary>
+    /// Moves the tetrimino up.
+    /// </summary>
+    /// <param name="checkCollision">If collisions should be checked</param>
     public void MoveUp(bool checkCollision = true)
     {
         for (int i = 0; i < 4; i++)
@@ -132,14 +150,18 @@ public partial class Tetrimino : TetriminoBase
 
         if (checkCollision)
         {
-            playField.BottomCollisionDetection();
-            playField.CollisionDetection(0);
+            PlayField.BottomCollisionDetection();
+            PlayField.CollisionDetection(0);
         }
 
-        pivot = new Vector2(pivot.X, pivot.Y - 1);
+        Pivot = new Vector2(Pivot.X, Pivot.Y - 1);
         SetDrawPos();
     }
 
+    /// <summary>
+    ///  Moves the tetrimino down.
+    /// </summary>
+    /// <param name="checkCollision">If collisions should be checked</param>
     private void moveDown(bool checkCollision = true)
     {
         for (int i = 0; i < 4; i++)
@@ -149,15 +171,18 @@ public partial class Tetrimino : TetriminoBase
 
         if (checkCollision)
         {
-            playField.BottomCollisionDetection();
-            playField.CollisionDetection(0);
+            PlayField.BottomCollisionDetection();
+            PlayField.CollisionDetection(0);
         }
 
-        pivot = new Vector2(pivot.X, pivot.Y + 1);
+        Pivot = new Vector2(Pivot.X, Pivot.Y + 1);
         SetDrawPos();
     }
 
-
+    /// <summary>
+    ///  Moves the tetrimino left.
+    /// </summary>
+    /// <param name="checkCollision">If collisions should be checked</param>
     private void moveLeft(bool checkCollision = true)
     {
         for (int i = 0; i < 4; i++)
@@ -166,7 +191,7 @@ public partial class Tetrimino : TetriminoBase
                 return;
             if (checkCollision)
             {
-                if (playField.CollisionDetection(-1))
+                if (PlayField.CollisionDetection(-1))
                 {
                     return;
                 }
@@ -178,10 +203,14 @@ public partial class Tetrimino : TetriminoBase
             GridPos[i] = (GridPos[i].Item1 - 1, GridPos[i].Item2);
         }
 
-        pivot = new Vector2(pivot.X - 1, pivot.Y);
+        Pivot = new Vector2(Pivot.X - 1, Pivot.Y);
         SetDrawPos();
     }
 
+    /// <summary>
+    ///  Moves the tetrimino right.
+    /// </summary>
+    /// <param name="checkCollision">If collisions should be checked</param>
     private void moveRight(bool checkCollision = true)
     {
         for (int i = 0; i < 4; i++)
@@ -190,7 +219,7 @@ public partial class Tetrimino : TetriminoBase
                 return;
             if (checkCollision)
             {
-                if (playField.CollisionDetection(1))
+                if (PlayField.CollisionDetection(1))
                 {
                     return;
                 }
@@ -202,7 +231,7 @@ public partial class Tetrimino : TetriminoBase
             GridPos[i] = (GridPos[i].Item1 + 1, GridPos[i].Item2);
         }
 
-        pivot = new Vector2(pivot.X + 1, pivot.Y);
+        Pivot = new Vector2(Pivot.X + 1, Pivot.Y);
         SetDrawPos();
     }
 

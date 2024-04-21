@@ -6,14 +6,15 @@ using osu.Framework.Localisation;
 using osu.Framework.Platform;
 using osu.Framework.Screens;
 using osuTK;
-using Tetris.Game.Game.Screens;
 using Tetris.Game.Menu.Ui;
 using Tetris.Game.Menu.Ui.Leaderboard;
 using Tetris.Game.Menu.Ui.Settings;
 
+namespace Tetris.Game.Game.Screens;
 
-namespace Tetris.Game.Menu;
-
+/// <summary>
+///  The main menu screen.
+/// </summary>
 public partial class MainMenuScreen : Screen
 {
     public Container Box;

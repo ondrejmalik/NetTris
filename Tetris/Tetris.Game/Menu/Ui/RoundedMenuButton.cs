@@ -7,6 +7,9 @@ using osuTK;
 
 namespace Tetris.Game.Menu.Ui;
 
+/// <summary>
+/// Rounded Button for the main menu.
+/// </summary>
 public partial class RoundedMenuButton : MenuButton
 {
     public RoundedMenuButton()

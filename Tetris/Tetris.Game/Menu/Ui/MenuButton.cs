@@ -7,6 +7,9 @@ using osuTK;
 
 namespace Tetris.Game.Menu.Ui;
 
+/// <summary>
+/// Button for consistent the main menu.
+/// </summary>
 public partial class MenuButton : BasicButton
 {
     Vector2 _baseSize;

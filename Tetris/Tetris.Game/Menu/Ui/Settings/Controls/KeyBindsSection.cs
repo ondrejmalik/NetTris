@@ -10,6 +10,9 @@ using Tetris.Game.Config;
 
 namespace Tetris.Game.Menu.Ui.Settings.Controls;
 
+/// <summary>
+/// Lists all keybinds in a Config.
+/// </summary>
 public partial class KeyBindsSection : CompositeDrawable
 {
     public FillFlowContainer Box;
@@ -34,6 +37,8 @@ public partial class KeyBindsSection : CompositeDrawable
         }
     }
 
+    /// <param name="config">Game or opponent config form <see cref="GameConfigManager"/></param>
+    /// <param name="titleText">Displayed title of the section</param>
     public KeyBindsSection(Dictionary<GameSetting, Key> config, string titleText = null)
     {
         if (titleText != null)
@@ -65,6 +70,9 @@ public partial class KeyBindsSection : CompositeDrawable
         }
     }
 
+    /// <summary>
+    /// Checks if a keybind is clicked and resets all other keybinds.
+    /// </summary>
     protected override bool OnMouseDown(MouseDownEvent e)
     {
         for (int i = 0; i < Box.Children.Count; i++)

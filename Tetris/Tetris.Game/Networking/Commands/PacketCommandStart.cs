@@ -2,8 +2,10 @@
 
 namespace Tetris.Game.Networking.Commands;
 
+/// <summary>
+/// Packet command to send server client is ready.
+/// </summary>
 [Serializable]
-// convert lastPieceGridPos to cords X,Y separeted by ; also check if null insert empty string
 public class PacketCommandStart() : PacketCommandBase(PacketCommandType.Start, "Start")
 {
 }

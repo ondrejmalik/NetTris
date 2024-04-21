@@ -5,12 +5,14 @@ using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Input.Events;
 using osu.Framework.Platform;
-using osuTK;
 using osuTK.Input;
 using Tetris.Game.Networking;
 
 namespace Tetris.Game.Menu.Ui.Settings;
 
+/// <summary>
+/// Displays the current FPS, UPS, and network pool rate.
+/// </summary>
 public partial class FpsCounter : CompositeDrawable
 {
     [Resolved] private GameHost host { get; set; }
@@ -34,13 +36,14 @@ public partial class FpsCounter : CompositeDrawable
             CornerExponent = 2,
             Masking = true,
             AutoSizeAxes = Axes.Both,
-
+            Alpha = 0.5f,
             Children = new Drawable[]
             {
                 new Box
                 {
                     Colour = Colour4.Gray,
                     RelativeSizeAxes = Axes.Both,
+                    Alpha = 0.5f,
                 },
                 new FillFlowContainer()
                 {
@@ -60,14 +63,14 @@ public partial class FpsCounter : CompositeDrawable
                         },
                         UpdateFpsText = new SpriteText
                         {
-                            Margin = new MarginPadding() {  Left = 5, Right = 5 },
+                            Margin = new MarginPadding() { Left = 5, Right = 5 },
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.TopCentre,
                             Font = new FontUsage(size: 20),
                         },
                         LastMsText = new SpriteText
                         {
-                            Margin = new MarginPadding() {Bottom = 2, Left = 5, Right = 5 },
+                            Margin = new MarginPadding() { Bottom = 2, Left = 5, Right = 5 },
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.TopCentre,
                             Font = new FontUsage(size: 20),
@@ -103,7 +106,15 @@ public partial class FpsCounter : CompositeDrawable
         return base.OnKeyDown(e);
     }
 
-    public void ToggleVisibility()
+    public void ToggleVisibility(bool visible)
     {
+        if (visible)
+        {
+            Show();
+        }
+        else
+        {
+            Hide();
+        }
     }
 }

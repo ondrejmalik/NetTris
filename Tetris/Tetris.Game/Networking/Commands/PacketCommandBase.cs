@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace Tetris.Game.Networking.Commands;
 
+/// <summary>
+///  Base class for all packet commands.
+/// </summary>
 [Serializable]
 public class PacketCommandBase
 {

@@ -3,6 +3,9 @@ using Realms;
 
 namespace Tetris.Game.Realm;
 
+/// <summary>
+/// Realm object for storing score.
+/// </summary>
 public class RealmScore : RealmObject
 {
     [Realms.PrimaryKey] public string Id { get; set; } = Guid.NewGuid().ToString();

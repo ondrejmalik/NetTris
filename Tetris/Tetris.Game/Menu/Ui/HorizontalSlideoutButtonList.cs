@@ -6,13 +6,22 @@ using osu.Framework.Graphics.UserInterface;
 
 namespace Tetris.Game.Menu.Ui;
 
+/// <summary>
+/// Button with a slideout list of buttons.
+/// </summary>
 public partial class HorizontalSlideoutButtonList : CompositeDrawable
 {
     Container box;
     private FillFlowContainer ffContainer;
+
+    /// <summary>
+    /// Main button that toggles the slideout list.
+    /// </summary>
     public Button MainButton { get; set; }
+
     public List<MenuButton> Buttons;
 
+    /// <param name="buttons">List of slideout buttons</param>
     public HorizontalSlideoutButtonList(List<MenuButton> buttons)
     {
         Buttons = buttons;

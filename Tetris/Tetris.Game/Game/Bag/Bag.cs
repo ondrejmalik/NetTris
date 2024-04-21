@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tetris.Game.Game.Playfield.Tetrimino;
+using Tetris.Game.Game.Tetrimino;
 
 namespace Tetris.Game.Game.Bag;
 
+/// <summary>
+/// Represents a 7 bag of pieces that can be dequeued.
+/// </summary>
 public class Bag
 {
     private LinkedList<PieceType> bagQueue = new LinkedList<PieceType>();
     private bool[] wasUsed = new bool[7];
 
+    /// <summary>
+    ///  The queue of pieces.
+    /// </summary>
     public LinkedList<PieceType> BagQueue
     {
         get
@@ -26,6 +32,9 @@ public class Bag
         }
     }
 
+    /// <summary>
+    ///  Fills the bag with 7 pieces.
+    /// </summary>
     public void FillBag()
     {
         bagQueue.Clear();
@@ -43,6 +52,10 @@ public class Bag
         }
     }
 
+    /// <summary>
+    ///  returns and removes a piece from the bag.
+    /// </summary>
+    /// <returns>First piece in BagQueue</returns>
     public PieceType Dequeue()
     {
         if (bagQueue.Count == 0)

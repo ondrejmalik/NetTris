@@ -4,6 +4,9 @@ using Tetris.Game.Realm;
 
 namespace Tetris.Game.Config;
 
+/// <summary>
+/// Static class to manage game configuration.
+/// </summary>
 public static class GameConfigManager
 {
     #region Private
@@ -15,13 +18,17 @@ public static class GameConfigManager
 
     #endregion
 
-
+    /// <summary>
+    /// Static constructor to load the game configuration.
+    /// </summary>
     static GameConfigManager()
     {
         RealmManager.LoadConfig();
     }
 
-
+    /// <summary>
+    /// Clears the game configuration.
+    /// </summary>
     public static void Clear()
     {
         GameControlsConfig.Clear();
@@ -32,6 +39,9 @@ public static class GameConfigManager
 
     #region Properties
 
+    /// <summary>
+    /// Game configuration.
+    /// </summary>
     public static Dictionary<GameSetting, Key> GameControlsConfig
     {
         get => _gameConfig;
@@ -41,7 +51,9 @@ public static class GameConfigManager
         }
     }
 
-
+    /// <summary>
+    /// Opponent configuration.
+    /// </summary>
     public static Dictionary<GameSetting, Key> OpponentControlsConfig
     {
         get => _opponentConfig;
@@ -51,6 +63,9 @@ public static class GameConfigManager
         }
     }
 
+    /// <summary>
+    /// Online configuration.
+    /// </summary>
     public static Dictionary<OnlineSetting, string> OnlineConfig
     {
         get => _onlineConfig;
@@ -60,6 +75,9 @@ public static class GameConfigManager
         }
     }
 
+    /// <summary>
+    /// User configuration.
+    /// </summary>
     public static Dictionary<UserSetting, string> UserConfig
     {
         get => _userConfig;
@@ -73,6 +91,9 @@ public static class GameConfigManager
 
     #region SetDefaults
 
+    /// <summary>
+    /// Sets the default values for the game configuration.
+    /// </summary>
     public static void SetDefaults()
     {
         GameControlsConfig = GameControlsConfigSetDefaults();
@@ -81,7 +102,10 @@ public static class GameConfigManager
         UserConfig = UserConfigSetDefaults();
     }
 
-
+    /// <summary>
+    /// Sets the default values for the game configuration.
+    /// </summary>
+    /// <returns></returns>
     public static Dictionary<GameSetting, Key> GameControlsConfigSetDefaults()
     {
         return new Dictionary<GameSetting, Key>
@@ -96,6 +120,10 @@ public static class GameConfigManager
         };
     }
 
+    /// <summary>
+    /// Sets the default values for the opponent configuration.
+    /// </summary>
+    /// <returns></returns>
     public static Dictionary<GameSetting, Key> OpponentControlsConfigSetDefaults()
     {
         return new Dictionary<GameSetting, Key>
@@ -110,6 +138,10 @@ public static class GameConfigManager
         };
     }
 
+    /// <summary>
+    /// Sets the default values for the online configuration.
+    /// </summary>
+    /// <returns></returns>
     public static Dictionary<OnlineSetting, string> OnlineConfigSetDefaults()
     {
         return new Dictionary<OnlineSetting, string>
@@ -120,11 +152,16 @@ public static class GameConfigManager
         };
     }
 
+    /// <summary>
+    /// Sets the default values for the user configuration.
+    /// </summary>
+    /// <returns></returns>
     public static Dictionary<UserSetting, string> UserConfigSetDefaults()
     {
         return new Dictionary<UserSetting, string>
         {
             { UserSetting.Username, "Guest Player" },
+            { UserSetting.ShowFps, "false" }
         };
     }
 

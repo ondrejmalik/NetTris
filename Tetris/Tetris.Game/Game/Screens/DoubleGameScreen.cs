@@ -14,6 +14,9 @@ using Tetris.Game.Networking.Commands;
 
 namespace Tetris.Game.Game.Screens
 {
+    /// <summary>
+    ///  Two gameContainers beside each other, one for the player and one for the opponent
+    /// </summary>
     public partial class DoubleGameScreen : GameScreenBase
     {
         private FillFlowContainer ffContainer;
@@ -24,9 +27,6 @@ namespace Tetris.Game.Game.Screens
 
         private NetworkHandler networkHandler;
 
-        /// <summary>
-        /// Two screens beside each other, one for the player and one for the opponent
-        /// </summary>
         /// <param name="online">networking thread is started</param>
         public DoubleGameScreen(bool online = false)
         {

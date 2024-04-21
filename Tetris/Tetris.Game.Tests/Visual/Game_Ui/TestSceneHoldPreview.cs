@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using Tetris.Game.Game.Bag;
-using Tetris.Game.Game.Playfield.Tetrimino;
+using Tetris.Game.Game.Tetrimino;
 using Tetris.Game.Game.UI;
 
 namespace Tetris.Game.Tests.Visual.Game_Ui;

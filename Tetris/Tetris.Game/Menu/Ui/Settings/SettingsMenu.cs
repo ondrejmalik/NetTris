@@ -10,6 +10,9 @@ using Tetris.Game.Menu.Ui.Settings.User;
 
 namespace Tetris.Game.Menu.Ui.Settings;
 
+/// <summary>
+/// Settings Menu for setting user settings, graphics settings, controls settings, and online settings.
+/// </summary>
 public partial class SettingsMenu : CompositeDrawable
 {
     private Container box;

@@ -9,6 +9,9 @@ using Tetris.Game.Realm;
 
 namespace Tetris.Game.Menu.Ui.Leaderboard;
 
+/// <summary>
+/// Score displayed in the <see cref="Leaderboard"/>.
+/// </summary>
 public partial class LeaderboardScore : CompositeDrawable
 {
     public RealmScore Score;
@@ -18,6 +21,7 @@ public partial class LeaderboardScore : CompositeDrawable
     private SpriteText scoreText;
     private SpriteText dateText;
 
+    /// <param name="score">Score that should be displayed</param>
     public LeaderboardScore(RealmScore score)
     {
         Score = score;

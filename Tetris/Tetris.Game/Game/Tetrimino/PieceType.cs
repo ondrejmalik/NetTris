@@ -1,5 +1,8 @@
-﻿namespace Tetris.Game.Game.Playfield.Tetrimino;
+﻿namespace Tetris.Game.Game.Tetrimino;
 
+/// <summary>
+///  Represents the type of a piece.
+/// </summary>
 public enum PieceType
 {
     I,

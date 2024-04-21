@@ -5,6 +5,9 @@ using osu.Framework.Graphics.Sprites;
 
 namespace Tetris.Game.Menu.Ui.Settings.Graphics;
 
+/// <summary>
+///  Settings Section for setting graphics.
+/// </summary>
 public partial class GraphicsSettingsSection : CompositeDrawable
 {
     Container box;

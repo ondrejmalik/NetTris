@@ -10,6 +10,10 @@ using Tetris.Game.Game.Playfield;
 
 namespace Tetris.Game.Game.UI;
 
+/// <summary>
+/// Displays the stats of playfield.
+/// </summary>
+/// <param name="playField">playfield which stats should be displayed</param>
 public partial class PlayfieldStats(PlayField playField) : CompositeDrawable
 {
     Container box;
@@ -74,6 +78,9 @@ public partial class PlayfieldStats(PlayField playField) : CompositeDrawable
         base.Update();
     }
 
+    /// <summary>
+    /// periodally updates the cpm and time text.
+    /// </summary>
     private void periodicTextUdpate()
     {
         cpmText.Text = $"CPM: {Math.Round(playField.Cpm, 2)}";
@@ -82,6 +89,9 @@ public partial class PlayfieldStats(PlayField playField) : CompositeDrawable
 
     #endregion
 
+    /// <summary>
+    /// Event handler for when the value of the playfield changes.
+    /// </summary>
     private void handleValueChanged(object sender, EventArgs e)
     {
         linesClearedText.Text = $"Lines Cleared: {playField.ClearedLines}";

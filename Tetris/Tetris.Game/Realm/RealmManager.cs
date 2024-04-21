@@ -7,12 +7,21 @@ using Tetris.Game.Config;
 
 namespace Tetris.Game.Realm;
 
+/// <summary>
+/// Static class to manage Realm database.
+/// </summary>
 public static class RealmManager
 {
+    /// <summary>
+    /// Static Realm configuration.
+    /// </summary>
     // TODO move this path to config file
     public static RealmConfiguration Config = new RealmConfiguration(Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Tetris\Data\Database.realm"));
 
+    /// <summary>
+    /// Static constructor to create data directory if it doesn't exist.
+    /// </summary>
     static RealmManager()
     {
         if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -23,11 +32,20 @@ public static class RealmManager
         }
     }
 
+    /// <summary>
+    /// Gets the Realm Singleton instance.
+    /// </summary>
+    /// <returns><see cref="Realm"/></returns>
     public static Realms.Realm GetRealmInstance()
     {
         return Realms.Realm.GetInstance(Config);
     }
 
+    /// <summary>
+    /// Adds a score to the Realm database.
+    /// </summary>
+    /// <param name="playerName">Name of the palyer</param>
+    /// <param name="score">Achieved score</param>
     public static void AddScore(string playerName, int score)
     {
         Realms.Realm Realm = Realms.Realm.GetInstance(Config);
@@ -41,12 +59,19 @@ public static class RealmManager
         });
     }
 
+    /// <summary>
+    /// Reads all scores from the Realm database.
+    /// </summary>
+    /// <returns></returns>
     public static IQueryable<RealmScore> ReadScores()
     {
         Realms.Realm Realm = Realms.Realm.GetInstance(Config);
         return Realm.All<RealmScore>().OrderByDescending(x => x.Score);
     }
 
+    /// <summary>
+    /// Saves the game configuration to the Realm database.
+    /// </summary>
     public static void SaveConfig()
     {
         Realms.Realm Realm = Realms.Realm.GetInstance(Config);
@@ -83,6 +108,10 @@ public static class RealmManager
         });
     }
 
+    /// <summary>
+    /// Loads the game configuration from the Realm database.
+    /// </summary>
+    /// <param name="attempt"></param>
     public static void LoadConfig(int attempt = 0)
     {
         Realms.Realm Realm = Realms.Realm.GetInstance(Config);

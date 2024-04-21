@@ -34,6 +34,9 @@ namespace Tetris.Game.Game.Screens
             };
         }
 
+        /// <summary>
+        ///  Adds the end score to Realm and returns to the main menu.
+        /// </summary>
         private void handleGameOver(object sender, EventArgs e)
         {
             RealmManager.AddScore(GameConfigManager.UserConfig[UserSetting.Username],

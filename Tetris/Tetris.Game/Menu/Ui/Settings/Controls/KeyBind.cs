@@ -12,6 +12,9 @@ using Tetris.Game.Realm;
 
 namespace Tetris.Game.Menu.Ui.Settings.Controls;
 
+/// <summary>
+/// Visualizations for <see cref="GameConfigManager"/>'s GameControls and OpponentControls key value pair.
+/// </summary>
 public partial class KeyBind : CompositeDrawable
 {
     FillFlowContainer box;

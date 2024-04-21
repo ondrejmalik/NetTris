@@ -4,12 +4,17 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Logging;
 using osuTK;
-using Tetris.Game.Game.Playfield.Tetrimino;
+using Tetris.Game.Game.Tetrimino;
 
 namespace Tetris.Game.Game.Playfield;
 
 public partial class PlayField : PlayFieldBase
 {
+    /// <summary>
+    /// Number of lines.
+    /// This is used to send garbage to the opponent.
+    /// Fires OnClearedLinesChanged event.
+    /// </summary>
     public int ClearedLines
     {
         get => clearedLines;
@@ -20,8 +25,14 @@ public partial class PlayField : PlayFieldBase
         }
     }
 
+    /// <summary>
+    /// Clears per minute.
+    /// </summary>
     public double Cpm => ClearedLines / (Clock.CurrentTime / 60 / 1000);
 
+    /// <summary>
+    /// Time in seconds since the game started.
+    /// </summary>
     public int TimeInSeconds
     {
         get
@@ -30,8 +41,12 @@ public partial class PlayField : PlayFieldBase
         }
     }
 
+    /// <summary>
+    /// ClearedLines rounded to the nearest 10.
+    /// </summary>
     public int Level => (int)Math.Round((decimal)(ClearedLines / 10 + 1));
 
+    /// <returns>If piece colided with bottom of playfield.</returns>
     internal bool BottomCollisionDetection()
     {
         for (int i = 0; i < Piece.GridPos.Count; i++)
@@ -46,6 +61,11 @@ public partial class PlayField : PlayFieldBase
         return false;
     }
 
+    /// <summary>
+    /// Checks if the piece collides with the walls or other pieces.
+    /// </summary>
+    /// <param name="diff">This moves the piece collision detection left or right</param>
+    /// <returns>If the piece collided with anything</returns>
     internal bool CollisionDetection(int diff)
     {
         for (int i = 0; i < Piece.GridPos.Count; i++)
@@ -67,6 +87,10 @@ public partial class PlayField : PlayFieldBase
         return false;
     }
 
+    /// <summary>
+    /// Makes Occupied indexes under the piece true.
+    /// And adds new piece from bag queue to playfield.
+    /// </summary>
     private void place()
     {
         foreach (var pos in Piece.GridPos)
@@ -118,12 +142,19 @@ public partial class PlayField : PlayFieldBase
         HoldPreview.UpdatePreviewTetriminos();
     }
 
+    /// <summary>
+    /// destroys current piece and creates new piece from bag queue.
+    /// </summary>
     private void expireTetrimino()
     {
         Piece.Expire();
         Piece = new Tetrimino.Tetrimino(HoldPreview.Hold.Bag.Dequeue(), 4, 0, this, isOpponent, isOnline && isOpponent);
     }
 
+    /// <summary>
+    /// looks for lines that are full and clears them.
+    /// </summary>
+    /// <returns>number of cleared lines</returns>
     private int clearLine()
     {
         bool clear = false;
@@ -156,12 +187,20 @@ public partial class PlayField : PlayFieldBase
 
     #region Stack Up Down
 
+    /// <summary>
+    /// Starts recursive function to move stack down
+    /// </summary>
+    /// <param name="j">index of the vertical stack</param>
     private void newstackDown(int j)
     {
         Occupied[j].O = false;
         recurseStackDown(j);
     }
 
+    /// <summary>
+    /// Recursively moves stack down until j is less than 10
+    /// </summary>
+    /// <param name="j"></param>
     private void recurseStackDown(int j)
     {
         if (j > 10)
@@ -172,7 +211,10 @@ public partial class PlayField : PlayFieldBase
         }
     }
 
-
+    /// <summary>
+    /// Recursively moves stack up until j is less than 10
+    /// </summary>
+    /// <param name="j"></param>
     private void recurseStackUp(int j)
     {
         if (j < 190)
@@ -191,6 +233,11 @@ public partial class PlayField : PlayFieldBase
 
     #region Add Garbage Line
 
+    /// <summary>
+    /// Adds garbage lines to the playfield with empty holes where the of the blocks in enemy piece was.
+    /// </summary>
+    /// <param name="lines">number of garbage lines</param>
+    /// <param name="emptyGridPos">Grid pos of enemy piece that cleared line(s)</param>
     private void addGarbage(int lines, List<(int, int)> emptyGridPos = null)
     {
         // TODO: maybe add empty hole in place of last enemy piece instead of line
@@ -202,25 +249,17 @@ public partial class PlayField : PlayFieldBase
                 index = emptyGridPos[Random.Shared.Next(3)].Item1;
             }
 
-            addLine(index); // for now only add empty hole where the last piece was
+            addGarbageLine(index); // for now only add empty hole where the enemy piece was
         }
 
-        /*
-        if (emptyGridPos != null)
-        {
-            foreach (var cords in emptyGridPos) // add empty hole in place of last enemy piece
-            {
-                if (Occupied[cords.Item1 + cords.Item2 * 10].Occupied)
-                {
-                    Occupied[cords.Item1 + cords.Item2 * 10].Occupied = false;
-                }
-            }
-        }
-        */
         OpponentPlayField.ClearedLines += lines;
     }
 
-    private void addLine(int emptyIndex)
+    /// <summary>
+    /// Adds a line of garbage to playfield.
+    /// </summary>
+    /// <param name="emptyIndex"></param>
+    private void addGarbageLine(int emptyIndex)
     {
         try
         {

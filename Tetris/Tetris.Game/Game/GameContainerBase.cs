@@ -12,6 +12,4 @@ public abstract partial class GameContainerBase : CompositeDrawable
     protected  PlayfieldStats playfieldStats;
     protected  Hold Hold;
     protected  Bag.Bag bag = new Bag.Bag();
-
-
 }

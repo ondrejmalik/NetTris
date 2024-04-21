@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using Tetris.Game.Game.Bag;
-using Tetris.Game.Game.Playfield.Tetrimino;
+using Tetris.Game.Game.Tetrimino;
 using Tetris.Game.Networking;
 
 namespace Tetris.Game.Tests.Unit;

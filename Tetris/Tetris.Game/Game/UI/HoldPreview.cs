@@ -7,15 +7,18 @@ using osu.Framework.Graphics.Sprites;
 using osuTK;
 using osuTK.Graphics;
 using Tetris.Game.Game.Bag;
-using Tetris.Game.Game.Playfield.Tetrimino;
+using Tetris.Game.Game.Tetrimino;
 
 namespace Tetris.Game.Game.UI;
 
+/// <summary>
+/// Visualization of currently held piece and next 4 pieces.
+/// </summary>
 public partial class HoldPreview : CompositeDrawable
 {
     private FillFlowContainer ffBox;
-    private Tetrimino holdTetrimino;
-    private List<Tetrimino> queueTetriminos = new();
+    private Tetrimino.Tetrimino holdTetrimino;
+    private List<Tetrimino.Tetrimino> queueTetriminos = new();
     private FillFlowContainer bagQueueContainer;
     public Hold Hold { get; set; }
 
@@ -91,7 +94,7 @@ public partial class HoldPreview : CompositeDrawable
     public void SetHoldTetrimino()
     {
         holdTetrimino.Expire();
-        if (Hold.HeldPiece != null) holdTetrimino = new Tetrimino((PieceType)Hold.HeldPiece, 0, 0);
+        if (Hold.HeldPiece != null) holdTetrimino = new Tetrimino.Tetrimino((PieceType)Hold.HeldPiece, 0, 0);
         holdTetrimino.Show();
         holdTetrimino.Alpha = 1;
         ffBox.Insert(-1, holdTetrimino);
@@ -103,7 +106,7 @@ public partial class HoldPreview : CompositeDrawable
         LinkedListNode<PieceType> type = Hold.Bag.BagQueue.First;
         for (int i = 0; i < 4; i++)
         {
-            queueTetriminos.Add(new Tetrimino(type.Value, 0, 0) { Margin = new MarginPadding(10) });
+            queueTetriminos.Add(new Tetrimino.Tetrimino(type.Value, 0, 0) { Margin = new MarginPadding(10) });
             type = type.Next;
         }
 

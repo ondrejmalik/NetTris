@@ -17,11 +17,14 @@ using Tetris.Game.Realm;
 
 namespace Tetris.Game.Menu.Ui.Leaderboard;
 
+/// <summary>
+/// Displays Scores.
+/// </summary>
 public partial class Leaderboard : CompositeDrawable
 {
     public List<RealmScore> Scores;
     private Container box;
-    private BasicScrollContainer ScrollBox;
+    private BasicScrollContainer scrollBox;
     private FillFlowContainer ffContainer;
     private SpriteText title;
 
@@ -47,7 +50,7 @@ public partial class Leaderboard : CompositeDrawable
                     RelativeSizeAxes = Axes.Both,
                     Alpha = 0.5f,
                 },
-                ScrollBox = new BasicScrollContainer()
+                scrollBox = new BasicScrollContainer()
                 {
                     Height = 500,
                     Child = new Container()
@@ -76,7 +79,7 @@ public partial class Leaderboard : CompositeDrawable
                 }
             }
         };
-        ScrollBox.Margin = ScrollBox.Margin with { Vertical = 5 };
+        scrollBox.Margin = scrollBox.Margin with { Vertical = 5 };
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
         new Task(UpdateScores).Start();
@@ -87,7 +90,7 @@ public partial class Leaderboard : CompositeDrawable
 
     protected override void Update()
     {
-        ScrollBox.Width = Math.Max(ffContainer.Width + ffContainer.Margin.Left * 2,
+        scrollBox.Width = Math.Max(ffContainer.Width + ffContainer.Margin.Left * 2,
             title.Width + title.Margin.Left * 2);
         base.Update();
     }
@@ -103,6 +106,8 @@ public partial class Leaderboard : CompositeDrawable
         this.MoveTo(new Vector2(1500, -200), 250, Easing.InQuint).Then().Delay(256).OnComplete(_ => base.Hide());
     }
 
+    /// <param name="baseTitle">title to switch to when Leaderboard is hidden</param>
+    /// <param name="host">Used for renaming the game window</param>
     public void ToggleShow(string baseTitle, GameHost host = null)
     {
         if (Position.X == 1500)
@@ -117,6 +122,9 @@ public partial class Leaderboard : CompositeDrawable
         }
     }
 
+    /// <summary>
+    ///  Reads scores from the Realm and updates the leaderboard.
+    /// </summary>
     private void UpdateScores()
     {
         var tsScores = ThreadSafeReference.Create(RealmManager.ReadScores());

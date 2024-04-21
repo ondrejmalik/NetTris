@@ -8,6 +8,9 @@ using Tetris.Game.Game.UI;
 
 namespace Tetris.Game.Game;
 
+/// <summary>
+/// Holds the game elements.
+/// </summary>
 public partial class GameContainer : GameContainerBase
 {
     private Container box;
@@ -17,6 +20,11 @@ public partial class GameContainer : GameContainerBase
     Hold hold;
     Bag.Bag bag = new Bag.Bag();
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GameContainer"/> class.
+    /// </summary>
+    /// <param name="isOnline"></param>
+    /// <param name="isOpponent"></param>
     public GameContainer(bool isOnline = false, bool isOpponent = false)
     {
         hold = new Hold(bag, null);

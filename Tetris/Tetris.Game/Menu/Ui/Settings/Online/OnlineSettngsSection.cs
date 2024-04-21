@@ -6,6 +6,9 @@ using Tetris.Game.Realm;
 
 namespace Tetris.Game.Menu.Ui.Settings.Online;
 
+/// <summary>
+///  Settings Section for setting online settings.
+/// </summary>
 public partial class OnlineSettngsSection : CompositeDrawable
 {
     private SettingsTextBox ipBox;

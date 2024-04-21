@@ -7,13 +7,21 @@ using osu.Framework.Input.Events;
 using osuTK;
 using osuTK.Input;
 using Tetris.Game.Config;
-using Tetris.Game.Game.Playfield.Tetrimino;
+using Tetris.Game.Game.Tetrimino;
 using Tetris.Game.Game.UI;
 
 namespace Tetris.Game.Game.Playfield
 {
+    /// <summary>
+    ///  Represents the playfield of the game.
+    /// </summary>
     public partial class PlayField : PlayFieldBase
     {
+        /// <summary>
+        /// Used to retrieve the colour of a block based on its PieceType.
+        /// </summary>
+        /// <param name="type">PieceType of the block.</param>
+        /// <returns>Colour of the block.</returns>
         public static Colour4 PieceTypeToColour(PieceType type)
         {
             Colour4 colour = Colour4.White;
@@ -48,6 +56,12 @@ namespace Tetris.Game.Game.Playfield
             return colour;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="holdPreview">Where hold and bag queue will be displayed</param>
+        /// <param name="isOpponent">If player is opponent</param>
+        /// <param name="isOnline">If game is played online</param>
         public PlayField(HoldPreview holdPreview, bool isOpponent = false, bool isOnline = false)
         {
             this.isOpponent = isOpponent;
@@ -82,8 +96,6 @@ namespace Tetris.Game.Game.Playfield
                     },
                     droppedContainer = new Container()
                     {
-
-
                         AutoSizeAxes = Axes.Both,
                     },
                 }
@@ -140,6 +152,9 @@ namespace Tetris.Game.Game.Playfield
 
         #endregion
 
+        /// <summary>
+        /// redraws the colours of the occupied grid in absolute positions based on Playfield.x.
+        /// </summary>
         private void redrawOccupied()
         {
             if (isOnline) { }

@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using Tetris.Game.Game.Playfield.Tetrimino;
+using Tetris.Game.Game.Tetrimino;
 
 namespace Tetris.Game.Tests.Visual.Game_Ui
 {
