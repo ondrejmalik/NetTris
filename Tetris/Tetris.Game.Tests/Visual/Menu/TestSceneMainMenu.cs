@@ -34,11 +34,13 @@ namespace Tetris.Game.Tests.Visual.Menu
                     mainMenuScreen.SettingsButton.TriggerClick();
                 }
             );
+            AddAssert("Settings Menu is not null", () => mainMenuScreen.SettingsMenu != null);
             AddStep("Show Settings", () =>
                 {
                     mainMenuScreen.LeaderboardsButton.TriggerClick();
                 }
             );
+            AddAssert("Leaderboard is not null", () => mainMenuScreen.SettingsMenu != null);
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using osu.Framework.Allocation;
+﻿using System;
+using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.UserInterface;
 using Tetris.Game.Config;
+using Tetris.Game.Menu.Ui.Settings.Online;
 using Tetris.Game.Realm;
 
 namespace Tetris.Game.Menu.Ui.Settings.User;
@@ -14,6 +16,7 @@ namespace Tetris.Game.Menu.Ui.Settings.User;
 /// </summary>
 public partial class UserSettingsSection : CompositeDrawable
 {
+    public static event EventHandler<FpsChangedEventArgs> ShowFpsChanged;
     private SettingsTextBox usernameBox;
     private SettingsCheckBox showFpsCheckbox;
 
@@ -57,8 +60,14 @@ public partial class UserSettingsSection : CompositeDrawable
         };
         showFpsCheckbox.ShowFpsCheckbox.Current.ValueChanged += (sender) =>
         {
+            OnShowFpsChanged();
             GameConfigManager.UserConfig[UserSetting.ShowFps] = sender.NewValue.ToString();
             RealmManager.SaveConfig();
         };
+    }
+
+    private void OnShowFpsChanged()
+    {
+        ShowFpsChanged?.Invoke(this, new FpsChangedEventArgs(showFpsCheckbox.ShowFpsCheckbox.Current.Value));
     }
 }

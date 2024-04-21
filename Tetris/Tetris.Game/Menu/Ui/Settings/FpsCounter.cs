@@ -6,7 +6,10 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Input.Events;
 using osu.Framework.Platform;
 using osuTK.Input;
+using Tetris.Game.Config;
+using Tetris.Game.Menu.Ui.Settings.User;
 using Tetris.Game.Networking;
+using Tetris.Game.Realm;
 
 namespace Tetris.Game.Menu.Ui.Settings;
 
@@ -25,6 +28,8 @@ public partial class FpsCounter : CompositeDrawable
     [BackgroundDependencyLoader]
     private void load()
     {
+        UserSettingsSection.ShowFpsChanged += (sender, e) => ToggleVisibility(e.ShowFps);
+
         AutoSizeAxes = Axes.Both;
         Anchor = Anchor.BottomRight;
         Origin = Anchor.BottomRight;
@@ -32,7 +37,7 @@ public partial class FpsCounter : CompositeDrawable
         {
             CornerRadius = 20,
             BorderColour = Colour4.DarkGray,
-            BorderThickness = 10,
+            BorderThickness = 7,
             CornerExponent = 2,
             Masking = true,
             AutoSizeAxes = Axes.Both,
@@ -56,7 +61,7 @@ public partial class FpsCounter : CompositeDrawable
                     {
                         DrawFpsText = new SpriteText
                         {
-                            Margin = new MarginPadding() { Top = 2, Left = 5, Right = 5 },
+                            Margin = new MarginPadding() { Top = 3, Left = 5, Right = 5 },
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.TopCentre,
                             Font = new FontUsage(size: 20),
@@ -70,7 +75,7 @@ public partial class FpsCounter : CompositeDrawable
                         },
                         LastMsText = new SpriteText
                         {
-                            Margin = new MarginPadding() { Bottom = 2, Left = 5, Right = 5 },
+                            Margin = new MarginPadding() { Bottom = 3, Left = 5, Right = 5 },
                             Anchor = Anchor.TopCentre,
                             Origin = Anchor.TopCentre,
                             Font = new FontUsage(size: 20),
@@ -79,16 +84,20 @@ public partial class FpsCounter : CompositeDrawable
                 }
             }
         };
+        if (!GameConfigManager.UserConfig[UserSetting.ShowFps].Equals("false"))
+        {
+            Hide();
+        }
     }
 
     protected override void Update()
     {
-        deltaTime += host.DrawThread.Clock.ElapsedFrameTime;
+        deltaTime += host.UpdateThread.Clock.ElapsedFrameTime;
         if (deltaTime < 5000) // update counter every 1000ms
         {
-            DrawFpsText.Text = $"FPS: {host.DrawThread.Clock.FramesPerSecond}";
-            UpdateFpsText.Text = $"UPS: {host.UpdateThread.Clock.FramesPerSecond}";
-            LastMsText.Text = $"Net: {NetworkHandler.LastMs} ms";
+            DrawFpsText.Text = $"fps: {host.DrawThread.Clock.FramesPerSecond}";
+            UpdateFpsText.Text = $"ups: {host.UpdateThread.Clock.FramesPerSecond}";
+            LastMsText.Text = $"net: {NetworkHandler.LastMs} ms";
             deltaTime = 0;
         }
 
@@ -110,11 +119,13 @@ public partial class FpsCounter : CompositeDrawable
     {
         if (visible)
         {
-            Show();
+            box.FadeIn(300, Easing.OutQuint);
+            box.Delay(300).Then().OnComplete(_ => { Show(); });
         }
         else
         {
-            Hide();
+            box.FadeOut(300, Easing.OutQuint);
+            box.Delay(300).Then().OnComplete(_ => { Show(); });
         }
     }
 }
