@@ -30,8 +30,8 @@ public partial class LeaderboardScore : CompositeDrawable
         InternalChild = box = new Container()
         {
             AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
+
+
             CornerRadius = 20,
             BorderColour = Colour4.DimGray,
             BorderThickness = 4,
@@ -63,8 +63,8 @@ public partial class LeaderboardScore : CompositeDrawable
                                 {
                                     Text = Score.PlayerName ?? "Unknown",
                                     MaxWidth = 120,
-                                    Anchor = Anchor.TopLeft,
-                                    Origin = Anchor.TopLeft,
+
+
                                     Margin = new MarginPadding(10),
                                     Font = new FontUsage(size: 30),
                                 },

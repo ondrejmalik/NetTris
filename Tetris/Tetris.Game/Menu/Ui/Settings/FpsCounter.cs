@@ -31,8 +31,8 @@ public partial class FpsCounter : CompositeDrawable
             CornerExponent = 2,
             Masking = true,
             AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
+
+
 
             Children = new Drawable[]
             {

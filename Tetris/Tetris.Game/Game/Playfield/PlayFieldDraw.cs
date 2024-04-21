@@ -63,8 +63,8 @@ namespace Tetris.Game.Game.Playfield
             InternalChild = box = new Container
             {
                 AutoSizeAxes = Axes.Both,
-                Anchor = Anchor.TopLeft,
-                Origin = Anchor.TopLeft,
+
+
                 Children = new Drawable[]
                 {
                     new Box
@@ -82,8 +82,8 @@ namespace Tetris.Game.Game.Playfield
                     },
                     droppedContainer = new Container()
                     {
-                        Anchor = Anchor.TopLeft,
-                        Origin = Anchor.TopLeft,
+
+
                         AutoSizeAxes = Axes.Both,
                     },
                 }
@@ -94,7 +94,7 @@ namespace Tetris.Game.Game.Playfield
                 {
                     Size = new Vector2(5, 1000),
                     Position = new Vector2(x[i], 0),
-                    Anchor = Anchor.TopLeft,
+
                     Colour = Colour4.SlateGray,
                 });
             }
@@ -105,7 +105,7 @@ namespace Tetris.Game.Game.Playfield
                 {
                     Size = new Vector2(500, 5),
                     Position = new Vector2(0, y[i]),
-                    Anchor = Anchor.TopLeft,
+
                     Colour = Colour4.SlateGray,
                 });
             }
@@ -153,7 +153,7 @@ namespace Tetris.Game.Game.Playfield
                     {
                         Size = new Vector2(45, 45),
                         Position = new Vector2(PlayField.x[set.I % 10] + 5, PlayField.y[set.I / 10] + 5),
-                        Anchor = Anchor.TopLeft,
+
                         Colour = PieceTypeToColour(set.P),
                     });
                 }

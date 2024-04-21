@@ -10,7 +10,6 @@ namespace Tetris.Game.Networking;
 [Serializable]
 public class Packet
 {
-    //TODO: Remove Colour to optimize serialization size
     //TODO: Add a diferential update system to reduce the amount of data sent
     public Packet()
     {

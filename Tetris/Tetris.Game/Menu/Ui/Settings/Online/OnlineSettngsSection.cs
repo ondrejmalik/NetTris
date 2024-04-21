@@ -8,8 +8,9 @@ namespace Tetris.Game.Menu.Ui.Settings.Online;
 
 public partial class OnlineSettngsSection : CompositeDrawable
 {
-    SettingsTextBox ipBox;
-    SettingsTextBox portBox;
+    private SettingsTextBox ipBox;
+    private SettingsTextBox portBox;
+    private SettingsTextBox tickRateBox;
 
     [BackgroundDependencyLoader]
     private void load()
@@ -36,6 +37,11 @@ public partial class OnlineSettngsSection : CompositeDrawable
                     PlaceholderText = "Server Port",
                     Text = GameConfigManager.OnlineConfig[OnlineSetting.Port],
                 },
+                tickRateBox = new SettingsTextBox()
+                {
+                    PlaceholderText = "Tick Rate (hz)",
+                    Text = GameConfigManager.OnlineConfig[OnlineSetting.TickRate],
+                },
             }
         };
 
@@ -47,6 +53,11 @@ public partial class OnlineSettngsSection : CompositeDrawable
         portBox.OnCommit += (sender, newText) =>
         {
             GameConfigManager.OnlineConfig[OnlineSetting.Port] = portBox.Text;
+            RealmManager.SaveConfig();
+        };
+        tickRateBox.OnCommit += (sender, newText) =>
+        {
+            GameConfigManager.OnlineConfig[OnlineSetting.TickRate] = tickRateBox.Text;
             RealmManager.SaveConfig();
         };
     }

@@ -7,7 +7,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using osu.Framework.Logging;
-using osu.Framework.Threading;
 using Tetris.Game.Game.Playfield;
 using Tetris.Game.Networking.Commands;
 
@@ -37,8 +36,24 @@ public class NetworkHandler()
     private PlayField playFieldLeft;
     private PlayField playFieldRight;
     private bool sendGameOver = false;
+    private static NetworkHandler instance = null;
 
-    public NetworkHandler(string serverIp, int port, int tickRate = 5) : this()
+    public static NetworkHandler GetInstance(string serverIp, int port, int tickRate = 5)
+    {
+        if (instance == null)
+        {
+            instance = new NetworkHandler(serverIp, port, tickRate);
+        }
+
+        return instance;
+    }
+
+    public static void DisposeInstance()
+    {
+        instance = null;
+    }
+
+    private NetworkHandler(string serverIp, int port, int tickRate = 5) : this()
     {
         if (!IPAddress.TryParse(serverIp, out IPAddress ipAddress))
         {

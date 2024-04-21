@@ -6,16 +6,21 @@ namespace Tetris.Game.Config;
 
 public static class GameConfigManager
 {
+    #region Private
+
     private static Dictionary<GameSetting, Key> _gameConfig = new();
     private static Dictionary<GameSetting, Key> _opponentConfig = new();
     private static Dictionary<OnlineSetting, string> _onlineConfig = new();
     private static Dictionary<UserSetting, string> _userConfig = new();
 
+    #endregion
+
+
     static GameConfigManager()
     {
-        // TODO: add other configs to realm db, load them here and set them to defaults if they don't exist
         RealmManager.LoadConfig();
     }
+
 
     public static void Clear()
     {
@@ -24,6 +29,8 @@ public static class GameConfigManager
         OnlineConfig.Clear();
         UserConfig.Clear();
     }
+
+    #region Properties
 
     public static Dictionary<GameSetting, Key> GameControlsConfig
     {
@@ -62,6 +69,10 @@ public static class GameConfigManager
         }
     }
 
+    #endregion
+
+    #region SetDefaults
+
     public static void SetDefaults()
     {
         GameControlsConfig = GameControlsConfigSetDefaults();
@@ -69,6 +80,7 @@ public static class GameConfigManager
         OnlineConfig = OnlineConfigSetDefaults();
         UserConfig = UserConfigSetDefaults();
     }
+
 
     public static Dictionary<GameSetting, Key> GameControlsConfigSetDefaults()
     {
@@ -104,6 +116,7 @@ public static class GameConfigManager
         {
             { OnlineSetting.Ip, "127.0.0.1" },
             { OnlineSetting.Port, "8543" },
+            { OnlineSetting.TickRate, "5" }
         };
     }
 
@@ -114,4 +127,6 @@ public static class GameConfigManager
             { UserSetting.Username, "Guest Player" },
         };
     }
+
+    #endregion
 }

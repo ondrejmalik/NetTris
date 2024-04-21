@@ -38,8 +38,8 @@ public partial class MainMenu : Screen
         InternalChild = Box = new Container
         {
             RelativeSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
+
+
             Children = new Drawable[]
             {
                 new FillFlowContainer()

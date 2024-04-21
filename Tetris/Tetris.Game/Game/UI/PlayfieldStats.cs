@@ -30,8 +30,8 @@ public partial class PlayfieldStats(PlayField playField) : CompositeDrawable
             CornerRadius = 40,
             Masking = true,
             AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
+
+
             Children = new Drawable[]
             {
                 new Box()

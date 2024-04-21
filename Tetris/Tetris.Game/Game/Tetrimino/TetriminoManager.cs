@@ -29,6 +29,7 @@ public partial class Tetrimino : TetriminoBase
     public void Rotate(bool reverse)
     {
         bool revert = false;
+        bool revertUp = false;
         bool revertDirection = false;
         for (int i = 0; i < 4; i++)
         {
@@ -44,6 +45,13 @@ public partial class Tetrimino : TetriminoBase
                 revertDirection = true;
                 moveLeft(false);
                 moveLeft(false);
+            }
+
+            if (GridPos[i].Item2 < 1)
+            {
+                revertUp = true;
+                moveDown();
+                moveDown();
             }
         }
 
@@ -86,6 +94,12 @@ public partial class Tetrimino : TetriminoBase
             }
         }
 
+        if (revertUp)
+        {
+            MoveUp();
+            MoveUp();
+        }
+
         SetDrawPos();
     }
 
@@ -108,18 +122,41 @@ public partial class Tetrimino : TetriminoBase
 
     #region Movement
 
-    private void moveDown()
+    public void MoveUp(bool checkCollision = true)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            GridPos[i] = (GridPos[i].Item1, GridPos[i].Item2 - 1);
+        }
+
+
+        if (checkCollision)
+        {
+            playField.BottomCollisionDetection();
+            playField.CollisionDetection(0);
+        }
+
+        pivot = new Vector2(pivot.X, pivot.Y - 1);
+        SetDrawPos();
+    }
+
+    private void moveDown(bool checkCollision = true)
     {
         for (int i = 0; i < 4; i++)
         {
             GridPos[i] = (GridPos[i].Item1, GridPos[i].Item2 + 1);
         }
 
-        playField.BottomCollisionDetection();
-        playField.CollisionDetection(0);
+        if (checkCollision)
+        {
+            playField.BottomCollisionDetection();
+            playField.CollisionDetection(0);
+        }
+
         pivot = new Vector2(pivot.X, pivot.Y + 1);
         SetDrawPos();
     }
+
 
     private void moveLeft(bool checkCollision = true)
     {

@@ -76,7 +76,7 @@ public partial class PlayField : PlayFieldBase
             {
                 Size = new Vector2(45, 45),
                 Position = new Vector2(PlayField.x[pos.Item1] + 5, PlayField.y[pos.Item2] + 5),
-                Anchor = Anchor.TopLeft,
+
                 Colour = c,
             });
 
@@ -221,35 +221,34 @@ public partial class PlayField : PlayFieldBase
         OpponentPlayField.ClearedLines += lines;
     }
 
-    private void addLine(int emptyIndex = 2)
+    private void addLine(int emptyIndex)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++) // move up each X Line
         {
             recurseStackUp(i);
         }
 
+        //------------------ this checks for each Y line if there is garbage and if there is it goes to start of line above it
         bool foundGarbage = false;
         int lineStart = Occupied.Count - 10;
-        for (int i = Occupied.Count - 1; i >= 0; i = i - 1) // check garbage line
+        for (int i = Occupied.Count - 1; i >= 0; i = i - 1)
         {
-            if (PieceTypeToColour(Occupied[i].P) == Colour4.Gray)
+            // if colour of occupied[i] is colour of garbage
+            if (PieceTypeToColour(Occupied[i].P) == PieceTypeToColour(PieceType.Garbage))
+
             {
                 foundGarbage = true;
-                i = lineStart - 10;
+                i = lineStart - 10; // this goes to start of line above
             }
 
+            // if i is at end of line and not found garbage then break
             if (i % 10 == 0)
             {
                 lineStart = i;
-                if (!foundGarbage)
-                {
-                    break;
-                }
-
                 break;
             }
         }
-
+        //------------------ this add line of garbage at lineStart line and add empty hole where the enemy piece was (emptyIndex)
 
         for (int j = lineStart; j < lineStart + 10; j++)
         {
@@ -261,6 +260,15 @@ public partial class PlayField : PlayFieldBase
 
             Occupied[j].O = true;
             Occupied[j].P = PieceType.Garbage;
+        }
+
+        foreach (var pos in Piece.GridPos)
+        {
+            if (Occupied[pos.Item1 + pos.Item2 * 10].O)
+            {
+                Piece.MoveUp();
+                Piece.SetDrawPos();
+            }
         }
 
         redrawOccupied();

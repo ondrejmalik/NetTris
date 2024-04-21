@@ -61,16 +61,16 @@ public partial class KeyBind : CompositeDrawable
             Margin = new MarginPadding(10),
             Direction = FillDirection.Horizontal,
             AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
+
+
             Children = new Drawable[]
             {
                 SettingNameText = new SpriteText()
                 {
                     Text = Setting.ToString(),
                     Font = new FontUsage(size: 25),
-                    Origin = Anchor.TopLeft,
-                    Anchor = Anchor.TopLeft,
+
+
                     Margin = new MarginPadding(10),
                 },
                 new Container()
@@ -85,8 +85,8 @@ public partial class KeyBind : CompositeDrawable
                         // Limit the key name to 5 characters to prevent overflow
                         // Math.Min is used to prevent errors when the key name is shorter than 5 characters
                         Text = Key.ToString().Substring(0, Math.Min(5, Key.ToString().Length)),
-                        Origin = Anchor.TopLeft,
-                        Anchor = Anchor.TopLeft,
+
+
                         Size = new osuTK.Vector2(50, 50),
                         Colour = BaseColour
                     }

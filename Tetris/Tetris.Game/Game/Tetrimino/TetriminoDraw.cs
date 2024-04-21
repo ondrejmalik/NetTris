@@ -80,8 +80,8 @@ public partial class Tetrimino : TetriminoBase
         InternalChild = container = new Container
         {
             AutoSizeAxes = Axes.Both,
-            Anchor = Anchor.TopLeft,
-            Origin = Anchor.TopLeft,
+
+
             Children = new Drawable[]
             {
                 debugText = new SpriteText()
@@ -103,7 +103,7 @@ public partial class Tetrimino : TetriminoBase
         {
             Position = pivot * 50,
             Size = new Vector2(5, 5),
-            Anchor = Anchor.TopLeft,
+
             Colour = Colour4.Purple,
             Depth = -20,
         });

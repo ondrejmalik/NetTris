@@ -24,8 +24,9 @@ namespace Tetris.Game.Game.Screens
 
         public DoubleGameScreen(bool online = false)
         {
-            networkHandler = new NetworkHandler(GameConfigManager.OnlineConfig[OnlineSetting.Ip],
-                int.Parse(GameConfigManager.OnlineConfig[OnlineSetting.Port]));
+            networkHandler = NetworkHandler.GetInstance(GameConfigManager.OnlineConfig[OnlineSetting.Ip],
+                int.Parse(GameConfigManager.OnlineConfig[OnlineSetting.Port]),
+                int.Parse(GameConfigManager.OnlineConfig[OnlineSetting.TickRate]));
             gameContainer1 = new GameContainer(true);
             gameContainer2 = new GameContainer(isOnline: online, isOpponent: true);
             gameContainer1.Scale = new Vector2(0.8f);
@@ -114,7 +115,7 @@ namespace Tetris.Game.Game.Screens
             {
                 networkHandler.Running = false;
                 networkHandler.Client.Close();
-                networkHandler = null;
+                NetworkHandler.DisposeInstance();
                 networkingThread.Join();
             }
         }
