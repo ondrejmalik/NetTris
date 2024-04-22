@@ -22,22 +22,20 @@ namespace Tetris.Game.Game.Screens
         {
             resultText = new();
             resultText.Text = lost ? "You Lost :C" : "You Win!";
-            resultText.Anchor = Anchor.Centre;
-            resultText.Origin = Anchor.Centre;
         }
 
         public GameOverScreen(string statsString)
         {
             resultText = new();
             resultText.Text = statsString;
-            resultText.Anchor = Anchor.Centre;
-            resultText.Origin = Anchor.Centre;
         }
 
 
         [BackgroundDependencyLoader]
         private void load()
         {
+            resultText.Anchor = Anchor.Centre;
+            resultText.Origin = Anchor.Centre;
             host.Window.Title = "Game Over";
             InternalChildren = new Drawable[]
             {
@@ -64,13 +62,9 @@ namespace Tetris.Game.Game.Screens
                             Font = new FontUsage(size: 30),
                             Text = "Press any key to continue",
                         },
-                        new FpsCounter()
-                        {
-                            Anchor = Anchor.Centre,
-                            Origin = Anchor.Centre
-                        },
                     }
-                }
+                },
+                new FpsCounter()
             };
             loadTime = Clock.CurrentTime;
         }
