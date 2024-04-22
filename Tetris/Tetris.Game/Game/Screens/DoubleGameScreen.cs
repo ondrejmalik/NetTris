@@ -45,7 +45,6 @@ namespace Tetris.Game.Game.Screens
                 {
                     networkHandler.Start(gameContainer1.PlayField, gameContainer2.PlayField);
                 });
-                networkingThread.Start();
                 networkHandler.GameIsReady += handleGameIsReady;
                 networkHandler.GameOver += handleGameOver;
             }
@@ -81,6 +80,11 @@ namespace Tetris.Game.Game.Screens
             };
         }
 
+        protected override void LoadComplete()
+        {
+            networkingThread?.Start();
+            base.LoadComplete();
+        }
 
         #region Event Handlers
 

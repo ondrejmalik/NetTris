@@ -65,7 +65,8 @@ public partial class Tetrimino : TetriminoBase
             }
         }
 
-        double theta = reverse ? Math.PI / 2 : -Math.PI / 2;
+        // math source https://www.youtube.com/watch?v=a59YQ4qe7mE
+        double theta = reverse ? Math.PI / 2 : -Math.PI / 2; // angle of rotation
 
         double[,] rotationMatrix =
         {
@@ -73,7 +74,7 @@ public partial class Tetrimino : TetriminoBase
             { Math.Sin(theta), Math.Cos(theta) }
         };
         List<(int, int)> tempGridPos = GridPos;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++) // rotatest every block around pivot
         {
             double deltaX = GridPos[i].Item1 - Pivot.X;
             double deltaY = GridPos[i].Item2 - Pivot.Y;
@@ -82,7 +83,7 @@ public partial class Tetrimino : TetriminoBase
             double rotatedY = rotationMatrix[1, 0] * deltaX + rotationMatrix[1, 1] * deltaY;
             if (rotatedX + Pivot.X < 0 || rotatedX + Pivot.X > 9 || rotatedY + Pivot.Y > 19 || rotatedY + Pivot.Y < 0)
             {
-                GridPos = tempGridPos;
+                GridPos = tempGridPos; // if rotated piece is out of bounds, don't rotate
                 return;
             }
 

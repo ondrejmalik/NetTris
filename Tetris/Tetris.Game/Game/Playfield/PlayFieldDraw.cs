@@ -98,6 +98,12 @@ namespace Tetris.Game.Game.Playfield
                     {
                         AutoSizeAxes = Axes.Both,
                     },
+                    new Box()
+                    {
+                        Size = new Vector2(500, 50),
+                        Position = new Vector2(0, y[19]),
+                        Colour = Colour4.Black,
+                    }
                 }
             };
             for (int i = 0; i < x.Count; i++)

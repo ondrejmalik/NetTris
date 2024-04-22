@@ -157,7 +157,7 @@ public class NetworkHandler()
             try
             {
                 Packet packet = new();
-                if (playFieldLeft.Occupied.Count > 0)
+                if (playFieldLeft.Occupied.Count > 0 && playFieldLeft.Piece != null)
                 {
                     if (sendGameOver)
                     {
@@ -169,6 +169,11 @@ public class NetworkHandler()
                         packet = new(playFieldLeft.Occupied, playFieldLeft.Piece.GridPos,
                             playFieldLeft.Piece.PieceType, new PacketCommandSendLines(newLines, lastPieceGridPos));
                     }
+                }
+                else // this waits until the playfield is ready
+                {
+                    Thread.Sleep(16);
+                    continue;
                 }
 
                 Send(packet);
@@ -193,7 +198,7 @@ public class NetworkHandler()
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
+                    Logger.Log(e.ToString());
                     Running = false;
                     break;
                 }
