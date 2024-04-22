@@ -180,13 +180,24 @@ public class NetworkHandler()
                     continue;
                 }
 
-                Packet deserialized = Packet.Deserialize(received);
-                if (deserialized.Command.PacketCommandType == PacketCommandType.GameOver)
+                Packet deserialized;
+                try
                 {
-                    OnGameOver(false);
+                    deserialized = Packet.Deserialize(received);
+                    if (deserialized.Command.PacketCommandType == PacketCommandType.GameOver)
+                    {
+                        OnGameOver(false);
+                        Running = false;
+                        break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
                     Running = false;
                     break;
                 }
+
 
                 addSentLines(deserialized);
 

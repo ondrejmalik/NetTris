@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using osu.Framework.Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Logging;
@@ -30,7 +31,7 @@ public partial class PlayField : PlayFieldBase
         return $"Cleared Lines: {ClearedLines}      " +
                $"Level: {Level}     " +
                $"Time: {TimeInSeconds}s      " +
-               $"Clears per minute: {Cpm.ToString().Substring(0, 5)}     ";
+               $"Clears per minute: {Cpm.ToString().Substring(0, Math.Min(Cpm.ToString().Length, 5))}     ";
     }
 
     /// <summary>

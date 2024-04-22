@@ -123,6 +123,14 @@ public partial class Tetrimino : TetriminoBase
     {
         if (IsDummy) { }
 
+        foreach (var pos in GridPos) //check if the piece is out of bounds
+        {
+            if (pos.Item1 < 0 || pos.Item1 >= 10 || pos.Item2 < 0 || pos.Item2 >= 20)
+            {
+                return;
+            }
+        }
+
         try
         {
             Boxes[0].Position = new Vector2(PlayFieldBase.x[GridPos[0].Item1] + 5,
