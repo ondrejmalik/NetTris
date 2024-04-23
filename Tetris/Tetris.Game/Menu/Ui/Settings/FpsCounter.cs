@@ -1,4 +1,6 @@
-﻿using osu.Framework.Allocation;
+﻿using System.Drawing;
+using osu.Framework.Allocation;
+using osu.Framework.Configuration;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
@@ -9,7 +11,6 @@ using osuTK.Input;
 using Tetris.Game.Config;
 using Tetris.Game.Menu.Ui.Settings.User;
 using Tetris.Game.Networking;
-using Tetris.Game.Realm;
 
 namespace Tetris.Game.Menu.Ui.Settings;
 
@@ -19,6 +20,7 @@ namespace Tetris.Game.Menu.Ui.Settings;
 public partial class FpsCounter : CompositeDrawable
 {
     [Resolved] private GameHost host { get; set; }
+    [Resolved] private FrameworkConfigManager config { get; set; }
     Container box;
     private SpriteText DrawFpsText;
     private SpriteText UpdateFpsText;
@@ -111,6 +113,15 @@ public partial class FpsCounter : CompositeDrawable
             host.MaximumDrawHz = 0; // unlimited fps
             host.MaximumUpdateHz = 0;
         }
+        else if (e.Key == Key.F2)
+        {
+            config.SetValue(FrameworkSetting.WindowedSize, new Size(1280, 720));
+        }
+        else if (e.Key == Key.F3)
+        {
+            config.SetValue(FrameworkSetting.WindowedSize, new Size(640, 480));
+        }
+
 
         return base.OnKeyDown(e);
     }

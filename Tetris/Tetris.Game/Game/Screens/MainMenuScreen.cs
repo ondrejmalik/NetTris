@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using osu.Framework.Allocation;
+using osu.Framework.Configuration;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Localisation;
@@ -33,8 +34,11 @@ public partial class MainMenuScreen : Screen
     }
 
     [BackgroundDependencyLoader]
-    private void load()
+    private void load(FrameworkConfigManager config)
     {
+        //heh
+        //host.Window.LowOnMemory;
+        //host.TakeScreenshotAsync();
         host.Window.Title = windowTitle;
         InternalChild = Box = new Container
         {
