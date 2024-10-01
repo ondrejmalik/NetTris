@@ -25,11 +25,11 @@ jobs:
 
       # Restore dependencies
       - name: Restore dependencies
-        run: dotnet restore ./Tetris.Desktop/Tetris.Desktop.csproj
+        run: dotnet restore Tetris/Tetris.Desktop/Tetris.Desktop.csproj
 
       # Build the application
       - name: Build Tetris.Desktop
-        run: dotnet build ./Tetris.Desktop/Tetris.Desktop.csproj --configuration Release --no-restore
+        run: dotnet build Tetris/Tetris.Desktop/Tetris.Desktop.csproj --configuration Release --no-restore
 
       # Run tests (if you have any tests)
       - name: Run tests
