@@ -30,7 +30,11 @@ jobs:
       # Build the application
       - name: Build Tetris.Desktop
         run: dotnet build Tetris/Tetris.Desktop/Tetris.Desktop.csproj --configuration Release --no-restore
-# Upload the build artifact
+      
+      - name: Publish executable
+        run: dotnet publish Tetris/Tetris.Desktop/Tetris.Desktop.csproj --configuration Release --self-contained -r win-x64 -p:PublishSingleFile=true -o ./publish
+
+      # Upload the build artifact
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
