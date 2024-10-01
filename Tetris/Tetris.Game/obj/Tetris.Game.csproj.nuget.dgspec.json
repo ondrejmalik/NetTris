@@ -1,41 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "A:\\Projects\\Tetris\\Tetris\\Tetris.Game\\Tetris.Game.csproj": {}
+    "D:\\Projects\\Tetris\\Tetris\\Tetris.Game\\Tetris.Game.csproj": {}
   },
   "projects": {
-    "A:\\Projects\\Tetris\\Tetris\\Tetris.Game\\Tetris.Game.csproj": {
+    "D:\\Projects\\Tetris\\Tetris\\Tetris.Game\\Tetris.Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "A:\\Projects\\Tetris\\Tetris\\Tetris.Game\\Tetris.Game.csproj",
+        "projectUniqueName": "D:\\Projects\\Tetris\\Tetris\\Tetris.Game\\Tetris.Game.csproj",
         "projectName": "Tetris.Game",
-        "projectPath": "A:\\Projects\\Tetris\\Tetris\\Tetris.Game\\Tetris.Game.csproj",
-        "packagesPath": "C:\\Users\\om777\\.nuget\\packages\\",
-        "outputPath": "A:\\Projects\\Tetris\\Tetris\\Tetris.Game\\obj\\",
+        "projectPath": "D:\\Projects\\Tetris\\Tetris\\Tetris.Game\\Tetris.Game.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\Tetris\\Tetris\\Tetris.Game\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\om777\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Users\\om777\\Downloads": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "A:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\Tetris.Resources.csproj": {
-                "projectPath": "A:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\Tetris.Resources.csproj"
+              "D:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\Tetris.Resources.csproj": {
+                "projectPath": "D:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\Tetris.Resources.csproj"
               }
             }
           }
@@ -44,6 +36,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -71,34 +68,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.104/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "A:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\Tetris.Resources.csproj": {
+    "D:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\Tetris.Resources.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "A:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\Tetris.Resources.csproj",
+        "projectUniqueName": "D:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\Tetris.Resources.csproj",
         "projectName": "Tetris.Resources",
-        "projectPath": "A:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\Tetris.Resources.csproj",
-        "packagesPath": "C:\\Users\\om777\\.nuget\\packages\\",
-        "outputPath": "A:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\obj\\",
+        "projectPath": "D:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\Tetris.Resources.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\Tetris\\Tetris\\Tetris.Resources\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\om777\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Users\\om777\\Downloads": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -111,6 +100,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -142,7 +136,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.104/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
