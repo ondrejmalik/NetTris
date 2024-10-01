@@ -34,3 +34,9 @@ jobs:
       # Run tests (if you have any tests)
       - name: Run tests
         run: dotnet test --no-build --verbosity normal
+# Upload the build artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Tetris.Desktop-exe
+          path: ./publish/Tetris.Desktop.exe
