@@ -32,7 +32,7 @@ jobs:
         run: dotnet build Tetris/Tetris.Desktop/Tetris.Desktop.csproj --configuration Release --no-restore
       
       - name: Publish executable
-        run: dotnet publish Tetris/Tetris.Desktop/Tetris.Desktop.csproj --configuration Release --self-contained -r win-x64 -p:PublishSingleFile=true -o ./publish
+        run: dotnet publish Tetris/Tetris.Desktop/Tetris.Desktop.csproj --configuration Release --self-contained -r win-x64 -o ./publish
 
       # Upload the build artifact
       - name: Upload artifact
